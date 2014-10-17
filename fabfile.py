@@ -3,6 +3,7 @@ from fabric.api import *
 
 def oh_my_zsh():
     local('sudo apt-get install -y zsh')
+    local('rm -f ~/.oh-my-zsh')
     local('ln -sf "$PWD/oh-my-zsh" ~/.oh-my-zsh')
     local('chsh -s /bin/zsh')
     local('ln -sf "$PWD/zshrc" ~/.zshrc')
