@@ -6,6 +6,8 @@ def oh_my_zsh():
     local('rm -f ~/.oh-my-zsh')
     local('ln -s "$PWD/oh-my-zsh" ~/.oh-my-zsh')
     local('chsh -s /bin/zsh')
+    local('rm -f ~/.zshrc')
+    local('ln -s "$PWD/zshrc" ~/.zshrc')
 
 def solarized(scheme='light'):
     solarized_dircolors(scheme)
