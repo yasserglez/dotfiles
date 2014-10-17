@@ -1,6 +1,12 @@
 from fabric.api import *
 
 
+def oh_my_zsh():
+    local('sudo apt-get install -y zsh')
+    local('rm -f ~/.oh-my-zsh')
+    local('ln -s "$PWD/oh-my-zsh" ~/.oh-my-zsh')
+    local('chsh -s /bin/zsh')
+
 def solarized(scheme='light'):
     solarized_dircolors(scheme)
     solarized_gnome_terminal(scheme)
