@@ -25,4 +25,4 @@ compinit
 
 # $PATH settings
 
-export PATH="~/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
