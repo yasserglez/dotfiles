@@ -11,6 +11,11 @@ def oh_my_zsh():
     local('chsh -s $(which zsh)')
     local('ln -sf "$PWD/zshrc" ~/.zshrc')
 
+def git():
+    local('sudo apt-get install -y git')
+    local('rm -f ~/.gitconfig')
+    local('ln -sf "$PWD/gitconfig" ~/.gitconfig')
+
 def solarized(scheme='light'):
     solarized_dircolors(scheme)
     solarized_gnome_terminal(scheme)
