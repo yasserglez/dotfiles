@@ -1,0 +1,71 @@
+#
+# Theme based on sorin, including several personal customizations.
+#
+# Authors:
+#   Yasser Gonzalez Fernandez <contact@yglezfdez.com>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_sorin_pwd {
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    _prompt_sorin_pwd="$MATCH"
+    unset MATCH
+  else
+    _prompt_sorin_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+  fi
+}
+
+function prompt_yglezfdez_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  # Format PWD.
+  prompt_sorin_pwd
+  
+  # Get Python information.
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
+
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
+}
+
+function prompt_yglezfdez_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_yglezfdez_precmd
+
+  # Set editor-info parameters.
+  zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}❯%f%b'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{red}❮%f%b'
+  
+  # Set python-info parameters.
+  zstyle ':prezto:module:python:info:virtualenv' format ' %F{blue}virtualenv%f:%F{green}%v%b%f'
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%f'
+  zstyle ':prezto:module:git:info:position' format ':%F{green}%p%f'
+  zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
+  zstyle ':prezto:module:git:info:keys' format \
+    'rprompt' ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s'
+
+  # Define prompts.
+  PROMPT='%F{cyan}${_prompt_sorin_pwd}%f%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  RPROMPT='${python_info[virtualenv]}${git_info:+${(e)git_info[rprompt]}}'
+}
+
+prompt_yglezfdez_setup "$@"

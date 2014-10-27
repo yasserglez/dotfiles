@@ -4,20 +4,21 @@ from fabric.api import *
 
 
 def zsh():
-    local('sudo apt-get install -y zsh')
-    local('chsh -s $(which zsh)')
-    if os.path.isdir('prezto'):
-        with lcd('prezto'):
-            local('git pull')
-            local('git submodule update --init --recursive')
-    else:
-        local('git clone --recursive https://github.com/sorin-ionescu/prezto')
-    local('rm -fr ~/.zprezto')
-    local('ln -s $PWD/prezto ~/.zprezto')
-    local('ln -sf $PWD/prompt_yglezfdez_setup ~/.zprezto/modules/prompt/functions/')
-    for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
-        local('rm -f ~/.{0}'.format(dotfile))
-        local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
+    with lcd('zsh'):
+        local('sudo apt-get install -y zsh')
+        local('chsh -s $(which zsh)')
+        if os.path.isdir('prezto'):
+            with lcd('prezto'):
+                local('git pull')
+                local('git submodule update --init --recursive')
+        else:
+            local('git clone --recursive https://github.com/sorin-ionescu/prezto')
+        local('rm -fr ~/.zprezto')
+        local('ln -s $PWD/prezto ~/.zprezto')
+        local('ln -sf $PWD/prompt_yglezfdez_setup ~/.zprezto/modules/prompt/functions/')
+        for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
+            local('rm -f ~/.{0}'.format(dotfile))
+            local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
 
 def git():
     local('sudo apt-get install -y git')
