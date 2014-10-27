@@ -15,8 +15,8 @@ def zsh():
     local('rm -fr ~/.zprezto')
     local('ln -s $PWD/prezto ~/.zprezto')
     for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
-        local('echo -f ~/.{0}'.format(dotfile))
-        local('echo -s $PWD/{0} ~/.{0}'.format(dotfile))
+        local('ln -f ~/.{0}'.format(dotfile))
+        local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
 
 def git():
     local('sudo apt-get install -y git')
