@@ -3,13 +3,20 @@ import os
 from fabric.api import *
 
 
-def oh_my_zsh():
-    _git_pull_or_clone('https://github.com/robbyrussell/oh-my-zsh')
+def zsh():
     local('sudo apt-get install -y zsh')
-    local('rm -f ~/.oh-my-zsh')
-    local('ln -sf "$PWD/oh-my-zsh" ~/.oh-my-zsh')
     local('chsh -s $(which zsh)')
-    local('ln -sf "$PWD/zshrc" ~/.zshrc')
+    if os.path.isdir('prezto'):
+        with lcd('prezto'):
+            local('git pull')
+            local('git submodule update --init --recursive')
+    else:
+        local('git clone --recursive https://github.com/sorin-ionescu/prezto')
+    local('rm -fr ~/.zprezto')
+    local('ln -s $PWD/prezto ~/.zprezto')
+    for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
+        local('echo -f ~/.{0}'.format(dotfile))
+        local('echo -s $PWD/{0} ~/.{0}'.format(dotfile))
 
 def git():
     local('sudo apt-get install -y git')
@@ -45,11 +52,12 @@ def solarized_gedit(scheme='light'):
         local('ln -sf "$PWD/solarized-dark.xml" ~/.local/share/gedit/styles/')
 
 
-def _git_pull_or_clone(git_repo):
-    git_repo_dir = os.path.basename(git_repo)
+def _git_pull_or_clone(git_repo, git_repo_dir=None):
+    if git_repo_dir is None:
+        git_repo_dir = os.path.basename(git_repo)
     if os.path.isdir(git_repo_dir):
         with lcd(git_repo_dir):
             local('git pull')
     else:
-        local('git clone {0}'.format(git_repo))
+        local('git clone {0} {1}'.format(git_repo, git_repo_dir))
 
