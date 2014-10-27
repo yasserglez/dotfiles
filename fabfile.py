@@ -14,8 +14,9 @@ def zsh():
         local('git clone --recursive https://github.com/sorin-ionescu/prezto')
     local('rm -fr ~/.zprezto')
     local('ln -s $PWD/prezto ~/.zprezto')
+    local('ln -sf $PWD/prompt_yglezfdez_setup ~/.zprezto/modules/prompt/functions/')
     for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
-        local('ln -f ~/.{0}'.format(dotfile))
+        local('rm -f ~/.{0}'.format(dotfile))
         local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
 
 def git():

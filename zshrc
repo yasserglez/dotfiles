@@ -1,13 +1,7 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# ~/.zshrc: This file is sourced by interactive shells. It should define aliases, 
+# functions, shell options, and key bindings.
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-
-# Customize to your needs...

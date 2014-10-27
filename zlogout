@@ -1,13 +1,2 @@
-#
-# Executes commands at logout.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# Print the message.
-cat <<-EOF
-
-Thank you. Come again!
-  -- Dr. Apu Nahasapeemapetilon
-EOF
+# ~/.zlogout: This file is sourced by login shells during logout. It should be
+# used for displaying messages and the deletion of files.

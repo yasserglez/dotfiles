@@ -1,24 +1,11 @@
-#
-# Executes commands at login pre-zshrc.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-#
-# Browser
-#
-
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
+# ~/.zprofile: This file is similar to zlogin, but it is sourced before zshrc.
 
 #
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 
 #
@@ -26,7 +13,7 @@ export PAGER='less'
 #
 
 if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
+  export LANG='en_CA.UTF-8'
 fi
 
 #

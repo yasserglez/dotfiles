@@ -1,9 +1,7 @@
-#
-# Executes commands at login post-zshrc.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# ~/.zlogin: This file is sourced by login shells after zshrc, and thus, it 
+# should contain commands that need to execute at login. This is not the 
+# file to define aliases, functions, shell options, and key bindings. 
+# It should not change the shell environment.
 
 # Execute code that does not affect the current session in the background.
 {
@@ -13,11 +11,3 @@
     zcompile "$zcompdump"
   fi
 } &!
-
-# Print a random, hopefully interesting, adage.
-if (( $+commands[fortune] )); then
-  if [[ -t 0 || -t 1 ]]; then
-    fortune -a
-    print
-  fi
-fi
