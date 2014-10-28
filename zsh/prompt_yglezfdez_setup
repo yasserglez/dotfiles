@@ -1,5 +1,5 @@
 #
-# My custom prompt theme.
+# My custom prompt.
 #
 # Authors:
 #   Yasser Gonzalez Fernandez <contact@yglezfdez.com>
@@ -44,6 +44,19 @@ function prompt_yglezfdez_setup {
   # Define prompts.
   PROMPT=$'\n%U%m%u:%~$git_info[prompt]$python_info[virtualenv]\n${editor_info[keymap]} '
   RPROMPT=''
+  SPROMPT=" -- correct '%R' to '%r' [nyae]? "
+
+  # Completions.
+  zstyle ':completion:*:corrections' format ' -- %d'
+  zstyle ':completion:*:descriptions' format ' -- %d'
+  zstyle ':completion:*:messages' format ' -- %d'
+  zstyle ':completion:*:warnings' format ' -- no matches found'
+  zstyle ':completion:*' format ' -- %d'
+}
+
+# Keeping this over here to easily match the style used in SPROMPT and completions.
+function command_not_found_handler() {
+  echo " -- command not found: $1 $2"
 }
 
 prompt_yglezfdez_setup "$@"
