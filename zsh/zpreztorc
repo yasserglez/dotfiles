@@ -31,7 +31,6 @@ zstyle ':prezto:load' pmodule \
   'archive' \
   'git' \
   'python' \
-  'syntax-highlighting' \
   'history-substring-search' \
   'prompt'
 
@@ -58,16 +57,6 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'yglezfdez'
 
-#
-# Syntax Highlighting
-#
-
-# Set syntax highlighters.
-# By default, only the main highlighter is enabled.
-zstyle ':prezto:module:syntax-highlighting' highlighters \
-  'main' \
-  'brackets'
-  
 #
 # Terminal
 #
