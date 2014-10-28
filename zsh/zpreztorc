@@ -70,10 +70,3 @@ zstyle ':prezto:module:terminal:window-title' format '%s'
 # Set the tab title format.
 zstyle ':prezto:module:terminal:tab-title' format '%s'
 
-#
-# Python
-#
-export PROJECT_HOME="$HOME/Workspace"
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
-

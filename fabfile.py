@@ -30,22 +30,22 @@ def solarized(scheme='light'):
     solarized_gnome_terminal(scheme)
     solarized_gedit(scheme)
 
-def solarized_gnome_terminal(scheme='light'):
+def solarized_gnome_terminal(scheme):
     git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
     _git_pull_or_clone(git_repo)
     with lcd(os.path.basename(git_repo)):
         local('sudo apt-get install -y dconf-cli')
         local('./install.sh -s {0} -p Default'.format(scheme))
 
-def solarized_dircolors(scheme='light'):
+def solarized_dircolors(scheme):
     git_repo = 'https://github.com/seebi/dircolors-solarized'
     _git_pull_or_clone(git_repo)
     with lcd(os.path.basename(git_repo)):
-        local('rm -f ~/.dircolors')
-        local('ln -s "$PWD/dircolors.ansi-{0}" ~/.dircolors'.format(scheme))
-        local('eval `dircolors ~/.dircolors`')
+        local('rm -f ~/.dir_colors')
+        local('ln -s "$PWD/dircolors.ansi-{0}" ~/.dir_colors'.format(scheme))
+        local('eval `dircolors ~/.dir_colors`')
 
-def solarized_gedit(scheme='light'):
+def solarized_gedit(scheme):
     git_repo = 'https://github.com/mattcan/solarized-gedit'
     _git_pull_or_clone(git_repo)
     with lcd(os.path.basename(git_repo)):
