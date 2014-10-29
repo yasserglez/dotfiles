@@ -2,5 +2,9 @@
 	name = Yasser Gonzalez Fernandez
 	email = contact@yglezfdez.com
 
+[core]
+	excludesfile = ~/.gitignore
+
 [push]
 	default = simple
+

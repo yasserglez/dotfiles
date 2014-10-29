@@ -22,8 +22,9 @@ def zsh():
 
 def git():
     local('sudo apt-get install -y git')
-    local('rm -f ~/.gitconfig')
-    local('ln -sf "$PWD/gitconfig" ~/.gitconfig')
+    with lcd('git'):
+        local('rm -f ~/.gitconfig')
+        local('ln -sf "$PWD/gitconfig" ~/.gitconfig')
 
 def solarized(scheme='light'):
     solarized_dircolors(scheme)
