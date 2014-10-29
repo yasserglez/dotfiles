@@ -44,22 +44,25 @@ def solarized(scheme='light'):
 
 def solarized_gnome_terminal(scheme):
     git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
-    _git_pull_or_clone(git_repo)
-    with lcd(os.path.basename(git_repo)):
+    git_repo_dir = 'solarized/gnome-terminal-colors-solarized'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    with lcd(git_repo_dir):
         local('sudo apt-get install -y dconf-cli')
         local('./install.sh -s {0} -p Default'.format(scheme))
 
 def solarized_dircolors(scheme):
     git_repo = 'https://github.com/seebi/dircolors-solarized'
-    _git_pull_or_clone(git_repo)
-    with lcd(os.path.basename(git_repo)):
+    git_repo_dir = 'solarized/dircolors-solarized'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    with lcd(git_repo_dir):
         local('rm -f ~/.dir_colors')
         local('ln -s "$PWD/dircolors.ansi-{0}" ~/.dir_colors'.format(scheme))
 
 def solarized_gedit(scheme):
     git_repo = 'https://github.com/mattcan/solarized-gedit'
-    _git_pull_or_clone(git_repo)
-    with lcd(os.path.basename(git_repo)):
+    git_repo_dir = 'solarized/solarized-gedit'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    with lcd(git_repo_dir):
         local('mkdir -p ~/.local/share/gedit/styles')
         local('ln -sf "$PWD/solarized-light.xml" ~/.local/share/gedit/styles/')
         local('ln -sf "$PWD/solarized-dark.xml" ~/.local/share/gedit/styles/')
