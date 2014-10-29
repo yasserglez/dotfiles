@@ -34,7 +34,7 @@ set clipboard=unnamedplus  " use the system clipboard
 set novisualbell  " no blinking
 set noerrorbells  " no noise
 
-if has('gui_running)
+if has('gui_running')
     set guifont=Ubuntu\ Mono\ 11
     set guioptions-=T  " remove toolbar
 endif
@@ -44,8 +44,8 @@ endif
 "
 
 let mapleader='\'
-noremap <Leader>bl :set background=light<CR>
-noremap <Leader>bd :set background=dark<CR>
+noremap <Leader>l :set background=light<CR>
+noremap <Leader>d :set background=dark<CR>
 
 " move vertically by visual line (for wrapped lines)
 nnoremap j gj
@@ -66,6 +66,7 @@ call vundle#begin('~/.vim/vundle/')
 Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'gagoar/StripWhiteSpaces'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on

@@ -19,7 +19,7 @@ def zsh():
         for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
             local('rm -f ~/.{0}'.format(dotfile))
             local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
-            
+
 def vim():
     local('sudo apt-get install -y git vim-gnome')
     # ~/.vimrc
@@ -47,7 +47,7 @@ def git():
     git_repo_dir = 'git/gitignore'
     _git_pull_or_clone(git_repo, git_repo_dir)
     with lcd(git_repo_dir):
-        templates = ('Global/Linux', 'Global/vim', 'Global/Eclipse', 
+        templates = ('Global/Linux', 'Global/vim', 'Global/Eclipse',
             'Global/Matlab', 'R', 'Python', 'C', 'C++', 'Java', 'TeX')
         for template in templates:
             local('cat {0}.gitignore >> ~/.gitignore'.format(template))
@@ -91,4 +91,3 @@ def _git_pull_or_clone(git_repo, git_repo_dir=None):
             local('git pull')
     else:
         local('git clone {0} {1}'.format(git_repo, git_repo_dir))
-
