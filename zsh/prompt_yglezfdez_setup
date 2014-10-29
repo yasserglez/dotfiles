@@ -45,6 +45,7 @@ function prompt_yglezfdez_setup {
   PROMPT=$'\n%U%m%u:%~$git_info[prompt]$python_info[virtualenv]\n${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT=" -- correct '%R' to '%r' [nyae]? "
+  PROMPT2='  > '
 
   # Completions.
   zstyle ':completion:*:corrections' format ' -- %d'
