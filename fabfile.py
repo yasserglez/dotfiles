@@ -52,7 +52,7 @@ def git():
         for template in templates:
             local('cat {0}.gitignore >> ~/.gitignore'.format(template))
 
-def solarized(scheme='light'):
+def solarized(scheme='dark'):
     solarized_dircolors(scheme)
     solarized_gnome_terminal(scheme)
     solarized_gedit(scheme)
