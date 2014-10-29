@@ -24,7 +24,7 @@ set hlsearch  " highlight matches
 set ignorecase  " ignore case in search patterns (...)
 set smartcase   " if it contains lowercase letters only
 
-" first complete longest common string and invoke wildmenu, 
+" first complete longest common string and invoke wildmenu,
 " then complete the first alternative and cycle throught the rest
 set wildmenu
 set wildmode=longest:full,full
@@ -50,14 +50,18 @@ filetype off
 set rtp+=~/.vim/vundle/Vundle.vim
 call vundle#begin('~/.vim/vundle/')
 
-    Plugin 'gmarik/Vundle.vim'
-    Plugin 'altercation/vim-colors-solarized'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'gagoar/StripWhiteSpaces'
 
 call vundle#end()
 filetype plugin indent on
 
-" altercation/vim-colors-solarized
+" vim-colors-solarized
 syntax enable
 set t_Co=16
 set background=light
 colorscheme solarized
+
+" StripWhiteSpaces
+let g:strip_trailing_lines = 1
