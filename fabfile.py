@@ -19,6 +19,21 @@ def zsh():
         for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
             local('rm -f ~/.{0}'.format(dotfile))
             local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
+            
+def vim():
+    local('sudo apt-get install -y git vim-gnome')
+    # ~/.vimrc
+    with lcd('vim'):
+        local('rm -f ~/.vimrc')
+        local('ln -sf "$PWD/vimrc" ~/.vimrc')
+    # ~/.vim
+    local('rm -rf ~/.vim')
+    local('mkdir ~/.vim')
+    git_repo = 'https://github.com/gmarik/Vundle.vim'
+    git_repo_dir = 'vim/vundle/Vundle.vim'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    with lcd('vim'):
+        local('ln -sf "$PWD/vundle" ~/.vim/vundle')
 
 def git():
     local('sudo apt-get install -y git')

@@ -1,0 +1,18 @@
+" Vundle
+
+set nocompatible
+filetype off
+set rtp+=~/.vim/vundle/Vundle.vim
+call vundle#begin('~/.vim/vundle/')
+
+    Plugin 'gmarik/Vundle.vim'
+    Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
+filetype plugin indent on
+
+" vim-colors-solarized
+syntax enable
+set t_Co=16
+set background=light
+colorscheme solarized
