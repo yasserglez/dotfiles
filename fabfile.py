@@ -22,9 +22,20 @@ def zsh():
 
 def git():
     local('sudo apt-get install -y git')
+    # ~/.gitconfig
     with lcd('git'):
         local('rm -f ~/.gitconfig')
         local('ln -sf "$PWD/gitconfig" ~/.gitconfig')
+    # ~/.gitignore
+    local('rm -f ~/.gitignore')
+    git_repo = 'https://github.com/github/gitignore'
+    git_repo_dir = 'git/gitignore'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    with lcd(git_repo_dir):
+        templates = ('Global/Linux', 'Global/vim', 'Global/Eclipse', 
+            'Global/Matlab', 'R', 'Python', 'C', 'C++', 'Java', 'TeX')
+        for template in templates:
+            local('cat {0}.gitignore >> ~/.gitignore'.format(template))
 
 def solarized(scheme='light'):
     solarized_dircolors(scheme)
@@ -44,7 +55,6 @@ def solarized_dircolors(scheme):
     with lcd(os.path.basename(git_repo)):
         local('rm -f ~/.dir_colors')
         local('ln -s "$PWD/dircolors.ansi-{0}" ~/.dir_colors'.format(scheme))
-        local('eval `dircolors ~/.dir_colors`')
 
 def solarized_gedit(scheme):
     git_repo = 'https://github.com/mattcan/solarized-gedit'
