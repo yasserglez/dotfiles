@@ -37,6 +37,7 @@ set noerrorbells  " no noise
 if has('gui_running')
     set guifont=Ubuntu\ Mono\ 11
     set guioptions-=T  " remove toolbar
+    set lines=42 columns=86  " set the window size
 endif
 
 "
