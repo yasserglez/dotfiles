@@ -56,6 +56,13 @@ nnoremap k gk
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
 
 "
+" Specific File Type Settings
+"
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
+let g:html_indent_inctags = "html,body,head,tbody"
+
+"
 " Vundle Plugins
 "
 
