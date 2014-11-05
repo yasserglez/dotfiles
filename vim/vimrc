@@ -45,8 +45,9 @@ endif
 "
 
 let mapleader='\'
-noremap <Leader>l :set background=light<CR>
-noremap <Leader>d :set background=dark<CR>
+noremap <leader>l :set background=light<CR>
+noremap <leader>d :set background=dark<CR>
+noremap <leader>w :w!<cr>  " Fast saving
 
 " move vertically by visual line (for wrapped lines)
 nnoremap j gj
@@ -60,7 +61,7 @@ nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
 "
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
-let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_inctags = "body,head"
 
 "
 " Vundle Plugins
@@ -75,6 +76,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'gagoar/StripWhiteSpaces'
 Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 filetype plugin indent on
@@ -87,3 +89,8 @@ colorscheme solarized
 
 " StripWhiteSpaces
 let g:strip_trailing_lines = 1
+
+" NERDTree
+map <silent> <C-n> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
