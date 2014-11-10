@@ -13,6 +13,7 @@ set autoindent  " copy indent from current line when starting a new line
 set backspace=indent,eol,start  " allow backspacing over everything
 
 set wrap  " wrap long lines
+set linebreak  " do not break words
 set textwidth=79  " break long lines
 
 set relativenumber  " show line numbers relative to current line
@@ -45,8 +46,11 @@ endif
 "
 
 let mapleader='\'
+
+" light/dark solarized color scheme
 noremap <leader>l :set background=light<CR>
 noremap <leader>d :set background=dark<CR>
+
 noremap <leader>w :w!<cr>  " Fast saving
 
 " move vertically by visual line (for wrapped lines)
@@ -77,6 +81,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'gagoar/StripWhiteSpaces'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 filetype plugin indent on
@@ -94,3 +100,7 @@ let g:strip_trailing_lines = 1
 map <silent> <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" vim-markdown
+let g:vim_markdown_math=1
+let g:vim_markdown_folding_disabled=1
