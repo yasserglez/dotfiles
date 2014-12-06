@@ -116,4 +116,3 @@ def _git_pull_or_clone(git_repo, git_repo_dir):
             local('git submodule update --init --recursive')
     else:
         local('git clone --recursive {0} {1}'.format(git_repo, git_repo_dir))
-
