@@ -3,22 +3,22 @@ import os
 from fabric.api import lcd, local
 from fabric.contrib.console import confirm
 
-def emacs():
+def emacs(force=False):
     _apt_get_install('emacs24')
-    if _can_overwrite('~/.emacs.d'):
+    if force or _can_overwrite('~/.emacs.d'):
         local('rm -rf ~/.emacs.d')
         local('mkdir ~/.emacs.d')
         with lcd('emacs'):
             local('ln -s $PWD/init.el ~/.emacs.d/init.el')
             local('ln -s $PWD/config.org ~/.emacs.d/config.org')
 
-def vim():
+def vim(force=False):
     _apt_get_install('git', 'vim-nox')
-    if _can_overwrite('~/.vimrc'):
+    if force or _can_overwrite('~/.vimrc'):
         with lcd('vim'):
             local('rm -f ~/.vimrc')
             local('ln -sf "$PWD/vimrc" ~/.vimrc')
-    if _can_overwrite('~/.vim'):
+    if force or _can_overwrite('~/.vim'):
         local('rm -rf ~/.vim')
         local('mkdir ~/.vim')
         git_repo = 'https://github.com/gmarik/Vundle.vim'
@@ -27,13 +27,13 @@ def vim():
         with lcd('vim'):
             local('ln -sf $PWD/vundle ~/.vim/vundle')
 
-def git():
+def git(force=False):
     _apt_get_install('git')
-    if _can_overwrite('~/.gitconfig'):
+    if force or _can_overwrite('~/.gitconfig'):
         with lcd('git'):
             local('rm -f ~/.gitconfig')
             local('ln -sf $PWD/gitconfig ~/.gitconfig')
-    if _can_overwrite('~/.gitignore'):
+    if force or _can_overwrite('~/.gitignore'):
         local('rm -f ~/.gitignore')
         git_repo = 'https://github.com/github/gitignore'
         git_repo_dir = 'git/gitignore'
@@ -45,28 +45,28 @@ def git():
             for template in templates:
                 local('cat {0}.gitignore >> ~/.gitignore'.format(template))
 
-def zsh():
+def zsh(force=False):
     _apt_get_install('zsh')
     local('chsh -s /usr/bin/zsh')
     git_repo = 'https://github.com/sorin-ionescu/prezto'
     git_repo_dir = 'zsh/prezto'
     _git_pull_or_clone(git_repo, git_repo_dir)
-    if _can_overwrite('~/.zprezto'):
+    if force or _can_overwrite('~/.zprezto'):
         with lcd('zsh'):
             local('rm -fr ~/.zprezto')
             local('ln -s $PWD/prezto ~/.zprezto')
             local('ln -s $PWD/prompt_yglezfdez_setup ~/.zprezto/modules/prompt/functions/')
     for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
-        if _can_overwrite('~/.{0}'.format(dotfile)):
+        if force or _can_overwrite('~/.{0}'.format(dotfile)):
             local('rm -f ~/.{0}'.format(dotfile))
             local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
 
-def solarized(scheme='dark'):
-    solarized_dircolors(scheme)
-    solarized_gnome_terminal(scheme)
-    solarized_gedit(scheme)
+def solarized(force=False, scheme='dark'):
+    solarized_dircolors(force, scheme)
+    solarized_gnome_terminal(force, scheme)
+    solarized_gedit(force, scheme)
 
-def solarized_gnome_terminal(scheme):
+def solarized_gnome_terminal(force=False, scheme='dark'):
     git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
     git_repo_dir = 'solarized/gnome-terminal-colors-solarized'
     _git_pull_or_clone(git_repo, git_repo_dir)
@@ -74,16 +74,16 @@ def solarized_gnome_terminal(scheme):
         _apt_get_install('dconf-cli')
         local('./install.sh -s {0} -p Default'.format(scheme))
 
-def solarized_dircolors(scheme):
+def solarized_dircolors(force=False, scheme='dark'):
     git_repo = 'https://github.com/seebi/dircolors-solarized'
     git_repo_dir = 'solarized/dircolors-solarized'
     _git_pull_or_clone(git_repo, git_repo_dir)
-    if _can_overwrite('~/.dir_colors'):
+    if force or _can_overwrite('~/.dir_colors'):
         with lcd(git_repo_dir):
             local('rm -f ~/.dir_colors')
             local('ln -s $PWD/dircolors.ansi-{0} ~/.dir_colors'.format(scheme))
 
-def solarized_gedit(scheme):
+def solarized_gedit(force=False, scheme='dark'):
     git_repo = 'https://github.com/mattcan/solarized-gedit'
     git_repo_dir = 'solarized/solarized-gedit'
     _git_pull_or_clone(git_repo, git_repo_dir)
