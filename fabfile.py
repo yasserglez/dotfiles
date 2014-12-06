@@ -2,6 +2,13 @@ import os
 
 from fabric.api import *
 
+def emacs():
+    local('sudo apt-get install -y emacs24')
+    local('rm -rf ~/.emacs.d')
+    local('mkdir ~/.emacs.d')
+    with lcd('emacs'):
+        local('ln -s $PWD/init.el ~/.emacs.d/init.el')
+        local('ln -s $PWD/config.org ~/.emacs.d/config.org')
 
 def zsh():
     with lcd('zsh'):

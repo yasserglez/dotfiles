@@ -1,0 +1,43 @@
+#+TITLE: Yasser Gonzalez's Emacs Configuration
+
+* About
+
+This is my Emacs configuration maintained in an Org-mode file.
+It is a work-in-progress inspired by similar configurations by
+[[http://sachac.github.io/.emacs.d/Sacha.html][Sacha Chua]] and [[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Arnaud Legrand]].
+
+The =~/.emacs.d/init.el= file simply loads all the elisp code in this
+document using Org-babel:
+
+#+begin_src emacs-lisp  :tangle no
+  (require 'org)
+  (defvar ygf/config-file "~/.emacs.d/config.org")
+  (org-babel-load-file ygf/config-file)
+#+end_src
+
+The following key bindings are set to easily edit and reload this file
+within Emacs.
+
+#+begin_src emacs-lisp
+  (defun yglez/edit-config-file ()
+    (interactive)
+    (find-file ygf/config-file))
+  
+  (global-set-key (kbd "C-c e") 'yglez/edit-config-file)
+  
+  (defun yglez/reload-config-file ()
+    (interactive)
+    (org-babel-load-file ygf/config-file))
+    
+  (global-set-key (kbd "C-c r") 'yglez/reload-config-file)
+#+end_src
+
+* Package Management
+  
+* Aestetics
+
+** Disable the splash screen
+
+#+begin_src emacs-lisp
+  (setq inhibit-splash-screen t)
+#+end_src
