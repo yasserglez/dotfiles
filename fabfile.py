@@ -3,7 +3,17 @@ import os
 from fabric.api import lcd, local
 from fabric.contrib.console import confirm
 
-def emacs(force=False):
+
+def install_all(force=False):
+    install_zsh(force)
+    install_git(force)
+    install_emacs(force)
+    install_vim(force)
+    install_solarized_gnome_terminal(force)
+    install_solarized_dircolors(force)
+    install_solarized_gedit(force)
+
+def install_emacs(force=False):
     _apt_get_install('emacs24')
     if force or _can_overwrite('~/.emacs.d'):
         local('rm -rf ~/.emacs.d')
@@ -12,7 +22,7 @@ def emacs(force=False):
             local('ln -s $PWD/init.el ~/.emacs.d/init.el')
             local('ln -s $PWD/config.org ~/.emacs.d/config.org')
 
-def vim(force=False):
+def install_vim(force=False):
     _apt_get_install('git', 'vim-nox')
     if force or _can_overwrite('~/.vimrc'):
         with lcd('vim'):
@@ -27,7 +37,7 @@ def vim(force=False):
         with lcd('vim'):
             local('ln -sf $PWD/vundle ~/.vim/vundle')
 
-def git(force=False):
+def install_git(force=False):
     _apt_get_install('git')
     if force or _can_overwrite('~/.gitconfig'):
         with lcd('git'):
@@ -45,7 +55,7 @@ def git(force=False):
             for template in templates:
                 local('cat {0}.gitignore >> ~/.gitignore'.format(template))
 
-def zsh(force=False):
+def install_zsh(force=False):
     _apt_get_install('zsh')
     local('chsh -s /usr/bin/zsh')
     git_repo = 'https://github.com/sorin-ionescu/prezto'
@@ -61,20 +71,16 @@ def zsh(force=False):
             local('rm -f ~/.{0}'.format(dotfile))
             local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
 
-def solarized(force=False, scheme='dark'):
-    solarized_dircolors(force, scheme)
-    solarized_gnome_terminal(force, scheme)
-    solarized_gedit(force, scheme)
-
-def solarized_gnome_terminal(force=False, scheme='dark'):
+def install_solarized_gnome_terminal(force=False, scheme='dark'):
+    _apt_get_install('gnome-terminal', 'dconf-cli')
     git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
     git_repo_dir = 'solarized/gnome-terminal-colors-solarized'
     _git_pull_or_clone(git_repo, git_repo_dir)
     with lcd(git_repo_dir):
-        _apt_get_install('dconf-cli')
         local('./install.sh -s {0} -p Default'.format(scheme))
 
-def solarized_dircolors(force=False, scheme='dark'):
+def install_solarized_dircolors(force=False, scheme='dark'):
+    _apt_get_install('coreutils')
     git_repo = 'https://github.com/seebi/dircolors-solarized'
     git_repo_dir = 'solarized/dircolors-solarized'
     _git_pull_or_clone(git_repo, git_repo_dir)
@@ -83,7 +89,8 @@ def solarized_dircolors(force=False, scheme='dark'):
             local('rm -f ~/.dir_colors')
             local('ln -s $PWD/dircolors.ansi-{0} ~/.dir_colors'.format(scheme))
 
-def solarized_gedit(force=False, scheme='dark'):
+def install_solarized_gedit(force=False, scheme='dark'):
+    _apt_get_install('gedit')
     git_repo = 'https://github.com/mattcan/solarized-gedit'
     git_repo_dir = 'solarized/solarized-gedit'
     _git_pull_or_clone(git_repo, git_repo_dir)
@@ -91,6 +98,7 @@ def solarized_gedit(force=False, scheme='dark'):
         local('mkdir -p ~/.local/share/gedit/styles')
         local('ln -sf $PWD/solarized-light.xml ~/.local/share/gedit/styles/')
         local('ln -sf $PWD/solarized-dark.xml ~/.local/share/gedit/styles/')
+
 
 def _can_overwrite(file_or_dir):
     file_or_dir = os.path.expanduser(file_or_dir)
