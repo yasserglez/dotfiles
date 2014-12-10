@@ -49,9 +49,9 @@ to avoid loading the packages again after processing the init file.
   (package-initialize)
 #+end_src
 
-I keep the following list of basic packages that can be easily
-installed using the =~ygf/install-basic-packages= function on a
-new Emacs installation.
+I keep a list of packages that I use very often so they can be
+easily installed using the =~ygf/install-basic-packages= function
+on a new Emacs installation.
 
 #+begin_src emacs-lisp
   (defvar yglez/basic-packages '())
@@ -62,6 +62,26 @@ new Emacs installation.
             (unless (package-installed-p package)
               (package-install package)))
           yglez/basic-packages))
+#+end_src
+
+The following two functions are based on Donald Curtis' =~after= macro.
+=~yglez/when-package-is-available= is used for code that should run
+if the package is available (when =~package.el= installs a new package
+it creates an autoload file named as the package with =~-autoloads=
+appended). =~yglez/after-package-loaded= is used for code that
+should run after a package is loaded by checking for a feature
+name provided by the package.
+
+#+begin_src emacs-lisp
+  (defmacro yglez/when-package-is-available (package &rest code)
+    (declare (indent defun))
+    `(eval-after-load ,(concat package "-autoloads")
+       '(progn ,@code)))
+  
+  (defmacro yglez/after-package-is-loaded (package &rest code)
+    (declare (indent defun))
+    `(eval-after-load ,package
+       '(progn ,@code)))
 #+end_src
   
 * Aesthetics
