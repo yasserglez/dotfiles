@@ -4,9 +4,7 @@
 
 This is my Emacs configuration maintained in an Org-mode file.
 It is a work-in-progress inspired by similar configurations by
-[[http://sachac.github.io/.emacs.d/Sacha.html][Sacha Chua]],
-[[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Arnaud Legrand]], and
-[[http://milkbox.net/note/single-file-master-emacs-configuration][Donald Curtis]].
+[[http://sachac.github.io/.emacs.d/Sacha.html][Sacha Chua]], [[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Arnaud Legrand]], and [[http://milkbox.net/note/single-file-master-emacs-configuration][Donald Curtis]].
 
 The =~/.emacs.d/init.el= file simply loads all the elisp code in this
 document using Org-babel:
@@ -54,10 +52,12 @@ easily installed using the =~ygf/install-basic-packages= function
 on a new Emacs installation.
 
 #+begin_src emacs-lisp
-  (defvar yglez/basic-packages '())
+  (defvar yglez/basic-packages
+    '(solarized-theme))
   
   (defun yglez/install-basic-packages ()
     (interactive)
+    (package-refresh-contents)
     (mapc (lambda (package)
             (unless (package-installed-p package)
               (package-install package)))
@@ -90,4 +90,17 @@ name provided by the package.
 
 #+begin_src emacs-lisp
   (setq inhibit-splash-screen t)
+#+end_src
+
+** Solarized color theme
+
+#+begin_src emacs-lisp
+  (yglez/when-package-is-available "solarized-theme"
+    ;; Avoid all font-size changes
+    (setq solarized-height-minus-1 1)
+    (setq solarized-height-plus-1 1)
+    (setq solarized-height-plus-2 1)
+    (setq solarized-height-plus-3 1)
+    (setq solarized-height-plus-4 1)
+    (load-theme 'solarized-dark t))
 #+end_src
