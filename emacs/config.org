@@ -4,7 +4,9 @@
 
 This is my Emacs configuration maintained in an Org-mode file.
 It is a work-in-progress inspired by similar configurations by
-[[http://sachac.github.io/.emacs.d/Sacha.html][Sacha Chua]] and [[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Arnaud Legrand]].
+[[http://sachac.github.io/.emacs.d/Sacha.html][Sacha Chua]],
+[[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Arnaud Legrand]], and
+[[http://milkbox.net/note/single-file-master-emacs-configuration][Donald Curtis]].
 
 The =~/.emacs.d/init.el= file simply loads all the elisp code in this
 document using Org-babel:
@@ -33,8 +35,36 @@ within Emacs.
 #+end_src
 
 * Package Management
+
+I use Emacs' built-in =~package.el= for package management with the
+GNU and MELPA repositories. =~package-enable-at-startup= is set to nil,
+to avoid loading the packages again after processing the init file.
+
+#+begin_src emacs-lisp
+  (require 'package)
+  (setq package-archives
+        '(("gnu" . "http://elpa.gnu.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")))
+  (setq package-enable-at-startup nil)
+  (package-initialize)
+#+end_src
+
+I keep the following list of basic packages that can be easily
+installed using the =~ygf/install-basic-packages= function on a
+new Emacs installation.
+
+#+begin_src emacs-lisp
+  (defvar yglez/basic-packages '())
   
-* Aestetics
+  (defun yglez/install-basic-packages ()
+    (interactive)
+    (mapc (lambda (package)
+            (unless (package-installed-p package)
+              (package-install package)))
+          yglez/basic-packages))
+#+end_src
+  
+* Aesthetics
 
 ** Disable the splash screen
 
