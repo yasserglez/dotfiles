@@ -1,0 +1,6 @@
+
+# Install all packages in my home directory
+.libPaths("~/.local/lib/R/library")
+
+# Set RStudio's CRAN mirror as default
+options(repos = structure(c(CRAN = "http://cran.rstudio.com/")))

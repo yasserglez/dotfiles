@@ -12,6 +12,15 @@ def install_all(force=False):
     install_solarized_gnome_terminal(force)
     install_solarized_dircolors(force)
     install_solarized_gedit(force)
+    install_r(force)
+
+def install_r(force=False):
+    _apt_get_install('r-base', 'r-base-dev')
+    if force or _can_overwrite('~/.Rprofile'):
+        local('rm -f ~/.Rprofile')
+        local('mkdir -p ~/.local/lib/R/library')
+        with lcd('R'):
+            local('ln -s $PWD/Rprofile ~/.Rprofile')
 
 def install_emacs(force=False):
     _apt_get_install('emacs24')
