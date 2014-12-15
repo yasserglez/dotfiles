@@ -116,7 +116,7 @@ def _can_overwrite(file_or_dir):
 
 def _apt_get_install(*packages):
     for package in packages:
-        local('sudo apt-get install -q -y {0}'.format(package))
+        local('sudo apt-get install {0}'.format(package))
 
 def _git_pull_or_clone(git_repo, git_repo_dir):
     if os.path.isdir(git_repo_dir):
