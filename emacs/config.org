@@ -106,6 +106,12 @@ name provided by the package.
   (scroll-bar-mode -1)
 #+end_src
 
+** Show the buffer in the frame title
+
+#+begin_src emacs-lisp
+  (setq frame-title-format "%b")
+#+end_src   
+   
 ** Solarized color theme
 
 #+begin_src emacs-lisp
