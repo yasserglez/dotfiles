@@ -54,8 +54,9 @@ on a new Emacs installation.
 
 #+begin_src emacs-lisp
   (defvar yasserglez/basic-packages
-    '(solarized-theme))
-
+    '(solarized-theme
+      auctex))
+  
   (defun yasserglez/install-basic-packages ()
     (interactive)
     (package-refresh-contents)
@@ -126,6 +127,19 @@ name provided by the package.
     (setq solarized-height-plus-4 1.0)
     (load-theme 'solarized-dark t))
 #+end_src
+* AUCTeX
+
+#+begin_src emacs-lisp
+  (yasserglez/when-package-is-available "auctex"
+    ;; Enable the PDF mode
+    (setq TeX-PDF-mode t)
+    ;; Enable document parsing
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    ;; Make AUCTeX aware of multi-file documents
+    (setq-default TeX-master nil))
+#+end_src
+
 * Miscellaneous
 
 ** Disable auto-save and backups
@@ -134,4 +148,3 @@ name provided by the package.
   (setq auto-save-default nil)
   (setq make-backup-files nil)
 #+end_src
-  
