@@ -19,17 +19,17 @@ The following key bindings are set to easily edit and reload this file
 within Emacs.
 
 #+begin_src emacs-lisp
-  (defun yglez/edit-config-file ()
+  (defun yasserglez/edit-config-file ()
     (interactive)
     (find-file ygf/config-file))
-  
-  (global-set-key (kbd "C-c e") 'yglez/edit-config-file)
-  
-  (defun yglez/reload-config-file ()
+
+  (global-set-key (kbd "C-c e") 'yasserglez/edit-config-file)
+
+  (defun yasserglez/reload-config-file ()
     (interactive)
     (org-babel-load-file ygf/config-file))
-    
-  (global-set-key (kbd "C-c r") 'yglez/reload-config-file)
+
+  (global-set-key (kbd "C-c r") 'yasserglez/reload-config-file)
 #+end_src
 
 * Package Management
@@ -52,38 +52,38 @@ easily installed using the =~ygf/install-basic-packages= function
 on a new Emacs installation.
 
 #+begin_src emacs-lisp
-  (defvar yglez/basic-packages
+  (defvar yasserglez/basic-packages
     '(solarized-theme))
-  
-  (defun yglez/install-basic-packages ()
+
+  (defun yasserglez/install-basic-packages ()
     (interactive)
     (package-refresh-contents)
     (mapc (lambda (package)
             (unless (package-installed-p package)
               (package-install package)))
-          yglez/basic-packages))
+          yasserglez/basic-packages))
 #+end_src
 
 The following two functions are based on Donald Curtis' =~after= macro.
-=~yglez/when-package-is-available= is used for code that should run
+=~yasserglez/when-package-is-available= is used for code that should run
 if the package is available (when =~package.el= installs a new package
 it creates an autoload file named as the package with =~-autoloads=
-appended). =~yglez/after-package-loaded= is used for code that
+appended). =~yasserglez/after-package-loaded= is used for code that
 should run after a package is loaded by checking for a feature
 name provided by the package.
 
 #+begin_src emacs-lisp
-  (defmacro yglez/when-package-is-available (package &rest code)
+  (defmacro yasserglez/when-package-is-available (package &rest code)
     (declare (indent defun))
     `(eval-after-load ,(concat package "-autoloads")
        '(progn ,@code)))
-  
-  (defmacro yglez/after-package-is-loaded (package &rest code)
+
+  (defmacro yasserglez/after-package-is-loaded (package &rest code)
     (declare (indent defun))
     `(eval-after-load ,package
        '(progn ,@code)))
 #+end_src
-  
+
 * Aesthetics
 
 ** Disable the splash screen
@@ -101,7 +101,7 @@ name provided by the package.
 ** Solarized color theme
 
 #+begin_src emacs-lisp
-  (yglez/when-package-is-available "solarized-theme"
+  (yasserglez/when-package-is-available "solarized-theme"
     ;; Avoid all font-size changes
     (setq solarized-height-minus-1 1)
     (setq solarized-height-plus-1 1)
