@@ -126,3 +126,12 @@ name provided by the package.
     (setq solarized-height-plus-4 1.0)
     (load-theme 'solarized-dark t))
 #+end_src
+* Miscellaneous
+
+** Disable auto-save and backups
+
+#+begin_src emacs-lisp
+  (setq auto-save-default nil)
+  (setq make-backup-files nil)
+#+end_src
+  
