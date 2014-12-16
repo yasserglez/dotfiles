@@ -92,6 +92,12 @@ name provided by the package.
   (setq inhibit-splash-screen t)
 #+end_src
 
+** Disable the toolbar
+
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+#+end_src
+
 ** Solarized color theme
 
 #+begin_src emacs-lisp
