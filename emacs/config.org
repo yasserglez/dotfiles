@@ -11,6 +11,7 @@ document using Org-babel:
 
 #+begin_src emacs-lisp  :tangle no
   (require 'org)
+  (setq vc-follow-symlinks nil)
   (defvar ygf/config-file "~/.emacs.d/config.org")
   (org-babel-load-file ygf/config-file)
 #+end_src
@@ -84,8 +85,13 @@ name provided by the package.
        '(progn ,@code)))
 #+end_src
 
-* Aesthetics
 
+#+begin_src emacs-lisp
+  (setq vc-follow-symlinks nil)
+#+end_src
+
+* Aesthetics
+  
 ** Disable the splash screen
 
 #+begin_src emacs-lisp
