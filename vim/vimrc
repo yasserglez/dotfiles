@@ -12,10 +12,6 @@ set autoindent  " copy indent from current line when starting a new line
 
 set backspace=indent,eol,start  " allow backspacing over everything
 
-set wrap  " wrap long lines
-set linebreak  " do not break words
-set textwidth=79  " break long lines
-
 set showmatch  " highlight matching [{()}]
 
 set incsearch  " search as characters are entered
