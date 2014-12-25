@@ -2,9 +2,9 @@
 
 * About
 
-This is my Emacs configuration maintained in an Org-mode file.
-It is a work-in-progress inspired by similar configurations by
-[[http://sachac.github.io/.emacs.d/Sacha.html][Sacha Chua]], [[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Arnaud Legrand]], and [[http://milkbox.net/note/single-file-master-emacs-configuration][Donald Curtis]].
+This is my Emacs configuration maintained in an Org-mode file.  It is
+a work-in-progress inspired by similar configurations by [[http://sachac.github.io/.emacs.d/Sacha.html][Sacha Chua]],
+[[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Arnaud Legrand]], and [[http://milkbox.net/note/single-file-master-emacs-configuration][Donald Curtis]].
 
 The =~/.emacs.d/init.el= file simply loads all the elisp code in this
 document using Org-babel:
@@ -36,21 +36,22 @@ within Emacs.
 * Package Management
 
 I use Emacs' built-in =~package.el= for package management with the
-GNU and MELPA repositories. =~package-enable-at-startup= is set to nil,
-to avoid loading the packages again after processing the init file.
+GNU repo, the MELPA Stable repo and other package-specific repos.
+=~package-enable-at-startup= is set to nil, to avoid loading the
+packages again after processing the init file.
 
 #+begin_src emacs-lisp
   (require 'package)
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
-          ("melpa" . "http://melpa.org/packages/")))
+          ("melpa-stable" . "http://stable.melpa.org/packages/")))
   (setq package-enable-at-startup nil)
   (package-initialize)
 #+end_src
 
-I keep a list of packages that I use very often so they can be
-easily installed using the =~ygf/install-basic-packages= function
-on a new Emacs installation.
+I keep a list of packages that I use very often so they can be easily
+installed using the =~yasserglez/install-basic-packages= function on a
+new Emacs installation.
 
 #+begin_src emacs-lisp
   (defvar yasserglez/basic-packages
@@ -66,13 +67,13 @@ on a new Emacs installation.
           yasserglez/basic-packages))
 #+end_src
 
-The following two functions are based on Donald Curtis' =~after= macro.
-=~yasserglez/when-package-is-available= is used for code that should run
-if the package is available (when =~package.el= installs a new package
-it creates an autoload file named as the package with =~-autoloads=
-appended). =~yasserglez/after-package-loaded= is used for code that
-should run after a package is loaded by checking for a feature
-name provided by the package.
+The following two functions are based on Donald Curtis' =~after=
+macro. =~yasserglez/when-package-is-available= is used for code that
+should run if the package is available (when =~package.el= installs a
+new package it creates an autoload file named as the package with
+=~-autoloads= appended). =~yasserglez/after-package-loaded= is used
+for code that should run after a package is loaded by checking for a
+feature name provided by the package.
 
 #+begin_src emacs-lisp
   (defmacro yasserglez/when-package-is-available (package &rest code)
@@ -84,11 +85,6 @@ name provided by the package.
     (declare (indent defun))
     `(eval-after-load ,package
        '(progn ,@code)))
-#+end_src
-
-
-#+begin_src emacs-lisp
-  (setq vc-follow-symlinks nil)
 #+end_src
 
 * Aesthetics
