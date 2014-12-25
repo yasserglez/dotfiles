@@ -5,7 +5,7 @@ from fabric.contrib.console import confirm
 
 
 def install_all(force=False):
-    install_packages()
+    install_base_packages()
     install_zsh(force)
     install_git(force)
     install_emacs(force)
@@ -16,9 +16,10 @@ def install_all(force=False):
     install_r(force)
 
 
-def install_packages():
+def install_base_packages():
     packages = """
     banshee
+    build-essential
     easytag
     encfs
     gimp
@@ -31,9 +32,10 @@ def install_packages():
     kile
     lyx
     meld
+    python-dev
     texlive-lang-english
     texlive-lang-spanish
-    vlc    
+    vlc
     """.strip().split()
     _apt_get_install(*packages)
 
