@@ -168,3 +168,9 @@
   (setq auto-save-default nil)
   (setq make-backup-files nil)
 #+end_src
+   
+** End sentences with one space
+
+#+begin_src emacs-lisp
+  (setq sentence-end-double-space nil)
+#+end_src
