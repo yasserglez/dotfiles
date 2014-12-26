@@ -174,3 +174,9 @@
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil)
 #+end_src
+
+** Remove trailing whitespace on save
+
+#+begin_src emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+end_src
