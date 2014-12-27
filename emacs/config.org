@@ -59,7 +59,7 @@
     '(auctex
       elpy
       solarized-theme))
-  
+
   (defun yasserglez/install-base-packages ()
     (interactive)
     (package-refresh-contents)
@@ -90,7 +90,7 @@
 #+end_src
 
 * Appearance
-  
+
 ** Disable the splash screen
 
 #+begin_src emacs-lisp
@@ -109,8 +109,8 @@
 
 #+begin_src emacs-lisp
   (setq frame-title-format "%b")
-#+end_src   
-   
+#+end_src
+
 ** Solarized color theme
 
 #+begin_src emacs-lisp
@@ -125,13 +125,13 @@
     (setq solarized-height-plus-4 1.0)
     (load-theme 'solarized-dark t))
 #+end_src
-   
-* Python 
+
+* Python
 
   I use Elpy for Python development. Jedi (=~pip install --user jedi=)
   is required for code completion, and flake8
   (=~pip install --user flake8=) for code checking.
-  
+
 #+begin_src emacs-lisp
   (yasserglez/when-package-is-available "elpy"
     (elpy-enable)
@@ -139,14 +139,14 @@
     (setq elpy-rpc-backend "jedi")
     ;; Use IPython as the interactive intepreter
     (elpy-use-ipython)
-    ;; Run tests using nose
-    (elpy-set-test-runner 'elpy-test-nose-runner)
+    ;; Run tests using pytest
+    (elpy-set-test-runner 'elpy-test-pytest-runner)
     ;; Disable highlight-indentation
     (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules)))
 #+end_src
-  
+
 * LaTeX
-  
+
   I use AUCTeX to write LaTeX documents.
 
 #+begin_src emacs-lisp
@@ -168,7 +168,7 @@
   (setq auto-save-default nil)
   (setq make-backup-files nil)
 #+end_src
-   
+
 ** End sentences with one space
 
 #+begin_src emacs-lisp
