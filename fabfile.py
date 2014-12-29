@@ -5,7 +5,6 @@ from fabric.contrib.console import confirm
 
 
 def install_all(force=False):
-    install_base_packages()
     install_zsh(force)
     install_git(force)
     install_emacs(force)
@@ -14,30 +13,6 @@ def install_all(force=False):
     install_solarized_dircolors(force)
     install_solarized_gedit(force)
     install_r(force)
-
-
-def install_base_packages():
-    packages = """
-    banshee
-    build-essential
-    easytag
-    encfs
-    gimp
-    gnome-encfs-manager
-    gnucash
-    htop
-    inkscape
-    iotop
-    jabref
-    kile
-    lyx
-    meld
-    python-dev
-    texlive-lang-english
-    texlive-lang-spanish
-    vlc
-    """.strip().split()
-    _apt_get_install(*packages)
 
 
 def install_r(force=False):
