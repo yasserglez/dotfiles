@@ -1,10 +1,9 @@
 [user]
-	name = Yasser Gonzalez Fernandez
-	email = contact@yglezfdez.com
+	name = Yasser Gonzalez
+	email = yasserglez@gmail.com
 
 [core]
 	excludesfile = ~/.gitignore
 
 [push]
 	default = simple
-
