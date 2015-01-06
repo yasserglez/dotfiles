@@ -1,4 +1,4 @@
-#+TITLE: Yasser Gonzalez's Emacs Configuration
+#+title: Yasser Gonzalez's Emacs Configuration
 
 * About
 
@@ -12,8 +12,8 @@
 #+begin_src emacs-lisp  :tangle no
   (require 'org)
   (setq vc-follow-symlinks nil)
-  (defvar ygf/config-file "~/.emacs.d/config.org")
-  (org-babel-load-file ygf/config-file)
+  (defvar yasserglez/config-file "~/.emacs.d/config.org")
+  (org-babel-load-file yasserglez/config-file)
 #+end_src
 
   The following key bindings are set to easily edit and reload this
@@ -22,13 +22,13 @@
 #+begin_src emacs-lisp
   (defun yasserglez/edit-config-file ()
     (interactive)
-    (find-file ygf/config-file))
+    (find-file yasserglez/config-file))
 
   (global-set-key (kbd "C-c e") 'yasserglez/edit-config-file)
 
   (defun yasserglez/reload-config-file ()
     (interactive)
-    (org-babel-load-file ygf/config-file))
+    (org-babel-load-file yasserglez/config-file))
 
   (global-set-key (kbd "C-c r") 'yasserglez/reload-config-file)
 #+end_src
@@ -105,12 +105,6 @@
   (scroll-bar-mode -1)
 #+end_src
 
-** Show the buffer in the frame title
-
-#+begin_src emacs-lisp
-  (setq frame-title-format "%b")
-#+end_src
-
 ** Solarized color theme
 
 #+begin_src emacs-lisp
@@ -124,6 +118,19 @@
     (setq solarized-height-plus-3 1.0)
     (setq solarized-height-plus-4 1.0)
     (load-theme 'solarized-dark t))
+#+end_src
+
+** Show the buffer in the frame title
+
+#+begin_src emacs-lisp
+  (setq frame-title-format "%b")
+#+end_src
+
+** Show line and column number in the mode line
+
+#+begin_src emacs-lisp
+  (line-number-mode)
+  (column-number-mode)
 #+end_src
 
 * Python
