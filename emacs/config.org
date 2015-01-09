@@ -48,7 +48,8 @@
   function on a new Emacs installation.
 
 #+begin_src emacs-lisp
-  (defvar yasserglez/base-packages '(auctex elpy solarized-theme))
+  (defvar yasserglez/base-packages
+    '(auctex elpy magit solarized-theme))
 
   (defun yasserglez/install-base-packages ()
     (interactive)
