@@ -162,6 +162,19 @@
     (setq-default TeX-master nil))
 #+end_src
 
+* Git
+  Git integration using Magit.
+
+#+begin_src emacs-lisp
+  (yasserglez/when-package-is-available "magit"
+    ;; vc-git no longer needed.
+    (delete 'Git vc-handled-backends)
+    ;; Don't show " MRev" in modeline.
+    (setq magit-auto-revert-mode-lighter "")
+    ;; Bind a global key to magit-status.
+    (global-set-key (kbd "C-c g") 'magit-status))
+#+end_src
+
 * Miscellaneous
 
   Settings that don't fit in any previous category.
@@ -206,7 +219,7 @@
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+end_src
 
-** Enter auto-indents by default
+** RET auto-indents by default
 
 #+begin_src emacs-lisp
   (define-key global-map (kbd "RET") 'newline-and-indent)
