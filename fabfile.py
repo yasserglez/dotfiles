@@ -79,11 +79,11 @@ def install_zsh(force=False):
         with lcd('zsh'):
             local('rm -fr ~/.zprezto')
             local('ln -s $PWD/prezto ~/.zprezto')
-            local('ln -s $PWD/prompt_yglezfdez_setup ~/.zprezto/modules/prompt/functions/')
-    for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
-        if force or _can_overwrite('~/.{0}'.format(dotfile)):
-            local('rm -f ~/.{0}'.format(dotfile))
-            local('ln -s $PWD/{0} ~/.{0}'.format(dotfile))
+            local('ln -sf $PWD/prompt_yasserglez_setup ~/.zprezto/modules/prompt/functions/')
+            for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
+                if force or _can_overwrite('~/.{0}'.format(dotfile)):
+                    local('rm -f ~/.{0}'.format(dotfile))
+                    local('ln -sf $PWD/{0} ~/.{0}'.format(dotfile))
 
 
 def install_solarized_gnome_terminal(force=False, scheme='dark'):

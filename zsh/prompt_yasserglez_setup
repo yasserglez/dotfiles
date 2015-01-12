@@ -1,10 +1,8 @@
 #
 # My custom prompt.
 #
-# Authors:
-#   Yasser Gonzalez Fernandez <contact@yglezfdez.com>
 
-function prompt_yglezfdez_precmd {
+function prompt_yasserglez_precmd {
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
@@ -16,7 +14,7 @@ function prompt_yglezfdez_precmd {
   fi
 }
 
-function prompt_yglezfdez_setup {
+function prompt_yasserglez_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -25,7 +23,7 @@ function prompt_yglezfdez_setup {
   autoload -Uz add-zsh-hook
 
   # Add hook for calling {git,python}-info before each command.
-  add-zsh-hook precmd prompt_yglezfdez_precmd
+  add-zsh-hook precmd prompt_yasserglez_precmd
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:keymap:primary' format '>>>'
@@ -60,4 +58,4 @@ function command_not_found_handler() {
   echo " -- command not found: $1 $2"
 }
 
-prompt_yglezfdez_setup "$@"
+prompt_yasserglez_setup "$@"
