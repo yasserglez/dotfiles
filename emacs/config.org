@@ -205,3 +205,9 @@
 #+begin_src emacs-lisp
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+end_src
+
+** Enter auto-indents by default
+
+#+begin_src emacs-lisp
+  (define-key global-map (kbd "RET") 'newline-and-indent)
+#+end_src
