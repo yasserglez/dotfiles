@@ -63,27 +63,27 @@ def install_git(force=False):
         _git_pull_or_clone(git_repo, git_repo_dir)
         with lcd(git_repo_dir):
             templates = ('Global/Linux', 'Global/vim', 'Global/Emacs',
-                'Global/Eclipse', 'Global/Matlab', 'R', 'Python', 'C',
-                'C++', 'Java', 'TeX')
+                         'Global/Eclipse', 'Global/Matlab', 'R',
+                         'Python', 'C', 'C++', 'Java', 'TeX')
             for template in templates:
                 local('cat {0}.gitignore >> ~/.gitignore'.format(template))
 
 
 def install_zsh(force=False):
-    _apt_get_install('zsh')
+    _apt_get_install('zsh', 'xcape')
     local('chsh -s /usr/bin/zsh')
     git_repo = 'https://github.com/sorin-ionescu/prezto'
     git_repo_dir = 'zsh/prezto'
     _git_pull_or_clone(git_repo, git_repo_dir)
-    if force or _can_overwrite('~/.zprezto'):
-        with lcd('zsh'):
+    with lcd('zsh'):
+        if force or _can_overwrite('~/.zprezto'):
             local('rm -fr ~/.zprezto')
             local('ln -s $PWD/prezto ~/.zprezto')
             local('ln -sf $PWD/prompt_yasserglez_setup ~/.zprezto/modules/prompt/functions/')
-            for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
-                if force or _can_overwrite('~/.{0}'.format(dotfile)):
-                    local('rm -f ~/.{0}'.format(dotfile))
-                    local('ln -sf $PWD/{0} ~/.{0}'.format(dotfile))
+        for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
+            if force or _can_overwrite('~/.{0}'.format(dotfile)):
+                local('rm -f ~/.{0}'.format(dotfile))
+                local('ln -sf $PWD/{0} ~/.{0}'.format(dotfile))
 
 
 def install_solarized_gnome_terminal(force=False, scheme='dark'):
