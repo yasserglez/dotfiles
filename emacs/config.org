@@ -85,6 +85,18 @@
 
   Settings related with Emacs' appearance.
 
+** Start on a maximized window
+
+   #+begin_src emacs-lisp
+     (add-to-list 'default-frame-alist '(fullscreen . maximized))
+   #+end_src
+
+** Show the buffer name in the window title
+
+#+begin_src emacs-lisp
+  (setq frame-title-format "%b")
+#+end_src
+
 ** Disable the menu, tool and scroll bars
 
 #+begin_src emacs-lisp
@@ -108,10 +120,11 @@
     (load-theme 'solarized-dark t))
 #+end_src
 
-** Show the buffer in the frame title
+** Display relative line numbers
 
 #+begin_src emacs-lisp
-  (setq frame-title-format "%b")
+  (yasserglez/when-package-is-available "relative-line-numbers"
+    (global-relative-line-numbers-mode))
 #+end_src
 
 ** Show line and column number in the mode line
@@ -119,13 +132,6 @@
 #+begin_src emacs-lisp
   (line-number-mode)
   (column-number-mode)
-#+end_src
-
-** Display relative line numbers
-
-#+begin_src emacs-lisp
-  (yasserglez/when-package-is-available "relative-line-numbers"
-    (global-relative-line-numbers-mode))
 #+end_src
 
 * Python
