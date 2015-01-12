@@ -12,8 +12,8 @@ export PAGER='less'
 # Keyboard Layout
 #
 
-# Make CapsLock an additional Control key, map it to Escape when pressed 
-# and released on its own.
+# Make CapsLock an additional Control key, map it to Escape when
+# pressed and released on its own.
 setxkbmap -option 'ctrl:nocaps'
 xcape -e '#66=Escape'
 
@@ -33,12 +33,14 @@ fi
 typeset -gU cdpath fpath mailpath path
 
 # Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
+cdpath=(
+  ~/
+  $cdpath
+ )
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  ~/.local/bin
   /usr/local/{bin,sbin}
   $path
 )
