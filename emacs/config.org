@@ -49,7 +49,7 @@
 
 #+begin_src emacs-lisp
   (defvar yasserglez/base-packages
-    '(auctex elpy magit solarized-theme))
+    '(auctex elpy magit relative-line-numbers solarized-theme))
 
   (defun yasserglez/install-base-packages ()
     (interactive)
@@ -119,6 +119,13 @@
 #+begin_src emacs-lisp
   (line-number-mode)
   (column-number-mode)
+#+end_src
+
+** Display relative line numbers
+
+#+begin_src emacs-lisp
+  (yasserglez/when-package-is-available "relative-line-numbers"
+    (global-relative-line-numbers-mode))
 #+end_src
 
 * Python
