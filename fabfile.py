@@ -70,7 +70,7 @@ def install_git(force=False):
 
 
 def install_zsh(force=False):
-    _apt_get_install('zsh', 'xcape')
+    _apt_get_install('zsh')
     local('chsh -s /usr/bin/zsh')
     git_repo = 'https://github.com/sorin-ionescu/prezto'
     git_repo_dir = 'zsh/prezto'

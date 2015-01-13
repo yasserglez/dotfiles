@@ -3,6 +3,7 @@
 #
 # $PATH is set in ~/.profile.
 #
+
 source $HOME/.profile
 
 #
@@ -12,15 +13,6 @@ source $HOME/.profile
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
-
-#
-# Keyboard Layout
-#
-
-# Make CapsLock an additional Control key, map it to Escape when
-# pressed and released on its own.
-setxkbmap -option 'ctrl:nocaps'
-xcape -e '#66=Escape'
 
 #
 # Language
