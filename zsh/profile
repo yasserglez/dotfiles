@@ -1,0 +1,4 @@
+
+# Set $PATH here. It will be read by both zsh (sourced in ~/.zprofile)
+# and the desktop session.
+export PATH="$HOME/.local/bin:$PATH"

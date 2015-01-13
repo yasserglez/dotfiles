@@ -1,6 +1,11 @@
 # ~/.zprofile: This file is similar to zlogin, but it is sourced before zshrc.
 
 #
+# $PATH is set in ~/.profile.
+#
+source $HOME/.profile
+
+#
 # Editors
 #
 
@@ -34,16 +39,9 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the the list of directories that cd searches.
 cdpath=(
-  ~/
+  $HOME
   $cdpath
  )
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-  ~/.local/bin
-  /usr/local/{bin,sbin}
-  $path
-)
 
 #
 # Less

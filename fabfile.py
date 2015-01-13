@@ -80,7 +80,7 @@ def install_zsh(force=False):
             local('rm -fr ~/.zprezto')
             local('ln -s $PWD/prezto ~/.zprezto')
             local('ln -sf $PWD/prompt_yasserglez_setup ~/.zprezto/modules/prompt/functions/')
-        for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'zshenv', 'zshrc'):
+        for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'profile', 'zshenv', 'zshrc'):
             if force or _can_overwrite('~/.{0}'.format(dotfile)):
                 local('rm -f ~/.{0}'.format(dotfile))
                 local('ln -sf $PWD/{0} ~/.{0}'.format(dotfile))
