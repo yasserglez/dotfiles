@@ -13,6 +13,17 @@ def install_all(force=False):
     install_solarized_dircolors(force)
     install_solarized_gedit(force)
     install_r(force)
+    install_bin(force)
+
+
+def install_bin(force=False):
+    local_bin = '~/.local/bin'
+    local('mkdir -p {0}'.format(local_bin))
+    with lcd('bin'):
+        for bin_file in os.listdir('bin'):
+            bin_path = os.path.join(local_bin, bin_file)
+            if force or _can_overwrite(bin_path):
+                local('ln -s $PWD/{0} {1}'.format(bin_file, bin_path))
 
 
 def install_r(force=False):
