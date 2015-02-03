@@ -3,10 +3,10 @@
 * About
 
   This is my Emacs configuration maintained in an Org-mode file.
-  The =/.emacs.d/init.el= file simply loads all the Elisp code in
+  The =~/.emacs.d/init.el= file simply loads all the Elisp code in
   this document using Org-babel:
 
-#+BEGIN_SRC emacs-lisp  :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
   (require 'org)
   (setq vc-follow-symlinks nil)
   (defvar yasserglez/config-file "~/.emacs.d/config.org")
@@ -99,8 +99,11 @@
 
 ** Disable the menubar, the toolbar and the scrollbars
 
-   Enable Unity global app menu integration for Emacs using
-   =gsettings set com.canonical.unity-gtk-module whitelist "['emacs24']"=.
+   Enable Unity global app menu integration for Emacs using:
+
+#+BEGIN_SRC shell :tangle no
+   gsettings set com.canonical.unity-gtk-module whitelist "['emacs24']"
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (tool-bar-mode -1)
