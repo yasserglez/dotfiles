@@ -88,7 +88,7 @@
 ** Start on a maximized window
 
 #+BEGIN_SRC emacs-lisp
-     (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+END_SRC
 
 ** Show the buffer name in the window title
@@ -97,13 +97,16 @@
   (setq frame-title-format "%b")
 #+END_SRC
 
-** Disable the menubar, the toolbar and the scrollbars
+** Hide the menubar, the toolbar and the scrollbars
 
-   Enable Unity global app menu integration for Emacs using:
+   Enable Unity global app menu integration for Emacs by running the
+   following command in a terminal.
 
 #+BEGIN_SRC shell :tangle no
    gsettings set com.canonical.unity-gtk-module whitelist "['emacs24']"
 #+END_SRC
+
+   Keep the toolbar and the scrollbars disabled by default.
 
 #+BEGIN_SRC emacs-lisp
   (tool-bar-mode -1)
