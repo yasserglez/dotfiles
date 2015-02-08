@@ -65,7 +65,7 @@
   =yasserglez/when-package-is-available= is used for code that should
   run if the package is available (when =package.el= installs a new
   package it creates an autoload file named as the package with
-  =-autoloads= appended). =yasserglez/after-package-loaded= is used
+  =-autoloads= appended). =yasserglez/after-package-is-loaded= is used
   for code that should run after a package is loaded by checking for a
   feature name provided by the package.
 
@@ -144,9 +144,9 @@
 
 * Python
 
-  I use Elpy for Python development. Jedi (=pip install --user jedi=)
-  is required for code completion, and flake8
-  (=pip install --user flake8=) for code checking.
+  I use Elpy for Python programming. Jedi (=pip install --user jedi=)
+  is required for code completion, and flake8 (=pip install --user flake8=)
+  for code checking.
 
 #+BEGIN_SRC emacs-lisp
   (yasserglez/when-package-is-available "elpy"
@@ -159,6 +159,29 @@
     (elpy-set-test-runner 'elpy-test-pytest-runner)
     ;; Disable highlight-indentation
     (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules)))
+#+END_SRC
+
+* R
+
+  I use Emacs Speaks Statistics (ESS) for R programming.
+
+#+BEGIN_SRC emacs-lisp
+    (yasserglez/when-package-is-available "ess"
+      ;; Don't prompt for a starting directory when starting a new process
+      (setq ess-ask-for-ess-directory nil)
+      ;; An underscore is just an underscore
+      (setq ess-toggle-underscore nil)
+      ;; Code formatting
+      (setq ess-default-style 'OWN
+            ess-indent-level 4
+            ess-first-continued-statement-offset 0
+            ess-continued-statement-offset 4
+            ess-brace-offset -4
+            ess-arg-function-offset nil
+            ess-arg-function-offset-new-line nil
+            ess-expression-offset nil
+            ess-else-offset 0
+            ess-close-brace-offset 0))
 #+END_SRC
 
 * LaTeX
