@@ -30,7 +30,7 @@
 
   I use Emacs' built-in =package.el= for package management with the
   GNU and MELPA Stable repos (and also other package-specific repos).
-  =package-enable-at-startup= is set to nil, to avoid loading the
+  =package-enable-at-startup= is set to =nil=, to avoid loading the
   packages again after processing the init file.
 
 #+BEGIN_SRC emacs-lisp
@@ -94,7 +94,9 @@
 ** Show the buffer name in the window title
 
 #+BEGIN_SRC emacs-lisp
-  (setq frame-title-format "%b")
+    (require 'uniquify)
+    (setq frame-title-format "%b"
+          uniquify-buffer-name-style 'forward)
 #+END_SRC
 
 ** Hide the menubar, the toolbar and the scrollbars
@@ -120,11 +122,11 @@
     ;; Don't change the size of org-mode headlines
     (setq solarized-scale-org-headlines nil)
     ;; Avoid all font-size changes
-    (setq solarized-height-minus-1 1.0)
-    (setq solarized-height-plus-1 1.0)
-    (setq solarized-height-plus-2 1.0)
-    (setq solarized-height-plus-3 1.0)
-    (setq solarized-height-plus-4 1.0)
+    (setq solarized-height-minus-1 1.0
+          solarized-height-plus-1 1.0
+          solarized-height-plus-2 1.0
+          solarized-height-plus-3 1.0
+          solarized-height-plus-4 1.0)
     (load-theme 'solarized-dark t))
 #+END_SRC
 
