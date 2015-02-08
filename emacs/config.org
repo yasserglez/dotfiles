@@ -49,7 +49,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (defvar yasserglez/base-packages
-    '(auctex elpy magit relative-line-numbers solarized-theme))
+    '(auctex ess elpy magit relative-line-numbers solarized-theme))
 
   (defun yasserglez/install-base-packages ()
     (interactive)
