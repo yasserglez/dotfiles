@@ -133,8 +133,11 @@
 ** Display relative line numbers
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-available "relative-line-numbers"
-    (global-relative-line-numbers-mode))
+    (yasserglez/when-package-is-available "relative-line-numbers"
+      ;; Enable globally
+      (global-relative-line-numbers-mode)
+      ;; Follow visual lines
+      (setq relative-line-numbers-motion-function 'vertical-motion))
 #+END_SRC
 
 ** Show line and column number in the mode line
