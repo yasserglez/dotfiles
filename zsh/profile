@@ -1,5 +1,5 @@
-# ~/.profile: Read by both zsh (sourced in ~/.zprofile)
-# and the desktop session.
+# ~/.profile: Read by both zsh (sourced in ~/.zprofile) and the
+# desktop session. Intended for environment variable assignments.
 
 #
 # Editors
@@ -11,26 +11,21 @@ export EDITOR='emacsclient -a "" -c'
 # Language
 #
 
-if [[ -z "$LANG" ]]; then
+if [ -z "$LANG" ]; then
   export LANG='en_CA.UTF-8'
 fi
 
 #
-# Path for executable files
+# Executable Files
 #
 
 export PATH="$HOME/.local/bin:$PATH"
 
 #
-# Directory for temporary Files
+# Temporary Files
 #
 
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$USER"
+export TMPDIR="/tmp/$USER"
+if [ ! -d "$TMPDIR" ]; then
   mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
 fi
