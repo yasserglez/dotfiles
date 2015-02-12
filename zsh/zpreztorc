@@ -66,4 +66,3 @@ zstyle ':prezto:module:terminal:window-title' format '%s'
 
 # Set the tab title format.
 zstyle ':prezto:module:terminal:tab-title' format '%s'
-
