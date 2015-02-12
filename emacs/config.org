@@ -95,16 +95,8 @@
 
 ** Hide the menubar, the toolbar and the scrollbars
 
-   Enable Unity global app menu integration for Emacs by running the
-   following command in a terminal.
-
-#+BEGIN_SRC shell :tangle no
-   gsettings set com.canonical.unity-gtk-module whitelist "['emacs24']"
-#+END_SRC
-
-   Keep the toolbar and the scrollbars disabled by default.
-
 #+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
 #+END_SRC
