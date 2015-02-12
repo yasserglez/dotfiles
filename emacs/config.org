@@ -85,12 +85,6 @@
 
   Settings related with Emacs' appearance.
 
-** Start on a maximized window
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
-#+END_SRC
-
 ** Show the buffer name in the window title
 
 #+BEGIN_SRC emacs-lisp
