@@ -1,25 +1,10 @@
 # ~/.zprofile: This file is similar to zlogin, but it is sourced before zshrc.
 
 #
-# $PATH is set in ~/.profile.
+# Source ~/.profile
 #
 
 source $HOME/.profile
-
-#
-# Editors
-#
-
-export EDITOR='emacsclient -c'
-export PAGER='less'
-
-#
-# Language
-#
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_CA.UTF-8'
-fi
 
 #
 # Paths
@@ -38,6 +23,8 @@ cdpath=(
 # Less
 #
 
+export PAGER='less'
+
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
 # Remove -X and -F (exit if the content fits on one screen) to enable it.
@@ -47,18 +34,4 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
-
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$USER"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
 fi

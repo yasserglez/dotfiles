@@ -1,5 +1,36 @@
-# ~/.profile
+# ~/.profile: Read by both zsh (sourced in ~/.zprofile)
+# and the desktop session.
 
-# Set $PATH here. It will be read by both zsh
-# (sourced in ~/.zprofile) and the desktop session.
+#
+# Editors
+#
+
+export EDITOR='emacsclient -a "" -c'
+
+#
+# Language
+#
+
+if [[ -z "$LANG" ]]; then
+  export LANG='en_CA.UTF-8'
+fi
+
+#
+# Path for executable files
+#
+
 export PATH="$HOME/.local/bin:$PATH"
+
+#
+# Directory for temporary Files
+#
+
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$USER"
+  mkdir -p -m 700 "$TMPDIR"
+fi
+
+TMPPREFIX="${TMPDIR%/}/zsh"
+if [[ ! -d "$TMPPREFIX" ]]; then
+  mkdir -p "$TMPPREFIX"
+fi
