@@ -6,6 +6,7 @@ from fabric.contrib.console import confirm
 
 def install_all(force=False):
     install_zsh(force)
+    install_ack(force)
     install_git(force)
     install_emacs(force)
     install_vim(force)
@@ -24,6 +25,12 @@ def install_bin(force=False):
             bin_path = os.path.join(local_bin, bin_file)
             if force or _can_overwrite(bin_path):
                 local('ln -s $PWD/{0} {1}'.format(bin_file, bin_path))
+
+
+def install_ack(force=False):
+    _apt_get_install('ack-grep')
+    with lcd('ack'):
+        local('ln -s $PWD/ackrc ~/.ackrc')
 
 
 def install_r(force=False):
