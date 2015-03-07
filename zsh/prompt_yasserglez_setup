@@ -25,13 +25,6 @@ function prompt_yasserglez_setup {
   # Add hook for calling {git,python}-info before each command.
   add-zsh-hook precmd prompt_yasserglez_precmd
 
-  # Set editor-info parameters.
-  zstyle ':prezto:module:editor:info:keymap:primary' format '>>>'
-  zstyle ':prezto:module:editor:info:keymap:primary:insert' format 'I'
-  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format 'O'
-  zstyle ':prezto:module:editor:info:keymap:alternate' format '<<<'
-  zstyle ':prezto:module:editor:info:completing' format '...'
-
   # Set git-info parameters.
   zstyle ':prezto:module:git:info:branch' format '%Ugit%u:%b'
   zstyle ':prezto:module:git:info:keys' format 'branch' ' %b'
@@ -40,22 +33,21 @@ function prompt_yasserglez_setup {
   zstyle ':prezto:module:python:info:virtualenv' format ' %Uvirtualenv%u:%v'
 
   # Define prompts.
-  PROMPT=$'\n%U%m%u:%~$git_info[branch]$python_info[virtualenv]\n${editor_info[keymap]} '
-  RPROMPT=''
+  PROMPT=$'%U%m%u:%~$git_info[branch]$python_info[virtualenv]\n%# '
+  PROMPT2='> '
   SPROMPT=" -- correct '%R' to '%r' [nyae]? "
-  PROMPT2='... '
 
   # Completions.
-  zstyle ':completion:*:corrections' format ' -- %d'
-  zstyle ':completion:*:descriptions' format ' -- %d'
-  zstyle ':completion:*:messages' format ' -- %d'
-  zstyle ':completion:*:warnings' format ' -- no matches found'
-  zstyle ':completion:*' format ' -- %d'
+  zstyle ':completion:*:corrections' format '- %d'
+  zstyle ':completion:*:descriptions' format '- %d'
+  zstyle ':completion:*:messages' format '- %d'
+  zstyle ':completion:*:warnings' format '- no matches found'
+  zstyle ':completion:*' format '- %d'
 }
 
 # Keeping this over here to easily match the style used in SPROMPT and completions.
 function command_not_found_handler() {
-  echo " -- command not found: $1 $2"
+  echo "- command not found: $1 $2"
 }
 
 prompt_yasserglez_setup "$@"
