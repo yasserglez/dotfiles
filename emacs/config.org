@@ -157,22 +157,25 @@
   I use Emacs Speaks Statistics (ESS) for R programming.
 
 #+BEGIN_SRC emacs-lisp
-    (yasserglez/when-package-is-available "ess"
-      ;; Don't prompt for a starting directory when starting a new process
-      (setq ess-ask-for-ess-directory nil)
-      ;; An underscore is just an underscore
-      (setq ess-toggle-underscore nil)
-      ;; Code formatting
-      (setq ess-default-style 'OWN
-            ess-indent-level 4
-            ess-first-continued-statement-offset 0
-            ess-continued-statement-offset 4
-            ess-brace-offset -4
-            ess-arg-function-offset nil
-            ess-arg-function-offset-new-line nil
-            ess-expression-offset nil
-            ess-else-offset 0
-            ess-close-brace-offset 0))
+  (yasserglez/when-package-is-available "ess"
+    ;; Don't prompt for a starting directory when starting a new process
+    (setq ess-ask-for-ess-directory nil)
+    ;; An underscore is just an underscore
+    (setq ess-toggle-underscore nil)
+    ;; Autoload ESS for .R files
+    (autoload 'R-mode "ess-site.el" "ESS" t)
+    (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
+    ;; Code formatting
+    (setq ess-default-style 'OWN
+          ess-indent-level 4
+          ess-first-continued-statement-offset 0
+          ess-continued-statement-offset 4
+          ess-brace-offset -4
+          ess-arg-function-offset nil
+          ess-arg-function-offset-new-line nil
+          ess-expression-offset nil
+          ess-else-offset 0
+          ess-close-brace-offset 0))
 #+END_SRC
 
 * LaTeX
