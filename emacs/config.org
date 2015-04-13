@@ -3,8 +3,8 @@
 * About
 
   This is my Emacs configuration maintained in an Org-mode file.
-  The =~/.emacs.d/init.el= file simply loads all the Elisp code in
-  this document using Org-babel:
+  =~/.emacs.d/init.el= simply loads all the Elisp code in this
+  document using Org-babel:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (require 'org)
@@ -21,7 +21,7 @@
     (interactive)
     (find-file yasserglez/config-file))
 
-  (defun yasserglez/reload-config-file ()
+  (defun yasserglez/load-config-file ()
     (interactive)
     (org-babel-load-file yasserglez/config-file))
 #+END_SRC
@@ -43,8 +43,8 @@
   (package-initialize)
 #+END_SRC
 
-  I keep a list of packages that I use very often so they can be
-  easily installed using the =yasserglez/install-base-packages=
+  I keep a list of packages that are frequently used so they can be
+  easily installed with the =yasserglez/install-base-packages=
   function on a new Emacs installation.
 
 #+BEGIN_SRC emacs-lisp
@@ -60,24 +60,17 @@
           yasserglez/base-packages))
 #+END_SRC
 
-  The following two functions are based on
-  http://milkbox.net/note/single-file-master-emacs-configuration.
-  =yasserglez/when-package-is-available= is used for code that should
-  run if the package is available (when =package.el= installs a new
-  package it creates an autoload file named as the package with
-  =-autoloads= appended). =yasserglez/after-package-is-loaded= is used
-  for code that should run after a package is loaded by checking for a
-  feature name provided by the package.
+  =yasserglez/when-package-is-installed= is used for code that should
+  run only if a particular package is installed (when =package.el=
+  installs a new package it creates an autoload file named as the
+  package with =-autoloads= appended). It allows to keep the settings
+  associated with a package in the configuration file even when the
+  package is not installed.
 
 #+BEGIN_SRC emacs-lisp
-  (defmacro yasserglez/when-package-is-available (package &rest code)
+  (defmacro yasserglez/when-package-is-installed (package &rest code)
     (declare (indent defun))
     `(eval-after-load ,(concat package "-autoloads")
-       '(progn ,@code)))
-
-  (defmacro yasserglez/after-package-is-loaded (package &rest code)
-    (declare (indent defun))
-    `(eval-after-load ,package
        '(progn ,@code)))
 #+END_SRC
 
@@ -103,7 +96,7 @@
 ** Solarized color theme
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-available "solarized-theme"
+  (yasserglez/when-package-is-installed "solarized-theme"
     ;; Don't change the size of org-mode headlines
     (setq solarized-scale-org-headlines nil)
     ;; Avoid all font-size changes
@@ -118,7 +111,7 @@
 ** Display relative line numbers
 
 #+BEGIN_SRC emacs-lisp
-    (yasserglez/when-package-is-available "relative-line-numbers"
+    (yasserglez/when-package-is-installed "relative-line-numbers"
       ;; Enable globally
       (global-relative-line-numbers-mode)
       ;; Follow visual lines
@@ -139,7 +132,7 @@
   for code checking.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-available "elpy"
+  (yasserglez/when-package-is-installed "elpy"
     (elpy-enable)
     ;; Use Jedi for introspection and completion
     (setq elpy-rpc-backend "jedi")
@@ -156,7 +149,7 @@
   I use Emacs Speaks Statistics (ESS) for R programming.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-available "ess"
+  (yasserglez/when-package-is-installed "ess"
     ;; Don't prompt for a starting directory when starting a new process
     (setq ess-ask-for-ess-directory nil)
     ;; An underscore is just an underscore
@@ -182,7 +175,7 @@
   I use AUCTeX to write LaTeX documents.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-available "auctex"
+  (yasserglez/when-package-is-installed "auctex"
     ;; Enable the PDF mode
     (setq TeX-PDF-mode t)
     ;; Enable document parsing
@@ -197,7 +190,7 @@
   Git integration using Magit.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-available "magit"
+  (yasserglez/when-package-is-installed "magit"
     ;; vc-git no longer needed.
     (delete 'Git vc-handled-backends)
     ;; Don't show " MRev" in modeline.
@@ -208,7 +201,7 @@
 
 * Miscellaneous
 
-  Settings that don't fit in any previous category.
+  Settings that don't belong to any previous category.
 
 ** Disable prompts and startup messages
 
