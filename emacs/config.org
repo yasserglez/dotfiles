@@ -93,10 +93,9 @@
           uniquify-buffer-name-style 'forward)
 #+END_SRC
 
-** Hide the menubar, the toolbar and the scrollbars
+** Hide the the toolbar and the scrollbars
 
 #+BEGIN_SRC emacs-lisp
-  (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
 #+END_SRC
