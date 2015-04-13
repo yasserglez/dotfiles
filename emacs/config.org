@@ -141,7 +141,9 @@
     ;; Run tests using pytest
     (elpy-set-test-runner 'elpy-test-pytest-runner)
     ;; Disable highlight-indentation
-    (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules)))
+    (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
+    ;; Alias for pyvenv-workon
+    (defalias 'workon 'pyvenv-workon))
 #+END_SRC
 
 * R
