@@ -183,8 +183,15 @@
     ;; Enable document parsing
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
-    ;; Make AUCTeX aware of multi-file documents
-    (setq-default TeX-master nil))
+    ;; Define a default name for the top-level document
+    (setq-default TeX-master "master")
+    ;; Don't ask before saving each file
+    (setq TeX-save-query nil)
+    ;; Enable LaTeX Math mode by default
+    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+    ;; Enable RefTeX
+    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+    (setq reftex-plug-into-AUCTeX t))
 #+END_SRC
 
 * Git
