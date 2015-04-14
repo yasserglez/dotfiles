@@ -143,6 +143,9 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
         ispell-personal-dictionary "~/.emacs.d/aspell.pws")
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  ;; Unset the C-M-i key binding, used for completion in Elpy
+  (eval-after-load "flyspell"
+    '(define-key flyspell-mode-map (kbd "C-M-i") nil))
 #+END_SRC
 
 * YASnippet
