@@ -125,6 +125,20 @@
   (column-number-mode)
 #+END_SRC
 
+* Spell Checking
+
+Use GNU Aspell for spell checking. Enable =flyspell-mode= in all text
+mode buffers and =flyspell-prog-mode= in all programming mode buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ispell-program-name "aspell"
+        ispell-extra-args '("--sug-mode=ultra")
+        ispell-dictionary "en"
+        ispell-personal-dictionary "~/.emacs.d/aspell.pws")
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+END_SRC
+
 * Python
 
   I use Elpy for Python programming. Jedi (=pip install --user jedi=)
@@ -136,7 +150,7 @@
     (elpy-enable)
     ;; Use Jedi for introspection and completion
     (setq elpy-rpc-backend "jedi")
-    ;; Use IPython as the interactive intepreter
+    ;; Use IPython as the interactive interpreter
     (elpy-use-ipython)
     ;; Run tests using pytest
     (elpy-set-test-runner 'elpy-test-pytest-runner)

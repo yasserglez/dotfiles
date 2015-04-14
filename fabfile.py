@@ -50,6 +50,7 @@ def install_emacs(force=False):
         with lcd('emacs'):
             local('ln -s $PWD/init.el ~/.emacs.d/init.el')
             local('ln -s $PWD/config.org ~/.emacs.d/config.org')
+            local('ln -s $PWD/aspell.pws ~/.emacs.d/aspell.pws')
 
 
 def install_vim(force=False):
