@@ -148,15 +148,6 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
     '(define-key flyspell-mode-map (kbd "C-M-i") nil))
 #+END_SRC
 
-* YASnippet
-
-Enable the YASnippet minor mode in all buffers.
-
-#+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "yasnippet"
-    (yas-global-mode 1))
-#+END_SRC
-
 * Python
 
   I use Elpy for Python programming. Jedi (=pip install --user jedi=)
@@ -174,6 +165,8 @@ Enable the YASnippet minor mode in all buffers.
     (elpy-set-test-runner 'elpy-test-pytest-runner)
     ;; Disable highlight-indentation
     (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
+    ;; Load and configure YASnippet separately
+    (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules))
     ;; Alias for pyvenv-workon
     (defalias 'workon 'pyvenv-workon))
 #+END_SRC
@@ -238,6 +231,16 @@ Enable the YASnippet minor mode in all buffers.
     (setq magit-auto-revert-mode-lighter "")
     ;; Bind a global key to magit-status.
     (global-set-key (kbd "C-c g") 'magit-status))
+#+END_SRC
+
+* YASnippet
+
+Enable the YASnippet minor mode in all buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (yasserglez/when-package-is-installed "yasnippet"
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+    (yas-global-mode 1))
 #+END_SRC
 
 * Miscellaneous
