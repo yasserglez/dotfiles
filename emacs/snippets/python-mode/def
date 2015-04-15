@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: else
-# key: else
+# name: def
+# key: def
 # --
-else:
+def $1($2):
     $0
