@@ -53,6 +53,7 @@
       elpy
       ess
       magit
+      markdown-mode
       relative-line-numbers
       solarized-theme
       yasnippet))
@@ -217,6 +218,19 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
     ;; Enable RefTeX
     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
     (setq reftex-plug-into-AUCTeX t))
+#+END_SRC
+
+* Markdown
+
+  Editing Markdown-formatted text files.
+
+#+BEGIN_SRC emacs-lisp
+  (yasserglez/when-package-is-installed "markdown-mode"
+    (autoload 'markdown-mode "markdown-mode"
+      "Major mode for editing Markdown files" t)
+    ;; Associate markdown-mode with .md and .markdown files
+    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode)))
 #+END_SRC
 
 * Git
