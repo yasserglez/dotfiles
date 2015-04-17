@@ -38,7 +38,8 @@
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
           ("melpa-stable" . "http://stable.melpa.org/packages/")
-          ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+          ("elpy" . "http://jorgenschaefer.github.io/packages/")
+          ("org" . "http://orgmode.org/elpa/")))
   (setq package-enable-at-startup nil)
   (package-initialize)
 #+END_SRC
@@ -54,10 +55,11 @@
       ess
       magit
       markdown-mode
+      org
       relative-line-numbers
       solarized-theme
       yasnippet))
-
+  
   (defun yasserglez/install-base-packages ()
     (interactive)
     (package-refresh-contents)
@@ -255,6 +257,20 @@ Enable the YASnippet minor mode in all buffers.
   (yasserglez/when-package-is-installed "yasnippet"
     (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
     (yas-global-mode 1))
+#+END_SRC
+
+* Org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (yasserglez/when-package-is-installed "org"
+    ;; Global key bindings
+    (global-set-key "\C-cl" 'org-store-link)
+    (global-set-key "\C-ca" 'org-agenda)
+    (global-set-key "\C-cb" 'org-iswitchb)
+    ;; C-a and C-e behave specially in headlines and items
+    (setq org-special-ctrl-a/e t)
+    ;; Don't split the line on M-RET
+    (setq org-M-RET-may-split-line nil))
 #+END_SRC
 
 * Miscellaneous
