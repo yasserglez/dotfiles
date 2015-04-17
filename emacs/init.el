@@ -1,7 +1,8 @@
 ;;; Yasser Gonzalez's Emacs Configuration
 
 ;; Everything is contained in one Org-babel file that is loaded here.
+;; See ~/.emacs.d/config.org for the actual configuration.
 (require 'org)
 (setq vc-follow-symlinks nil)
-(defvar yasserglez/config-file "~/.emacs.d/config.org")
-(org-babel-load-file yasserglez/config-file)
+(defvar my-config-file "~/.emacs.d/config.org")
+(org-babel-load-file my-config-file)

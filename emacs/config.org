@@ -9,21 +9,21 @@
 #+BEGIN_SRC emacs-lisp :tangle no
   (require 'org)
   (setq vc-follow-symlinks nil)
-  (defvar yasserglez/config-file "~/.emacs.d/config.org")
-  (org-babel-load-file yasserglez/config-file)
+  (defvar my-config-file "~/.emacs.d/config.org")
+  (org-babel-load-file my-config-file)
 #+END_SRC
 
   I use the following interactive functions to edit and reload this
   file within Emacs.
 
 #+BEGIN_SRC emacs-lisp
-  (defun yasserglez/edit-config-file ()
+  (defun my-edit-config-file ()
     (interactive)
-    (find-file yasserglez/config-file))
+    (find-file my-config-file))
 
-  (defun yasserglez/load-config-file ()
+  (defun my-load-config-file ()
     (interactive)
-    (org-babel-load-file yasserglez/config-file))
+    (org-babel-load-file my-config-file))
 #+END_SRC
 
 * Package Management
@@ -45,11 +45,11 @@
 #+END_SRC
 
   I keep a list of packages that are frequently used so they can be
-  easily installed with the =yasserglez/install-base-packages=
+  easily installed with the =my-install-base-packages=
   function on a new Emacs installation.
 
 #+BEGIN_SRC emacs-lisp
-  (defvar yasserglez/base-packages
+  (defvar my-base-packages
     '(auctex
       elpy
       ess
@@ -59,28 +59,13 @@
       relative-line-numbers
       solarized-theme
       yasnippet))
-  
-  (defun yasserglez/install-base-packages ()
+
+  (defun my-install-base-packages ()
     (interactive)
     (package-refresh-contents)
-    (mapc (lambda (package)
-            (unless (package-installed-p package)
-              (package-install package)))
-          yasserglez/base-packages))
-#+END_SRC
-
-  =yasserglez/when-package-is-installed= is used for code that should
-  run only if a particular package is installed (when =package.el=
-  installs a new package it creates an autoload file named as the
-  package with =-autoloads= appended). It allows to keep the settings
-  associated with a package in the configuration file even when the
-  package is not installed.
-
-#+BEGIN_SRC emacs-lisp
-  (defmacro yasserglez/when-package-is-installed (package &rest code)
-    (declare (indent defun))
-    `(eval-after-load ,(concat package "-autoloads")
-       '(progn ,@code)))
+    (dolist (package my-base-packages)
+      (unless (package-installed-p package)
+        (package-install package))))
 #+END_SRC
 
 * Appearance
@@ -105,7 +90,7 @@
 ** Solarized color theme
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "solarized-theme"
+  (when (package-installed-p 'solarized-theme)
     ;; Don't change the size of org-mode headlines
     (setq solarized-scale-org-headlines nil)
     ;; Avoid all font-size changes
@@ -120,7 +105,7 @@
 ** Display relative line numbers
 
 #+BEGIN_SRC emacs-lisp
-    (yasserglez/when-package-is-installed "relative-line-numbers"
+    (when (package-installed-p 'relative-line-numbers)
       ;; Enable globally
       (global-relative-line-numbers-mode)
       ;; Follow visual lines
@@ -158,7 +143,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
   for code checking.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "elpy"
+  (when (package-installed-p 'elpy)
     (elpy-enable)
     ;; Use Jedi for introspection and completion
     (setq elpy-rpc-backend "jedi")
@@ -179,7 +164,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
   I use Emacs Speaks Statistics (ESS) for R programming.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "ess"
+  (when (package-installed-p 'ess)
     ;; Don't prompt for a starting directory when starting a new process
     (setq ess-ask-for-ess-directory nil)
     ;; An underscore is just an underscore
@@ -205,7 +190,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
   I use AUCTeX to write LaTeX documents.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "auctex"
+  (when (package-installed-p 'auctex)
     ;; Enable the PDF mode
     (setq TeX-PDF-mode t)
     ;; Enable document parsing
@@ -227,7 +212,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
   Editing Markdown-formatted text files.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "markdown-mode"
+  (when (package-installed-p 'markdown-mode)
     (autoload 'markdown-mode "markdown-mode"
       "Major mode for editing Markdown files" t)
     ;; Associate markdown-mode with .md and .markdown files
@@ -240,7 +225,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
   Git integration using Magit.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "magit"
+  (when (package-installed-p 'magit)
     ;; vc-git no longer needed.
     (delete 'Git vc-handled-backends)
     ;; Don't show " MRev" in modeline.
@@ -254,7 +239,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
 Enable the YASnippet minor mode in all buffers.
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "yasnippet"
+  (when (package-installed-p 'yasnippet)
     (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
     (yas-global-mode 1))
 #+END_SRC
@@ -262,7 +247,7 @@ Enable the YASnippet minor mode in all buffers.
 * Org-mode
 
 #+BEGIN_SRC emacs-lisp
-  (yasserglez/when-package-is-installed "org"
+  (when (package-installed-p 'org)
     ;; Global key bindings
     (global-set-key "\C-cl" 'org-store-link)
     (global-set-key "\C-ca" 'org-agenda)
