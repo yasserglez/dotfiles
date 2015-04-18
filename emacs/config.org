@@ -7,11 +7,19 @@
   document using Org-babel:
 
 #+BEGIN_SRC emacs-lisp :tangle no
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (package-initialize)
+
   (require 'org)
   (setq vc-follow-symlinks nil)
   (defvar my-config-file "~/.emacs.d/config.org")
   (org-babel-load-file my-config-file)
 #+END_SRC
+
+  =package.el= is loaded first to support using Org-mode installed
+  from an ELPA archive. =package-enable-at-startup= is set to =nil=,
+  to avoid loading the packages again after processing the init file.
 
   I use the following interactive functions to edit and reload this
   file within Emacs.
@@ -30,18 +38,13 @@
 
   I use Emacs' built-in =package.el= for package management with the
   GNU and MELPA Stable repos (and also other package-specific repos).
-  =package-enable-at-startup= is set to =nil=, to avoid loading the
-  packages again after processing the init file.
 
 #+BEGIN_SRC emacs-lisp
-  (require 'package)
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
           ("melpa-stable" . "http://stable.melpa.org/packages/")
           ("elpy" . "http://jorgenschaefer.github.io/packages/")
           ("org" . "http://orgmode.org/elpa/")))
-  (setq package-enable-at-startup nil)
-  (package-initialize)
 #+END_SRC
 
   I keep a list of packages that are frequently used so they can be

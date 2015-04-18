@@ -2,6 +2,11 @@
 
 ;; Everything is contained in one Org-babel file that is loaded here.
 ;; See ~/.emacs.d/config.org for the actual configuration.
+
+(require 'package)
+(setq package-enable-at-startup nil)
+(package-initialize)
+
 (require 'org)
 (setq vc-follow-symlinks nil)
 (defvar my-config-file "~/.emacs.d/config.org")
