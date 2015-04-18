@@ -200,7 +200,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
     ;; Define a default name for the top-level document
-    (setq-default TeX-master "master")
+    (setq-default TeX-master nil)
     ;; Don't ask before saving each file
     (setq TeX-save-query nil)
     ;; Enable LaTeX Math mode by default
