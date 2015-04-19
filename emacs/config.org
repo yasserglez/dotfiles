@@ -29,7 +29,7 @@
     (interactive)
     (find-file my-config-file))
 
-  (defun my-load-config-file ()
+  (defun my-reload-config-file ()
     (interactive)
     (org-babel-load-file my-config-file))
 #+END_SRC
@@ -52,23 +52,25 @@
   function on a new Emacs installation.
 
 #+BEGIN_SRC emacs-lisp
-  (defvar my-base-packages
-    '(auctex
-      elpy
-      ess
-      magit
-      markdown-mode
-      org
-      relative-line-numbers
-      solarized-theme
-      yasnippet))
+    (defvar my-base-packages
+      '(auctex
+        elpy
+        ess
+        magit
+        markdown-mode
+        org
+        relative-line-numbers
+        scss-mode
+        solarized-theme
+        web-mode
+        yasnippet))
 
-  (defun my-install-base-packages ()
-    (interactive)
-    (package-refresh-contents)
-    (dolist (package my-base-packages)
-      (unless (package-installed-p package)
-        (package-install package))))
+    (defun my-install-base-packages ()
+      (interactive)
+      (package-refresh-contents)
+      (dolist (package my-base-packages)
+        (unless (package-installed-p package)
+          (package-install package))))
 #+END_SRC
 
 * Appearance
@@ -174,7 +176,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
     (setq ess-toggle-underscore nil)
     ;; Autoload ESS for .R files
     (autoload 'R-mode "ess-site.el" "ESS" t)
-    (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
+    (add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
     ;; Code formatting
     (setq ess-default-style 'OWN
           ess-indent-level 4
@@ -186,6 +188,39 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
           ess-expression-offset nil
           ess-else-offset 0
           ess-close-brace-offset 0))
+#+END_SRC
+
+* Web Development
+
+Edit HTML and JavaScript files using =web-mode.el=.
+
+#+BEGIN_SRC emacs-lisp
+  (when (package-installed-p 'web-mode)
+    (require 'web-mode)
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+    ;; HTML indentation
+    (setq web-mode-markup-indent-offset 2)
+    ;; CSS indentation
+    (setq web-mode-css-indent-offset 2)
+    ;; JavaScript indentation
+    (setq web-mode-code-indent-offset 4)
+    ;; Highlight current HTML element
+    (setq web-mode-enable-current-element-highlight t))
+#+END_SRC
+
+Edit CSS files using Emacs' built-in =css-mode= and SASS files using
+=scss-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  ;; CSS indentation
+  (setq css-indent-offset 2)
+
+  (when (package-installed-p 'scss-mode)
+    (require 'scss-mode)
+    (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+    ;; Disable compilation on save
+    (setq scss-compile-at-save nil))
 #+END_SRC
 
 * LaTeX
