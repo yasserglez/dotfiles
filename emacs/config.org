@@ -223,6 +223,18 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
     (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode)))
 #+END_SRC
 
+* Org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (when (package-installed-p 'org)
+    ;; Global key bindings
+    (global-set-key "\C-cl" 'org-store-link)
+    (global-set-key "\C-ca" 'org-agenda)
+    (global-set-key "\C-cb" 'org-iswitchb)
+    ;; Don't split the line on M-RET
+    (setq org-M-RET-may-split-line nil))
+#+END_SRC
+
 * Git
 
   Git integration using Magit.
@@ -246,19 +258,6 @@ Enable the YASnippet minor mode in all buffers.
     (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
     (yas-global-mode 1))
 #+END_SRC
-
-* Org-mode
-
-#+BEGIN_SRC emacs-lisp
-  (when (package-installed-p 'org)
-    ;; Global key bindings
-    (global-set-key "\C-cl" 'org-store-link)
-    (global-set-key "\C-ca" 'org-agenda)
-    (global-set-key "\C-cb" 'org-iswitchb)
-    ;; Don't split the line on M-RET
-    (setq org-M-RET-may-split-line nil))
-#+END_SRC
-
 * Miscellaneous
 
   Settings that don't belong to any previous category.
