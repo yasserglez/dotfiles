@@ -52,25 +52,25 @@
   function on a new Emacs installation.
 
 #+BEGIN_SRC emacs-lisp
-    (defvar my-base-packages
-      '(auctex
-        elpy
-        ess
-        magit
-        markdown-mode
-        org
-        relative-line-numbers
-        scss-mode
-        solarized-theme
-        web-mode
-        yasnippet))
+  (defvar my-base-packages
+    '(auctex
+      elpy
+      ess
+      magit
+      markdown-mode
+      org-plus-contrib
+      relative-line-numbers
+      scss-mode
+      solarized-theme
+      web-mode
+      yasnippet))
 
-    (defun my-install-base-packages ()
-      (interactive)
-      (package-refresh-contents)
-      (dolist (package my-base-packages)
-        (unless (package-installed-p package)
-          (package-install package))))
+  (defun my-install-base-packages ()
+    (interactive)
+    (package-refresh-contents)
+    (dolist (package my-base-packages)
+      (unless (package-installed-p package)
+        (package-install package))))
 #+END_SRC
 
 * Appearance
