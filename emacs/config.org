@@ -338,7 +338,10 @@ Enable the YASnippet minor mode in all buffers.
 #+END_SRC
 
 ** RET auto-indents by default
-
 #+BEGIN_SRC emacs-lisp
   (define-key global-map (kbd "RET") 'newline-and-indent)
+#+END_SRC
+** Don't use tabs for indentation
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
 #+END_SRC
