@@ -290,7 +290,7 @@ a task transitions from/to =SOMEDAY=, =DONE= or =REFERENCE= (hence the
 
 ** Agenda
 
-=inbox.org= is used for capture and =calendar.org= for recurring
+=inbox.txt= is used for capture and =calendar.org= for recurring
 reminders such as birthdays, holidays, etc. The =projects= directory
 holds separate files for the different projects I'm working on
 (basically containing groups of tasks and reference materials).
@@ -299,7 +299,7 @@ tasks for a particular project using tags in the agenda.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-files
-        '("~/Dropbox/org/inbox.org"
+        '("~/Dropbox/org/inbox.txt"
           "~/Dropbox/org/projects/"
           "~/Dropbox/org/calendar.org"))
 #+END_SRC
@@ -339,16 +339,16 @@ Configure a group of agenda views and key bindings for quick access.
 
 ** Capturing and refiling
 
-Everything goes into =inbox.org= and it's later refiled to the correct file.
+Everything goes into =inbox.txt= and it's later refiled to the correct file.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-directory "~/Dropbox/org/")
-  (setq org-default-notes-file "~/Dropbox/org/inbox.org")
+  (setq org-default-notes-file "~/Dropbox/org/inbox.txt")
 
   (setq org-capture-templates
-        '(("t" "Task" entry (file+headline "inbox.org" "Tasks")
+        '(("t" "Task" entry (file "")
            "* TODO %?\n  :LOGBOOK:\n  - State \"TODO\"                         %U\n  :END:")
-          ("r" "Reference" entry (file+headline "inbox.org" "References")
+          ("r" "Reference" entry (file "")
            "* REFERENCE %?\n  :LOGBOOK:\n  - State \"REFERENCE\"                    %U\n  :END:")))
 
   (global-set-key (kbd "C-c c") 'org-capture)
