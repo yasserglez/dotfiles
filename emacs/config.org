@@ -378,6 +378,14 @@ Everything goes into =inbox.org= and it's later refiled to the correct file.
   (add-to-list 'auto-mode-alist '("\\.org_archive\\'" . org-mode))
 #+END_SRC
 
+*** Save all Org-mode buffers at 1 minute before the hour
+
+This is used in combination with the =bin/org-git-commit= shell script.
+
+#+BEGIN_SRC emacs-lisp
+  (run-at-time "00:59" (* 60 60) 'org-save-all-org-buffers)
+#+END_SRC
+
 *** Don't split lines with M-RET
 
 #+BEGIN_SRC emacs-lisp
