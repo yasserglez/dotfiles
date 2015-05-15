@@ -407,6 +407,7 @@ Everything goes into =inbox.txt= and it's later refiled to the correct file.
 
 #+BEGIN_SRC emacs-lisp
   (require 'org-pomodoro)
+  (require 'notifications)
 
   (setq org-pomodoro-length 25
         org-pomodoro-long-break-frequency 4
@@ -424,8 +425,13 @@ Everything goes into =inbox.txt= and it's later refiled to the correct file.
   (set-face-foreground 'org-pomodoro-mode-line-break
                        (face-attribute 'mode-line :foreground))
 
-  (global-set-key (kbd "C-c C-x C-i") 'org-pomodoro)
-  (global-set-key (kbd "C-c C-x C-o") 'org-pomodoro)
+  (defun org-pomodoro-notify (title message)
+    (notifications-notify
+     :title title
+     :body message
+     :app-name "Emacs: Org-Pomodoro"))
+
+  (global-set-key (kbd "<f5>") 'org-pomodoro)
 #+END_SRC
 
 ** Miscellaneous
