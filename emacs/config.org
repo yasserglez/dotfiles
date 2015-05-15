@@ -283,6 +283,7 @@ a task transitions from/to =SOMEDAY=, =DONE= or =REFERENCE= (hence the
 
 #+BEGIN_SRC emacs-lisp
   (setq org-log-into-drawer "LOGBOOK")
+  (setq org-clock-into-drawer "LOGBOOK")
   (setq org-log-redeadline 'time)
   (setq org-log-reschedule 'time)
   (setq org-log-repeat 'time)
