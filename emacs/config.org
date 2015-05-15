@@ -59,6 +59,7 @@ Emacs installation.
       magit
       markdown-mode
       org-plus-contrib
+      org-pomodoro
       relative-line-numbers
       scss-mode
       solarized-theme
@@ -368,6 +369,31 @@ Everything goes into =inbox.txt= and it's later refiled to the correct file.
   (setq org-habit-preceding-days 14)
   (setq org-habit-following-days 1)
   (setq org-habit-show-habits-only-for-today t)
+#+END_SRC
+
+** Pomodoro technique
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-pomodoro)
+
+  (setq org-pomodoro-length 25
+        org-pomodoro-long-break-frequency 4
+        org-pomodoro-short-break-length 3
+        org-pomodoro-long-break-length 15)
+
+  (setq org-pomodoro-play-sounds nil
+        org-pomodoro-time-format "%.2m:00"
+        org-pomodoro-format "Pomodoro %s"
+        org-pomodoro-short-break-format "Short Break %s"
+        org-pomodoro-long-break-format "Long Break %s")
+
+  (set-face-foreground 'org-pomodoro-mode-line
+                       (face-attribute 'mode-line :foreground))
+  (set-face-foreground 'org-pomodoro-mode-line-break
+                       (face-attribute 'mode-line :foreground))
+
+  (global-set-key (kbd "C-c C-x C-i") 'org-pomodoro)
+  (global-set-key (kbd "C-c C-x C-o") 'org-pomodoro)
 #+END_SRC
 
 ** Miscellaneous
