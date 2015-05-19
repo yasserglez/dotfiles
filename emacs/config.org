@@ -325,7 +325,7 @@ Configure a group of agenda views and key bindings for quick access.
           ("cw" "Agenda for next week" agenda ""
            ((org-agenda-overriding-header "Agenda for next week: ")
             (org-agenda-span 7)
-            (org-deadline-warning-days 84)))
+            (org-deadline-warning-days 14)))
           ("ct" "Unscheduled tasks" todo "TODO"
            ((org-agenda-overriding-header "Unscheduled TODO tasks: ")
             (org-agenda-skip-function '(org-agenda-skip-subtree-if 'scheduled))))))
@@ -367,7 +367,7 @@ Everything goes into =inbox.txt= and it's later refiled to the correct file.
   (require 'org-habit)
 
   (setq org-habit-preceding-days 14)
-  (setq org-habit-following-days 2)
+  (setq org-habit-following-days 1)
   (setq org-habit-show-habits-only-for-today t)
 
   ;; Blue :: If the task wasn't to be done yet on that day.
