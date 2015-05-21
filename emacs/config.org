@@ -292,18 +292,17 @@ a task transitions from/to =SOMEDAY=, =DONE= or =REFERENCE= (hence the
 
 ** Agenda
 
-=inbox.txt= is used for capture and =calendar.org= for recurring
-reminders such as birthdays, holidays, etc. The =projects= directory
-holds separate files for the different projects I'm working on
-(basically containing groups of tasks and reference materials).
-Each file contains a =#+FILETAGS= header so it is easier to filter
-tasks for a particular project using tags in the agenda.
+=inbox.txt= is used for capturing tasks (with capture templates and a
+few [[https://ifttt.com][IFTTT]] recipes that append content to the file). The =projects=
+directory holds separate files for the different projects I'm working
+on (basically containing headers for tasks and reference materials).
+Each file has a =#+FILETAGS= header so it is easier to filter tasks
+for a particular project using tags in the agenda.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-files
         '("~/Dropbox/org/inbox.txt"
-          "~/Dropbox/org/projects/"
-          "~/Dropbox/org/calendar.org"))
+          "~/Dropbox/org/projects/"))
 #+END_SRC
 
 Configure a group of agenda views and key bindings for quick access.
