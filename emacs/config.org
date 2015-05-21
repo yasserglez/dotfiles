@@ -364,6 +364,12 @@ Everything goes into =inbox.txt= and it's later refiled to the correct file.
 
 ** Habits
 
+The states used in the consistency graphs are simplified by
+representing the yellow (if the task was going to be overdue the next
+day) and red (if the task was overdue on that day) states with a
+single red color. The colors also have been modified to match the ones
+used in the agenda views (which come from the solarized color palette).
+
 #+BEGIN_SRC emacs-lisp
   (require 'org-habit)
 
@@ -387,21 +393,20 @@ Everything goes into =inbox.txt= and it's later refiled to the correct file.
                       :foreground "#002b36"
                       :background "#859900")
 
-  ;; Yellow :: If the task was going to be overdue the next day.
-  (set-face-attribute 'org-habit-alert-face nil
-                      :foreground "#002b36"
-                      :background "#b58900")
-  (set-face-attribute 'org-habit-alert-future-face nil
-                      :foreground "#002b36"
-                      :background "#b58900")
-
-  ;; Red :: If the task was overdue on that day.
+  ;; Red :: If the task was overdue on that day, or if the task was
+  ;; going to be overdue the next day.
   (set-face-attribute 'org-habit-overdue-face nil
                       :foreground "#002b36"
-                      :background "#dc322f")
+                      :background "#cb4b16")
   (set-face-attribute 'org-habit-overdue-future-face nil
                       :foreground "#002b36"
-                      :background "#dc322f")
+                      :background "#cb4b16")
+  (set-face-attribute 'org-habit-alert-face nil
+                      :foreground "#002b36"
+                      :background "#cb4b16")
+  (set-face-attribute 'org-habit-alert-future-face nil
+                      :foreground "#002b36"
+                      :background "#cb4b16")
 #+END_SRC
 
 ** Pomodoro technique
