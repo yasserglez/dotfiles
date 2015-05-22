@@ -292,7 +292,7 @@ a task transitions from/to =SOMEDAY=, =DONE= or =REFERENCE= (hence the
 
 ** Agenda
 
-=inbox.txt= is used for capturing tasks (with capture templates and a
+=inbox.org= is used for capturing tasks (with capture templates and a
 few [[https://ifttt.com][IFTTT]] recipes that append content to the file). The =projects=
 directory holds separate files for the different projects I'm working
 on (basically containing headers for tasks and reference materials).
@@ -301,7 +301,7 @@ for a particular project using tags in the agenda.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-files
-        '("~/Dropbox/org/inbox.txt"
+        '("~/Dropbox/org/inbox.org"
           "~/Dropbox/org/projects/"))
 #+END_SRC
 
@@ -502,7 +502,7 @@ Regenerate =calendar-holidays=.
 
 *** Save all Org-mode buffers at one minute before the hour
 
-This is used in combination with the =bin/org-git-commit= shell script.
+This is used in combination with the =bin/org-sync= shell script.
 
 #+BEGIN_SRC emacs-lisp
   (run-at-time "00:59" (* 60 60) 'org-save-all-org-buffers)
