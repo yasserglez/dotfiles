@@ -456,6 +456,41 @@ Use =F5= to start/stop a pomodoro.
   (global-set-key (kbd "<f5>") 'org-pomodoro)
 #+END_SRC
 
+** Holidays
+
+Configure a list of holidays I'm interested in.
+
+#+BEGIN_SRC emacs-lisp
+  (setq holiday-local-holidays
+        '((holiday-fixed 2 14 "Valentine's Day")
+          (holiday-fixed 4 1 "April Fools' Day")
+          (holiday-float 5 0 2 "Mother's Day")
+          (holiday-float 6 0 3 "Father's Day")
+          (holiday-fixed 10 31 "Halloween")
+          (holiday-fixed 12 31 "New Year's Eve")
+          ;; Ontario Public Holidays
+          ;; http://www.labour.gov.on.ca/english/es/pubs/guide/publicholidays.php
+          (holiday-fixed 1 1 "New Year's Day")      ; January 1
+          (holiday-float 2 1 3 "Family Day")        ; Third Monday in February
+          (holiday-easter-etc -2 "Good Friday")     ; Friday before Easter Sunday
+          (holiday-float 5 1 -1 "Victoria Day" 24)  ; Monday before May 25
+          (holiday-fixed 7 1 "Canada Day")          ; July 1
+          (holiday-float 9 1 1 "Labour Day")        ; First Monday in September
+          (holiday-float 10 1 2 "Thanksgiving Day") ; Second Monday in October
+          (holiday-fixed 12 25 "Christmas Day")     ; Christmas Day
+          (holiday-fixed 12 26 "Boxing Day")))      ; Boxing Day
+
+  (setq holiday-other-holidays '())
+#+END_SRC
+
+Regenerate =calendar-holidays=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq calendar-holidays
+        (append holiday-local-holidays
+                holiday-other-holidays))
+#+END_SRC
+
 ** Miscellaneous
 
 *** Associate Org-mode with .org and.org_archive files
@@ -465,7 +500,7 @@ Use =F5= to start/stop a pomodoro.
   (add-to-list 'auto-mode-alist '("\\.org_archive\\'" . org-mode))
 #+END_SRC
 
-*** Save all Org-mode buffers at 1 minute before the hour
+*** Save all Org-mode buffers at one minute before the hour
 
 This is used in combination with the =bin/org-git-commit= shell script.
 
