@@ -263,7 +263,7 @@ Editing Markdown-formatted text files.
 
 I use a task management system based mostly on David Allen's
 [[http://gettingthingsdone.com/][Getting Things Done]] methodology. Many configuration ideas are borrowed
-from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]], [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][Charles Cave]], and [[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
+from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
 
 ** Task states
 
@@ -412,15 +412,23 @@ used in the agenda views (which come from the solarized color palette).
 
 #+BEGIN_SRC emacs-lisp
   (require 'org-pomodoro)
-  (require 'notifications)
+#+END_SRC
 
+Set the duration of the pomodoro.
+
+#+BEGIN_SRC emacs-lisp
   (setq org-pomodoro-length 25
         org-pomodoro-long-break-frequency 4
         org-pomodoro-short-break-length 3
         org-pomodoro-long-break-length 15)
+#+END_SRC
 
+Configure the notifications: disable sounds, configure the modeline,
+show only the minutes remaining on the timer (I find the ticking
+seconds to be quite distracting), and use desktop notifications.
+
+#+BEGIN_SRC emacs-lisp
   (setq org-pomodoro-play-sounds nil
-        org-pomodoro-time-format "%.2m:00"
         org-pomodoro-format "Pomodoro %s"
         org-pomodoro-short-break-format "Short Break %s"
         org-pomodoro-long-break-format "Long Break %s")
@@ -430,12 +438,21 @@ used in the agenda views (which come from the solarized color palette).
   (set-face-foreground 'org-pomodoro-mode-line-break
                        (face-attribute 'mode-line :foreground))
 
+  (defun org-pomodoro-format-seconds ()
+    (format-seconds org-pomodoro-time-format
+                    (* 60 (ceiling org-pomodoro-countdown 60))))
+
+  (require 'notifications)
   (defun org-pomodoro-notify (title message)
     (notifications-notify
      :title title
      :body message
      :app-name "Emacs: Org-Pomodoro"))
+#+END_SRC
 
+Use =F5= to start/stop a pomodoro.
+
+#+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<f5>") 'org-pomodoro)
 #+END_SRC
 
