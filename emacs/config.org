@@ -341,11 +341,11 @@ Configure a group of agenda views and key bindings for quick access.
 
 ** Capturing and refiling
 
-Everything goes into =inbox.txt= and it's later refiled to the correct file.
+Everything goes into =inbox.org= and it's later refiled to the correct file.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-directory "~/Dropbox/org/")
-  (setq org-default-notes-file "~/Dropbox/org/inbox.txt")
+  (setq org-default-notes-file "~/Dropbox/org/inbox.org")
 
   (setq org-capture-templates
         '(("t" "Task" entry (file "")
