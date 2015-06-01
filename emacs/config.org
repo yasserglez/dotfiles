@@ -507,11 +507,17 @@ This is used in combination with the =bin/org-sync= shell script.
 #+BEGIN_SRC emacs-lisp
   (run-at-time "00:59" (* 60 60) 'org-save-all-org-buffers)
 #+END_SRC
-
 *** Don't split lines with M-RET
 
 #+BEGIN_SRC emacs-lisp
   (setq org-M-RET-may-split-line nil)
+#+END_SRC
+
+*** Show hours and minutes in clock tables
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-time-clocksum-format
+        '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 #+END_SRC
 
 *** Other key bindings
