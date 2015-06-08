@@ -1,7 +1,10 @@
-personal_ws-1.1 en 15 
+personal_ws-1.1 en 22 
 scalability
 toolkits
+cardinality
 acyclic
+iteratively
+pseudocode
 dataset
 configurators
 timestamp
@@ -10,7 +13,11 @@ Yasser
 recommender
 arity
 extensionally
+perceptrons
 subclasses
+perceptron
+multilayer
 configurator
 instantiation
+feedforward
 unary
