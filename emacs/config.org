@@ -261,7 +261,7 @@ Editing Markdown-formatted text files.
 
 * Org-mode
 
-I use a task management system based mostly on David Allen's
+I use a task management system mostly based on David Allen's
 [[http://gettingthingsdone.com/][Getting Things Done]] methodology. Many configuration ideas are borrowed
 from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
 
@@ -270,16 +270,28 @@ from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newar
 #+BEGIN_SRC emacs-lisp
   (setq org-use-fast-todo-selection t)
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "SOMEDAY(s!/!)" "|" "DONE(d!/!)" "REFERENCE(r!/!)")))
+        '((sequence "TODO(t!)" "|" "DONE(d!)" "REFERENCE(r!)")))
 #+END_SRC
 
-In the past I've used an additional =NEXT= state for tasks I'm ready
-to work on, but currently I rely on scheduling the task (during the
-daily or weekly reviews) and the agenda to identify the things I'm
-going to work on next.
+I've tried to simplify the task states as much as I can and use the
+agenda to organize all the work. Pending tasks have a =TODO= state and
+are either scheduled to be done on a particular day, or they have an
+associated date and time (for appointments, events, etc). Each pending
+task can be resolved by marking it as =DONE= or =REFERENCE=. Tasks
+marked as =DONE= can be safely archived, while =REFERENCE= tasks may
+be relevant as a reference in the future (i.e. notes about interesting
+articles, etc).
 
-Log task state changes into a drawer. A timestamp is logged every time
-a task transitions from/to =SOMEDAY=, =DONE= or =REFERENCE= (hence the
+In the past I've had an additional =NEXT= state for tasks to be done
+as soon as I can, but currently I rely on scheduling the task (during
+the daily or weekly reviews) and the agenda to identify the things I'm
+going to work on next. Similarly with a =SOMEDAY= state for
+someday/maybe tasks: if it's something to be done in the future, it
+must have a scheduled action in the future (even if it's just to
+consider doing it).
+
+Task state changes are logged into a drawer. A timestamp is added
+every time a task transitions form one state to another (hence the
 =!= markers after the keywords above).
 
 #+BEGIN_SRC emacs-lisp
@@ -327,7 +339,7 @@ Configure a group of agenda views and key bindings for quick access.
             (org-agenda-span 7)
             (org-deadline-warning-days 14)))
           ("ct" "Unscheduled tasks" todo "TODO"
-           ((org-agenda-overriding-header "Unscheduled TODO tasks: ")
+           ((org-agenda-overriding-header "Unscheduled tasks: ")
             (org-agenda-skip-function '(org-agenda-skip-subtree-if 'scheduled))))))
 
   (global-set-key (kbd "C-c a") 'org-agenda)
@@ -507,6 +519,7 @@ This is used in combination with the =bin/org-sync= shell script.
 #+BEGIN_SRC emacs-lisp
   (run-at-time "00:59" (* 60 60) 'org-save-all-org-buffers)
 #+END_SRC
+
 *** Don't split lines with M-RET
 
 #+BEGIN_SRC emacs-lisp
