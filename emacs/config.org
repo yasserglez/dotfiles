@@ -340,7 +340,7 @@ Configure a group of agenda views and key bindings for quick access.
             (org-deadline-warning-days 14)))
           ("ct" "Unscheduled tasks" todo "TODO"
            ((org-agenda-overriding-header "Unscheduled tasks: ")
-            (org-agenda-skip-function '(org-agenda-skip-subtree-if 'scheduled))))))
+            (org-agenda-skip-function '(org-agenda-skip-subtree-if 'timestamp))))))
 
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "<f12>")
