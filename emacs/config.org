@@ -530,6 +530,12 @@ This is used in combination with the =bin/org-sync= shell script.
         '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 #+END_SRC
 
+*** Only record the time when a task is archived
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-archive-save-context-info '(time))
+#+END_SRC
+
 *** Other key bindings
 
 #+BEGIN_SRC emacs-lisp
