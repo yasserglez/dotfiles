@@ -270,22 +270,21 @@ from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newar
 #+BEGIN_SRC emacs-lisp
   (setq org-use-fast-todo-selection t)
   (setq org-todo-keywords
-        '((sequence "TODO(t!)" "|" "DONE(d!)" "REFERENCE(r!)")))
+        '((sequence "TODO(t!)" "|" "DONE(d!)" "REF(r!)")))
 #+END_SRC
 
 I've tried to simplify the task states as much as I can and use the
 agenda to organize all the work. Pending tasks have a =TODO= state and
 are either scheduled to be done on a particular day, or they have an
 associated date and time (for appointments, events, etc). Each pending
-task can be resolved by marking it as =DONE= or =REFERENCE=. Tasks
-marked as =DONE= can be safely archived, while =REFERENCE= tasks may
-be relevant as a reference in the future (i.e. notes about interesting
-articles, etc).
+task can be resolved by marking it as =DONE= or =REF=. Tasks marked as
+=DONE= can be safely archived, while =REF= tasks may be relevant as a
+reference in the future (i.e. notes about interesting articles, etc).
 
 In the past I've had an additional =NEXT= state for tasks to be done
 as soon as I can, but currently I rely on scheduling the task (during
-the daily or weekly reviews) and the agenda to identify the things I'm
-going to work on next. Similarly with a =SOMEDAY= state for
+the daily or weekly reviews) and the agenda to identify the things
+I'm going to work on next. Similarly with a =SOMEDAY= state for
 someday/maybe tasks: if it's something to be done in the future, it
 must have a scheduled action in the future (even if it's just to
 consider doing it).
@@ -312,9 +311,7 @@ Each file has a =#+FILETAGS= header so it is easier to filter tasks
 for a particular project using tags in the agenda.
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files
-        '("~/Dropbox/org/inbox.org"
-          "~/Dropbox/org/projects/"))
+  (setq org-agenda-files '("~/Dropbox/org/"))
 #+END_SRC
 
 Configure a group of agenda views and key bindings for quick access.
@@ -363,7 +360,7 @@ Everything goes into =inbox.org= and it's later refiled to the correct file.
         '(("t" "Task" entry (file "")
            "* TODO %?\n  :LOGBOOK:\n  - State \"TODO\"                         %U\n  :END:")
           ("r" "Reference" entry (file "")
-           "* REFERENCE %?\n  :LOGBOOK:\n  - State \"REFERENCE\"                    %U\n  :END:")))
+           "* REF %?\n  :LOGBOOK:\n  - State \"REF\"                    %U\n  :END:")))
 
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "<f9>") 'org-capture)
