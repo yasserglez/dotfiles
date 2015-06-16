@@ -500,6 +500,26 @@ Regenerate =calendar-holidays=.
                 holiday-other-holidays))
 #+END_SRC
 
+** Encryption
+
+Support encrypting individual entries using Org-crypt.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-crypt)
+
+  ;; Use a hook to automatically encrypt entries before a file is saved
+  (org-crypt-use-before-save-magic)
+
+  ;; GPG key used for encryption
+  (setq org-crypt-key "97DF6096")
+
+  ;; Encrypted entries are marked with the private tag. Excluding the
+  ;; private tag from inheritance prevents already encrypted text being
+  ;; encrypted again.
+  (setq org-crypt-tag-matcher "private")
+  (setq org-tags-exclude-from-inheritance '("private"))
+#+END_SRC
+
 ** Miscellaneous
 
 *** Associate Org-mode with .org and.org_archive files
