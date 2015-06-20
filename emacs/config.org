@@ -330,7 +330,7 @@ Configure a group of agenda views and key bindings for quick access.
           ("cd" "Agenda for today" agenda ""
            ((org-agenda-overriding-header "Agenda for today: ")
             (org-agenda-span 1)
-            (org-deadline-warning-days 1)))
+            (org-deadline-warning-days 0)))
           ("cw" "Agenda for next week" agenda ""
            ((org-agenda-overriding-header "Agenda for next week: ")
             (org-agenda-span 7)
