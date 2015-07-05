@@ -1,12 +1,15 @@
-personal_ws-1.1 en 24 
+personal_ws-1.1 en 29 
 scalability
 toolkits
 cardinality
 acyclic
 iteratively
 pseudocode
+cardinalities
 dataset
+Bonferroni
 configurators
+Wilcoxon
 timestamp
 intensionally
 combinatorial
@@ -14,11 +17,13 @@ Yasser
 recommender
 arity
 extensionally
+overfitting
 perceptrons
 dimensionality
 subclasses
 perceptron
 multilayer
+tuple
 configurator
 instantiation
 feedforward
