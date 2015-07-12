@@ -173,11 +173,13 @@ I use Emacs Speaks Statistics (ESS) for R programming.
   (when (package-installed-p 'ess)
     ;; Don't prompt for a starting directory when starting a new process
     (setq ess-ask-for-ess-directory nil)
-    ;; An underscore is just an underscore
-    (setq ess-toggle-underscore nil)
-    ;; Autoload ESS for .R files
+    ;; Don't turn '_' into '<-'
+    (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
+    ;; Autoload ESS for .R and .Rd files
     (autoload 'R-mode "ess-site.el" "ESS" t)
-    (add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
+    (autoload 'Rd-mode "ess-site.el" "ESS" t)
+    (add-to-list 'auto-mode-alist '("\\.[Rr]\\'" . R-mode))
+    (add-to-list 'auto-mode-alist '("\\.[Rr]d\\'" . Rd-mode))
     ;; Code formatting
     (setq ess-default-style 'OWN
           ess-indent-level 4
