@@ -1,4 +1,4 @@
-personal_ws-1.1 en 29 
+personal_ws-1.1 en 32 
 scalability
 toolkits
 cardinality
@@ -13,6 +13,7 @@ Wilcoxon
 timestamp
 intensionally
 combinatorial
+suboptimal
 Yasser
 recommender
 arity
@@ -27,4 +28,6 @@ tuple
 configurator
 instantiation
 feedforward
+scalable
+satisfiability
 unary
