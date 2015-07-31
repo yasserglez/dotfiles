@@ -486,6 +486,7 @@ Configure a list of holidays I'm interested in.
           (holiday-easter-etc -2 "Good Friday")     ; Friday before Easter Sunday
           (holiday-float 5 1 -1 "Victoria Day" 24)  ; Monday before May 25
           (holiday-fixed 7 1 "Canada Day")          ; July 1
+          (holiday-float 8 1 1 "Civic Holiday")     ; First Monday in August
           (holiday-float 9 1 1 "Labour Day")        ; First Monday in September
           (holiday-float 10 1 2 "Thanksgiving Day") ; Second Monday in October
           (holiday-fixed 12 25 "Christmas Day")     ; Christmas Day
