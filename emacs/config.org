@@ -3,8 +3,8 @@
 * About
 
 This is my Emacs configuration maintained in an Org-mode file.
-=~/.emacs.d/init.el= simply loads all the Elisp code in this document
-using Org-babel:
+=~/.emacs.d/init.el= simply loads all the Emacs Lisp code in this
+document using Org-babel:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (require 'package)
@@ -21,8 +21,8 @@ using Org-babel:
 an ELPA archive. =package-enable-at-startup= is set to =nil=, to avoid
 loading the packages again after processing the init file.
 
-I use the following interactive functions to edit and reload this file
-within Emacs.
+Use the following interactive functions to edit and reload this
+configuration file within Emacs.
 
 #+BEGIN_SRC emacs-lisp
   (defun my-edit-config-file ()
@@ -34,9 +34,9 @@ within Emacs.
     (org-babel-load-file my-config-file))
 #+END_SRC
 
-* Package Management
+* Package management
 
-I use Emacs' built-in =package.el= for package management with the GNU
+Use Emacs' built-in =package.el= for package management with the GNU
 and MELPA Stable repos (and also other package-specific repos).
 
 #+BEGIN_SRC emacs-lisp
@@ -47,9 +47,9 @@ and MELPA Stable repos (and also other package-specific repos).
           ("org" . "http://orgmode.org/elpa/")))
 #+END_SRC
 
-I keep a list of packages that are frequently used so they can be
-easily installed with the =my-install-base-packages= function on a new
-Emacs installation.
+Keep a list of packages that are frequently used so they can be
+easily installed with the =my-install-base-packages= function on
+a new Emacs installation.
 
 #+BEGIN_SRC emacs-lisp
   (defvar my-base-packages
@@ -81,9 +81,9 @@ Settings related with Emacs' appearance.
 ** Show the buffer name in the window title
 
 #+BEGIN_SRC emacs-lisp
-    (require 'uniquify)
-    (setq frame-title-format "%b"
-          uniquify-buffer-name-style 'forward)
+  (require 'uniquify)
+  (setq frame-title-format "%b"
+        uniquify-buffer-name-style 'forward)
 #+END_SRC
 
 ** Hide the the toolbar and the scrollbars
@@ -111,11 +111,11 @@ Settings related with Emacs' appearance.
 ** Display relative line numbers
 
 #+BEGIN_SRC emacs-lisp
-    (when (package-installed-p 'relative-line-numbers)
-      ;; Enable globally
-      (global-relative-line-numbers-mode)
-      ;; Follow visual lines
-      (setq relative-line-numbers-motion-function 'vertical-motion))
+  (when (package-installed-p 'relative-line-numbers)
+    ;; Enable globally
+    (global-relative-line-numbers-mode)
+    ;; Follow visual lines
+    (setq relative-line-numbers-motion-function 'vertical-motion))
 #+END_SRC
 
 ** Show line and column number in the mode line
@@ -125,7 +125,7 @@ Settings related with Emacs' appearance.
   (column-number-mode)
 #+END_SRC
 
-* Spell Checking
+* Spell checking
 
 Use GNU Aspell for spell checking. Enable =flyspell-mode= in all text
 mode buffers and =flyspell-prog-mode= in all programming mode buffers.
@@ -144,7 +144,7 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
 
 * Python
 
-I use Elpy for Python programming. Jedi (=pip install --user jedi=) is
+Use Elpy for Python programming. Jedi (=pip install --user jedi=) is
 required for code completion, and flake8 (=pip install --user flake8=)
 for code checking.
 
@@ -167,7 +167,7 @@ for code checking.
 
 * R
 
-I use Emacs Speaks Statistics (ESS) for R programming.
+Use Emacs Speaks Statistics (ESS) for R programming.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'ess)
@@ -193,7 +193,7 @@ I use Emacs Speaks Statistics (ESS) for R programming.
           ess-close-brace-offset 0))
 #+END_SRC
 
-* Web Development
+* Web development
 
 Edit HTML and JavaScript files using =web-mode.el=.
 
@@ -228,7 +228,7 @@ Edit CSS files using Emacs' built-in =css-mode= and SASS files using
 
 * LaTeX
 
-I use AUCTeX to write LaTeX documents.
+Use AUCTeX to write LaTeX documents.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'auctex)
@@ -250,7 +250,7 @@ I use AUCTeX to write LaTeX documents.
 
 * Markdown
 
-Editing Markdown-formatted text files.
+Support editing Markdown-formatted text files.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'markdown-mode)
@@ -264,8 +264,8 @@ Editing Markdown-formatted text files.
 * Org-mode
 
 I use a task management system mostly based on David Allen's
-[[http://gettingthingsdone.com/][Getting Things Done]] methodology. Many configuration ideas are borrowed
-from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
+[[http://gettingthingsdone.com/][Getting Things Done]] methodology. Many configuration ideas were
+borrowed from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
 
 ** Task states
 
@@ -469,7 +469,7 @@ Use =F5= to start/stop a pomodoro.
 
 ** Holidays
 
-Configure a list of holidays I'm interested in.
+Configure a list of relevant holidays.
 
 #+BEGIN_SRC emacs-lisp
   (setq holiday-local-holidays
