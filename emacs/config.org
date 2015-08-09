@@ -3,6 +3,7 @@
 * About
 
 This is my Emacs configuration maintained in an Org-mode file.
+It is assumed that Emacs is installed from the [[https://launchpad.net/~ubuntu-elisp/+archive/ubuntu/ppa][Ubuntu Emacs Lisp PPA]].
 =~/.emacs.d/init.el= simply loads all the Emacs Lisp code in this
 document using Org-babel:
 
@@ -37,12 +38,12 @@ configuration file within Emacs.
 * Package management
 
 Use Emacs' built-in =package.el= for package management with the GNU
-and MELPA Stable repos (and also other package-specific repos).
+and MELPA repositories (and also other package-specific repositories).
 
 #+BEGIN_SRC emacs-lisp
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
-          ("melpa-stable" . "http://stable.melpa.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")
           ("elpy" . "http://jorgenschaefer.github.io/packages/")
           ("org" . "http://orgmode.org/elpa/")))
 #+END_SRC
