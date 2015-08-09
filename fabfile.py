@@ -43,7 +43,7 @@ def install_r(force=False):
 
 
 def install_emacs(force=False):
-    _apt_get_install('emacs24')
+    _apt_get_install('emacs-snapshot')
     if force or _can_overwrite('~/.emacs.d'):
         local('rm -rf ~/.emacs.d')
         local('mkdir ~/.emacs.d')
