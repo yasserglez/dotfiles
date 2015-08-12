@@ -55,6 +55,7 @@ a new Emacs installation.
 #+BEGIN_SRC emacs-lisp
   (defvar my-base-packages
     '(auctex
+      bind-key
       elpy
       ess
       magit
@@ -124,6 +125,20 @@ Settings related with Emacs' appearance.
 #+BEGIN_SRC emacs-lisp
   (line-number-mode)
   (column-number-mode)
+#+END_SRC
+
+* Key bindings
+
+Key bindings are managed using the =bind-key= package. =bind-key= is
+used to define new key bindings anywhere in the configuration file,
+and =my-key-bindings= will list a summary of the defined key bindings.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'bind-key)
+
+  (defun my-key-bindings ()
+    (interactive)
+    (describe-personal-keybindings))
 #+END_SRC
 
 * Spell checking
@@ -342,13 +357,10 @@ Configure a group of agenda views and key bindings for quick access.
            ((org-agenda-overriding-header "Unscheduled tasks: ")
             (org-agenda-skip-function '(org-agenda-skip-subtree-if 'timestamp))))))
 
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "<f12>")
-   (lambda (&optional arg) (interactive "P") (org-agenda arg "cw")))
-  (global-set-key (kbd "<f11>")
-   (lambda (&optional arg) (interactive "P") (org-agenda arg "cd")))
-  (global-set-key (kbd "<f10>")
-   (lambda (&optional arg) (interactive "P") (org-agenda arg "ct")))
+  (bind-key "C-c a" 'org-agenda)
+  (bind-key "<f12>" (lambda (&optional arg) (interactive "P") (org-agenda arg "cw")))
+  (bind-key "<f11>" (lambda (&optional arg) (interactive "P") (org-agenda arg "cd")))
+  (bind-key "<f10>" (lambda (&optional arg) (interactive "P") (org-agenda arg "ct")))
 #+END_SRC
 
 ** Capturing and refiling
@@ -365,8 +377,8 @@ Everything goes into =inbox.org= and it's later refiled to the correct file.
           ("r" "Reference" entry (file "")
            "* REF %?\n  :LOGBOOK:\n  - State \"REF\"                    %U\n  :END:")))
 
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "<f9>") 'org-capture)
+  (bind-key "C-c c" 'org-capture)
+  (bind-key "<f9>" 'org-capture)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -466,7 +478,7 @@ seconds to be quite distracting), and use desktop notifications.
 Use =F5= to start/stop a pomodoro.
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f5>") 'org-pomodoro)
+  (bind-key "<f5>" 'org-pomodoro)
 #+END_SRC
 
 ** Holidays
@@ -561,11 +573,11 @@ This is used in combination with the =bin/org-sync= shell script.
   (setq org-archive-save-context-info '(time))
 #+END_SRC
 
-*** Other key bindings
+*** Key bindings
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-c b") 'org-iswitchb)
-  (global-set-key (kbd "C-c l") 'org-store-link)
+  (bind-key "C-c b" 'org-iswitchb)
+  (bind-key "C-c l" 'org-store-link)
 #+END_SRC
 
 * Git
@@ -579,7 +591,7 @@ Git integration using Magit.
     ;; Don't show " MRev" in modeline.
     (setq magit-auto-revert-mode-lighter "")
     ;; Bind a global key to magit-status.
-    (global-set-key (kbd "C-c g") 'magit-status))
+    (bind-key "C-c g" 'magit-status))
 #+END_SRC
 
 * YASnippet
@@ -645,11 +657,18 @@ Based on [[http://www.masteringemacs.org/article/disabling-prompts-emacs][Disabl
 ** RET auto-indents by default
 
 #+BEGIN_SRC emacs-lisp
-  (define-key global-map (kbd "RET") 'newline-and-indent)
+  (bind-key "RET" 'newline-and-indent)
 #+END_SRC
 
 ** Don't use tabs for indentation
 
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
+#+END_SRC
+
+** Key bindings for =compile= and =recompile=
+
+#+BEGIN_SRC emacs-lisp
+  (bind-key "C-c C-c" 'compile)
+  (bind-key "C-c C-r" 'recompile)
 #+END_SRC
