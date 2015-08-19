@@ -2,5 +2,6 @@
 # Install all packages in my home directory
 .libPaths("~/.local/lib/R/library")
 
-# Set RStudio's CRAN mirror as default
-options(repos = structure(c(CRAN = "http://cran.rstudio.com/")))
+# Use RStudio's CRAN mirror over HTTPS
+options(download.file.method = "libcurl",
+        repos = structure(c(CRAN = "https://cran.rstudio.com/")))
