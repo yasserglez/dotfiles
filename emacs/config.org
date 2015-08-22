@@ -677,5 +677,5 @@ Based on [[http://www.masteringemacs.org/article/disabling-prompts-emacs][Disabl
 ** Key binding for =recompile=
 
 #+BEGIN_SRC emacs-lisp
-  (bind-key* "C-c C-r" 'recompile)
+  (bind-key* "C-c C-m" 'recompile)
 #+END_SRC
