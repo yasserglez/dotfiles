@@ -279,33 +279,27 @@ Support editing Markdown-formatted text files.
 
 * Org-mode
 
-I use a task management system mostly based on David Allen's
-[[http://gettingthingsdone.com/][Getting Things Done]] methodology. Many configuration ideas were
-borrowed from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
+I use a task management system based on David Allen's [[http://gettingthingsdone.com/][GTD methodology]].
+Many Org-mode configuration ideas were borrowed from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and
+[[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
 
 ** Task states
 
 #+BEGIN_SRC emacs-lisp
   (setq org-use-fast-todo-selection t)
   (setq org-todo-keywords
-        '((sequence "TODO(t!)" "|" "DONE(d!)" "REF(r!)")))
+        '((sequence "TODO(t!)" "MAYBE(m!)" "|" "DONE(d!)" "REF(r!)")))
 #+END_SRC
 
-I've tried to simplify the task states as much as I can and use the
-agenda to organize all the work. Pending tasks have a =TODO= state and
-are either scheduled to be done on a particular day, or they have an
-associated date and time (for appointments, events, etc). Each pending
-task can be resolved by marking it as =DONE= or =REF=. Tasks marked as
-=DONE= can be safely archived, while =REF= tasks may be relevant as a
-reference in the future (i.e. notes about interesting articles, etc).
-
-In the past I've had an additional =NEXT= state for tasks to be done
-as soon as I can, but currently I rely on scheduling the task (during
-the daily or weekly reviews) and the agenda to identify the things
-I'm going to work on next. Similarly with a =SOMEDAY= state for
-someday/maybe tasks: if it's something to be done in the future, it
-must have a scheduled action in the future (even if it's just to
-consider doing it).
+Tasks marked as =TODO= are things I've committed to act on -- i.e.
+next actions in GTD. =TODO= tasks may have an associated date or time
+(for appointments, etc), or sometimes I schedule them to be done on a
+particular day during the weekly review. Tasks marked as =MAYBE= are
+things I might want to do in the future -- i.e. someday/maybes in GTD.
+=MAYBE= tasks generally turn into =TODO= tasks when I decide to act on
+them. =TODO= tasks can be resolved by marking them as =DONE= or =REF=.
+Tasks marked as =DONE= can be safely archived, while =REF= tasks may
+be relevant for future reference (e.g., notes about articles I've read).
 
 Task state changes are logged into a drawer. A timestamp is added
 every time a task transitions form one state to another (hence the
@@ -322,11 +316,11 @@ every time a task transitions form one state to another (hence the
 ** Agenda
 
 =inbox.org= is used for capturing tasks (with capture templates and a
-few [[https://ifttt.com][IFTTT]] recipes that append content to the file). The =projects=
-directory holds separate files for the different projects I'm working
-on (basically containing headers for tasks and reference materials).
-Each file has a =#+FILETAGS= header so it is easier to filter tasks
-for a particular project using tags in the agenda.
+few [[https://ifttt.com][IFTTT]] recipes that append content to the file). I keep separate
+files for the different projects I'm working on (basically containing
+headers for tasks and reference materials). Each file has a =#+FILETAGS=
+header so it is easier to filter tasks for a particular project using
+tags in the agenda.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-files '("~/Dropbox/org/"))
