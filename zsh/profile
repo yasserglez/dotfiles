@@ -29,3 +29,10 @@ export TMPDIR="/tmp/$USER"
 if [ ! -d "$TMPDIR" ]; then
   mkdir -p -m 700 "$TMPDIR"
 fi
+
+#
+# Run PyCharm using OpenJDK patched with font fixes for Swing applications
+# http://www.webupd8.org/2013/06/install-openjdk-patched-with-font-fixes.html
+#
+
+export PYCHARM_JDK="/usr/lib/jvm/java-8-openjdk-amd64"
