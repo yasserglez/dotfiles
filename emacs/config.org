@@ -340,11 +340,11 @@ Configure a group of agenda views and key bindings for quick access.
   (setq org-agenda-custom-commands
         '(("c" . "Custom agenda commands")
           ("cd" "Agenda for today" agenda ""
-           ((org-agenda-overriding-header "Agenda for today: ")
+           ((org-agenda-compact-blocks t)
             (org-agenda-span 1)
             (org-deadline-warning-days 0)))
           ("cw" "Agenda for next week" agenda ""
-           ((org-agenda-overriding-header "Agenda for next week: ")
+           ((org-agenda-compact-blocks t)
             (org-agenda-span 7)
             (org-deadline-warning-days 14)))
           ("ct" "Unscheduled tasks" todo "TODO"
