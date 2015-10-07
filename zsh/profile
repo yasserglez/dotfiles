@@ -36,3 +36,9 @@ fi
 #
 
 export PYCHARM_JDK="/usr/lib/jvm/java-8-openjdk-amd64"
+
+#
+# R environment variables
+#
+
+export R_LIBS_USER="~/.local/lib/R/library"
