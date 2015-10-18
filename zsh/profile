@@ -16,13 +16,13 @@ if [ -z "$LANG" ]; then
 fi
 
 #
-# Executable Files
+# Executable files
 #
 
 export PATH="$HOME/.local/bin:$PATH"
 
 #
-# Temporary Files
+# Temporary files
 #
 
 export TMPDIR="/tmp/$USER"
@@ -31,9 +31,11 @@ if [ ! -d "$TMPDIR" ]; then
 fi
 
 #
+# PyCharm environment variables
+#
+
 # Run PyCharm using OpenJDK patched with font fixes for Swing applications
 # http://www.webupd8.org/2013/06/install-openjdk-patched-with-font-fixes.html
-#
 
 export PYCHARM_JDK="/usr/lib/jvm/java-8-openjdk-amd64"
 
@@ -42,3 +44,12 @@ export PYCHARM_JDK="/usr/lib/jvm/java-8-openjdk-amd64"
 #
 
 export R_LIBS_USER="~/.local/lib/R/library"
+
+#
+# Spark environment variables
+#
+
+export SPARK_HOME=/mnt/data/spark/spark
+export PATH="$PATH:$SPARK_HOME/bin"
+export PYSPARK_PYTHON=python3
+export SPARK_LOCAL_IP=127.0.0.1
