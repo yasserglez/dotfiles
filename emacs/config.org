@@ -2,10 +2,9 @@
 
 * About
 
-This is my Emacs configuration maintained in an Org-mode file.
-It is assumed that Emacs is installed from the [[https://launchpad.net/~ubuntu-elisp/+archive/ubuntu/ppa][Ubuntu Emacs Lisp PPA]].
-=~/.emacs.d/init.el= simply loads all the Emacs Lisp code in this
-document using Org-babel:
+A recent version of Emacs can installed from the [[https://launchpad.net/~ubuntu-elisp/+archive/ubuntu/ppa][Ubuntu Emacs Lisp PPA]].
+The is configuration maintained in an Org-mode file. =~/.emacs.d/init.el=
+simply loads all the Emacs Lisp code in this file using Org-babel:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (require 'package)
@@ -19,10 +18,10 @@ document using Org-babel:
 #+END_SRC
 
 =package.el= is loaded first to support using Org-mode installed from
-an ELPA archive. =package-enable-at-startup= is set to =nil=, to avoid
+an ELPA archive. =package-enable-at-startup= is set to =nil= to avoid
 loading the packages again after processing the init file.
 
-Use the following interactive functions to edit and reload this
+The following interactive functions allow to edit and reload this
 configuration file within Emacs.
 
 #+BEGIN_SRC emacs-lisp
@@ -37,8 +36,9 @@ configuration file within Emacs.
 
 * Package management
 
-Use Emacs' built-in =package.el= for package management with the GNU
-and MELPA repositories (and also other package-specific repositories).
+Emacs' built-in =package.el= is used for package management with
+the GNU and MELPA repositories (and also other package-specific
+repositories).
 
 #+BEGIN_SRC emacs-lisp
   (setq package-archives
@@ -48,9 +48,8 @@ and MELPA repositories (and also other package-specific repositories).
           ("org" . "http://orgmode.org/elpa/")))
 #+END_SRC
 
-Keep a list of packages that are frequently used so they can be
-easily installed with the =my-install-base-packages= function on
-a new Emacs installation.
+Keep a list of packages that are frequently used so they can be easily
+installed with =my-install-base-packages=.
 
 #+BEGIN_SRC emacs-lisp
   (defvar my-base-packages
@@ -131,7 +130,8 @@ Settings related with Emacs' appearance.
 
 Key bindings are managed using the =bind-key= package. =bind-key*= is
 used to define new key bindings anywhere in the configuration file,
-and =my-key-bindings= will list a summary of the defined key bindings.
+and =my-key-bindings= can be used to obtain a summary of all the
+defined key bindings.
 
 #+BEGIN_SRC emacs-lisp
   (require 'bind-key)
@@ -143,8 +143,9 @@ and =my-key-bindings= will list a summary of the defined key bindings.
 
 * Spell checking
 
-Use GNU Aspell for spell checking. Enable =flyspell-mode= in all text
-mode buffers and =flyspell-prog-mode= in all programming mode buffers.
+GNU Aspell is used for spell checking. =flyspell-mode= is enabled in
+all text-mode buffers and =flyspell-prog-mode= in all programming-mode
+buffers.
 
 #+BEGIN_SRC emacs-lisp
   (setq ispell-program-name "aspell"
@@ -170,7 +171,7 @@ Elpy is used for Python programming.
 The following command installs those packages using =pip=.
 
 #+BEGIN_SRC sh :tangle no
-  pip install jedi flake8 importmagic autopep8
+  pip install --user jedi flake8 importmagic autopep8
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -192,11 +193,11 @@ The following command installs those packages using =pip=.
 
 * R
 
-Use Emacs Speaks Statistics (ESS) for R programming.
+Emacs Speaks Statistics (ESS) is used for R programming.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'ess)
-    ;; Don't prompt for a starting directory when starting a new process
+    ;; Don't prompt for a directory when starting a new process
     (setq ess-ask-for-ess-directory nil)
     ;; Don't turn '_' into '<-'
     (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
@@ -220,7 +221,7 @@ Use Emacs Speaks Statistics (ESS) for R programming.
 
 * Web development
 
-Edit HTML and JavaScript files using =web-mode.el=.
+Use =web-mode.el= to edit HTML and JavaScript files.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'web-mode)
@@ -237,8 +238,8 @@ Edit HTML and JavaScript files using =web-mode.el=.
     (setq web-mode-enable-current-element-highlight t))
 #+END_SRC
 
-Edit CSS files using Emacs' built-in =css-mode= and SASS files using
-=scss-mode=.
+Emacs' built-in =css-mode= is used to edit CSS files and =scss-mode=
+to edit SASS files.
 
 #+BEGIN_SRC emacs-lisp
   ;; CSS indentation
@@ -253,7 +254,7 @@ Edit CSS files using Emacs' built-in =css-mode= and SASS files using
 
 * LaTeX
 
-Use AUCTeX to write LaTeX documents.
+AUCTeX is used to write LaTeX documents.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'auctex)
@@ -300,12 +301,12 @@ Many Org-mode configuration ideas were borrowed from [[http://doc.norang.ca/org-
         '((sequence "TODO(t!)" "MAYBE(m!)" "|" "DONE(d!)" "REF(r!)")))
 #+END_SRC
 
-Tasks marked as =TODO= are things I've committed to act on -- i.e.
+Tasks marked as =TODO= are things I've committed to work on -- i.e.
 next actions in GTD. =TODO= tasks may have an associated date or time
 (for appointments, etc), or sometimes I schedule them to be done on a
 particular day during the weekly review. Tasks marked as =MAYBE= are
 things I might want to do in the future -- i.e. someday/maybes in GTD.
-=MAYBE= tasks generally turn into =TODO= tasks when I decide to act on
+=MAYBE= tasks generally turn into =TODO= tasks when I decide to work on
 them. =TODO= tasks can be resolved by marking them as =DONE= or =REF=.
 Tasks marked as =DONE= can be safely archived, while =REF= tasks may
 be relevant for future reference (e.g., notes about articles I've read).
@@ -486,7 +487,7 @@ seconds to be quite distracting), and use desktop notifications.
      :app-name "Emacs: Org-Pomodoro"))
 #+END_SRC
 
-Use =F5= to start/stop a pomodoro.
+=F5= can be used to start/stop a pomodoro.
 
 #+BEGIN_SRC emacs-lisp
   (bind-key* "<f5>" 'org-pomodoro)
@@ -617,7 +618,7 @@ Enable the YASnippet minor mode in all buffers.
 
 * Miscellaneous
 
-Settings that don't belong to any previous category.
+Settings that don't fit in any previous category.
 
 ** Disable prompts and startup messages
 
