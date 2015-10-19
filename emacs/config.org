@@ -160,9 +160,18 @@ mode buffers and =flyspell-prog-mode= in all programming mode buffers.
 
 * Python
 
-Use Elpy for Python programming. Jedi (=pip install --user jedi=) is
-required for code completion, and flake8 (=pip install --user flake8=)
-for code checking.
+Elpy is used for Python programming.
+
+- =jedi= is required for code completion,
+- =flake8= for code checking,
+- =importmagic= for automatic imports, and
+- =autopep8= for automatic PEP-8 formatting.
+
+The following command installs those packages using =pip=.
+
+#+BEGIN_SRC sh :tangle no
+  pip install jedi flake8 importmagic autopep8
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'elpy)
