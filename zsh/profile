@@ -2,12 +2,6 @@
 # desktop session. Intended for environment variable assignments.
 
 #
-# Editors
-#
-
-export EDITOR='emacsclient -a "" -c'
-
-#
 # Language
 #
 
@@ -31,7 +25,13 @@ if [ ! -d "$TMPDIR" ]; then
 fi
 
 #
-# PyCharm environment variables
+# Editors
+#
+
+export EDITOR='emacsclient -a "" -c'
+
+#
+# PyCharm
 #
 
 # Run PyCharm using OpenJDK patched with font fixes for Swing applications
@@ -40,13 +40,13 @@ fi
 export PYCHARM_JDK="/usr/lib/jvm/java-8-openjdk-amd64"
 
 #
-# R environment variables
+# R
 #
 
 export R_LIBS_USER="~/.local/lib/R/library"
 
 #
-# Spark environment variables
+# Spark
 #
 
 export SPARK_HOME=/mnt/data/spark/spark

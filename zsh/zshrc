@@ -1,14 +1,19 @@
 # ~/.zshrc: This file is sourced by interactive shells. It should define aliases,
 # functions, shell options, and key bindings.
 
-# Source Prezto.
+#
+# Prezto
+#
+
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Load virtualenvwrapper into the shell session.
-# Set the directory where virtual environments are stored.
+#
+# virtualenvwrapper
+#
+
 export WORKON_HOME="$HOME/.virtualenvs"
-# Disable the virtualenv prompt.
+export PROJECT_HOME="$HOME/Workspace"
 VIRTUAL_ENV_DISABLE_PROMPT=1
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+source "$HOME/.local/bin/virtualenvwrapper.sh"

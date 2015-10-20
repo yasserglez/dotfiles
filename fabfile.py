@@ -13,6 +13,7 @@ def install_all(force=False):
     install_solarized_gnome_terminal(force)
     install_solarized_dircolors(force)
     install_solarized_gedit(force)
+    install_python(force)
     install_r(force)
     install_bin(force)
 
@@ -31,6 +32,11 @@ def install_ack(force=False):
     _apt_get_install('ack-grep')
     with lcd('ack'):
         local('ln -s $PWD/ackrc ~/.ackrc')
+
+
+def install_python(force=False):
+    _apt_get_install('python', 'python3', 'python-pip')
+    local('pip install --user --upgrade virtualenv virtualenvwrapper')
 
 
 def install_r(force=False):
