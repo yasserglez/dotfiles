@@ -207,16 +207,7 @@ Emacs Speaks Statistics (ESS) is used for R programming.
     (add-to-list 'auto-mode-alist '("\\.[Rr]\\'" . R-mode))
     (add-to-list 'auto-mode-alist '("\\.[Rr]d\\'" . Rd-mode))
     ;; Code formatting
-    (setq ess-default-style 'OWN
-          ess-indent-level 4
-          ess-first-continued-statement-offset 0
-          ess-continued-statement-offset 4
-          ess-brace-offset -4
-          ess-arg-function-offset nil
-          ess-arg-function-offset-new-line nil
-          ess-expression-offset nil
-          ess-else-offset 0
-          ess-close-brace-offset 0))
+    (setq ess-default-style 'RStudio))
 #+END_SRC
 
 * Web development
