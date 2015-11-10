@@ -20,12 +20,12 @@ def install_all(force=False):
 
 def install_bin(force=False):
     local_bin = '~/.local/bin'
-    local('mkdir -p {0}'.format(local_bin))
+    local('mkdir -p {}'.format(local_bin))
     with lcd('bin'):
         for bin_file in os.listdir('bin'):
             bin_path = os.path.join(local_bin, bin_file)
             if force or _can_overwrite(bin_path):
-                local('ln -s $PWD/{0} {1}'.format(bin_file, bin_path))
+                local('ln -s $PWD/{} {}'.format(bin_file, bin_path))
 
 
 def install_ack(force=False):
@@ -35,7 +35,7 @@ def install_ack(force=False):
 
 
 def install_python(force=False):
-    _apt_get_install('python', 'python3', 'python-pip')
+    _apt_get_install('python', 'python-pip', 'python3', 'python3-pip')
     local('pip install --user --upgrade virtualenv virtualenvwrapper')
 
 
@@ -92,7 +92,7 @@ def install_git(force=False):
                          'Global/Eclipse', 'Global/Matlab', 'R',
                          'Python', 'C', 'C++', 'Java', 'TeX')
             for template in templates:
-                local('cat {0}.gitignore >> ~/.gitignore'.format(template))
+                local('cat {}.gitignore >> ~/.gitignore'.format(template))
 
 
 def install_zsh(force=False):
@@ -107,9 +107,9 @@ def install_zsh(force=False):
             local('ln -s $PWD/prezto ~/.zprezto')
             local('ln -sf $PWD/prompt_yasserglez_setup ~/.zprezto/modules/prompt/functions/')
         for dotfile in ('zlogin', 'zlogout', 'zpreztorc', 'zprofile', 'profile', 'zshenv', 'zshrc'):
-            if force or _can_overwrite('~/.{0}'.format(dotfile)):
-                local('rm -f ~/.{0}'.format(dotfile))
-                local('ln -sf $PWD/{0} ~/.{0}'.format(dotfile))
+            if force or _can_overwrite('~/.{}'.format(dotfile)):
+                local('rm -f ~/.{}'.format(dotfile))
+                local('ln -sf $PWD/{} ~/.{}'.format(dotfile))
 
 
 def install_solarized_gnome_terminal(force=False, scheme='dark'):
@@ -118,7 +118,7 @@ def install_solarized_gnome_terminal(force=False, scheme='dark'):
     git_repo_dir = 'solarized/gnome-terminal-colors-solarized'
     _git_pull_or_clone(git_repo, git_repo_dir)
     with lcd(git_repo_dir):
-        local('./install.sh -s {0} -p Default'.format(scheme))
+        local('./install.sh -s {} -p Default'.format(scheme))
 
 
 def install_solarized_dircolors(force=False, scheme='dark'):
@@ -129,7 +129,7 @@ def install_solarized_dircolors(force=False, scheme='dark'):
     if force or _can_overwrite('~/.dir_colors'):
         with lcd(git_repo_dir):
             local('rm -f ~/.dir_colors')
-            local('ln -s $PWD/dircolors.ansi-{0} ~/.dir_colors'.format(scheme))
+            local('ln -s $PWD/dircolors.ansi-{} ~/.dir_colors'.format(scheme))
 
 
 def install_solarized_gedit(force=False, scheme='dark'):
@@ -145,13 +145,13 @@ def install_solarized_gedit(force=False, scheme='dark'):
 
 def _can_overwrite(file_or_dir):
     file_or_dir = os.path.expanduser(file_or_dir)
-    msg = 'Overwrite {0}?'.format(file_or_dir)
+    msg = 'Overwrite {}?'.format(file_or_dir)
     return not os.path.exists(file_or_dir) or confirm(msg)
 
 
 def _apt_get_install(*packages):
     for package in packages:
-        local('sudo apt-get install --yes --force-yes {0}'.format(package))
+        local('sudo apt-get install --yes --force-yes {}'.format(package))
 
 
 def _git_pull_or_clone(git_repo, git_repo_dir):
@@ -160,4 +160,4 @@ def _git_pull_or_clone(git_repo, git_repo_dir):
             local('git pull')
             local('git submodule update --init --recursive')
     else:
-        local('git clone --recursive {0} {1}'.format(git_repo, git_repo_dir))
+        local('git clone --recursive {} {}'.format(git_repo, git_repo_dir))
