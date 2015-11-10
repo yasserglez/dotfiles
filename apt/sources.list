@@ -3,3 +3,4 @@ deb http://security.ubuntu.com/ubuntu/ wily-security universe restricted multive
 deb http://archive.ubuntu.mirror.rafal.ca/ubuntu/ wily-updates universe restricted multiverse main
 deb http://archive.ubuntu.mirror.rafal.ca/ubuntu/ wily-backports universe restricted multiverse main
 deb http://archive.ubuntu.mirror.rafal.ca/ubuntu/ wily-proposed universe restricted multiverse main
+deb http://archive.canonical.com/ wily partner
