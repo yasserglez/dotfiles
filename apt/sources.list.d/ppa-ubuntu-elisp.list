@@ -1,0 +1,2 @@
+# Used for the emacs-snapshot package
+deb http://ppa.launchpad.net/ubuntu-elisp/ppa/ubuntu wily main

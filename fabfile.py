@@ -25,9 +25,15 @@ def ack(force=False):
 
 
 def apt(force=False):
-    if force or _can_overwrite('/etc/apt/sources.list'):
-        with lcd('apt'):
+    with lcd('apt'):
+        if force or _can_overwrite('/etc/apt/sources.list'):
             local('sudo ln -sf $PWD/sources.list /etc/apt/sources.list')
+        if force or _can_overwrite('/etc/apt/sources.list.d/'):
+            local('sudo rm -fr /etc/apt/sources.list.d')
+            local('sudo ln -s $PWD/sources.list.d /etc/apt/sources.list.d')
+    _apt_get_update()
+    _apt_get_install('launchpad-getkeys')
+    local('sudo launchpad-getkeys')
 
 
 def bin(force=False):
@@ -147,6 +153,10 @@ def _can_overwrite(file_or_dir):
     file_or_dir = os.path.expanduser(file_or_dir)
     msg = 'Overwrite {}?'.format(file_or_dir)
     return not os.path.exists(file_or_dir) or confirm(msg)
+
+
+def _apt_get_update():
+    local('sudo apt-get update')
 
 
 def _apt_get_install(*packages):
