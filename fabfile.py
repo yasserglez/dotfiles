@@ -4,21 +4,19 @@ from fabric.api import lcd, local
 from fabric.contrib.console import confirm
 
 
-def install_all(force=False):
-    install_zsh(force)
-    install_ack(force)
-    install_git(force)
-    install_emacs(force)
-    install_vim(force)
-    install_solarized_gnome_terminal(force)
-    install_solarized_dircolors(force)
-    install_solarized_gedit(force)
-    install_python(force)
-    install_r(force)
-    install_bin(force)
+def all(force=False):
+    zsh(force)
+    ack(force)
+    git(force)
+    emacs(force)
+    vim(force)
+    solarized(force)
+    python(force)
+    R(force)
+    bin(force)
 
 
-def install_bin(force=False):
+def bin(force=False):
     local_bin = '~/.local/bin'
     local('mkdir -p {}'.format(local_bin))
     with lcd('bin'):
@@ -28,18 +26,18 @@ def install_bin(force=False):
                 local('ln -s $PWD/{} {}'.format(bin_file, bin_path))
 
 
-def install_ack(force=False):
+def ack(force=False):
     _apt_get_install('ack-grep')
     with lcd('ack'):
         local('ln -s $PWD/ackrc ~/.ackrc')
 
 
-def install_python(force=False):
+def python(force=False):
     _apt_get_install('python', 'python-pip', 'python3', 'python3-pip')
     local('pip install --user --upgrade virtualenv virtualenvwrapper')
 
 
-def install_r(force=False):
+def R(force=False):
     _apt_get_install('r-base', 'r-base-dev')
     if force or _can_overwrite('~/.Rprofile'):
         local('rm -f ~/.Rprofile')
@@ -48,7 +46,7 @@ def install_r(force=False):
             local('ln -s $PWD/Rprofile ~/.Rprofile')
 
 
-def install_emacs(force=False):
+def emacs(force=False):
     _apt_get_install('emacs-snapshot')
     if force or _can_overwrite('~/.emacs.d'):
         local('rm -rf ~/.emacs.d')
@@ -60,7 +58,7 @@ def install_emacs(force=False):
             local('ln -s $PWD/aspell.pws ~/.emacs.d/aspell.pws')
 
 
-def install_vim(force=False):
+def vim(force=False):
     _apt_get_install('git', 'vim-nox')
     if force or _can_overwrite('~/.vimrc'):
         with lcd('vim'):
@@ -76,7 +74,7 @@ def install_vim(force=False):
             local('ln -sf $PWD/vundle ~/.vim/vundle')
 
 
-def install_git(force=False):
+def git(force=False):
     _apt_get_install('git')
     if force or _can_overwrite('~/.gitconfig'):
         with lcd('git'):
@@ -95,7 +93,7 @@ def install_git(force=False):
                 local('cat {}.gitignore >> ~/.gitignore'.format(template))
 
 
-def install_zsh(force=False):
+def zsh(force=False):
     _apt_get_install('zsh')
     local('chsh -s /usr/bin/zsh')
     git_repo = 'https://github.com/sorin-ionescu/prezto'
@@ -112,7 +110,8 @@ def install_zsh(force=False):
                 local('ln -sf $PWD/{} ~/.{}'.format(dotfile))
 
 
-def install_solarized_gnome_terminal(force=False, scheme='dark'):
+def solarized(force=False, scheme='dark'):
+    # gnome-terminal:
     _apt_get_install('gnome-terminal', 'dconf-cli')
     git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
     git_repo_dir = 'solarized/gnome-terminal-colors-solarized'
@@ -120,8 +119,7 @@ def install_solarized_gnome_terminal(force=False, scheme='dark'):
     with lcd(git_repo_dir):
         local('./install.sh -s {} -p Default'.format(scheme))
 
-
-def install_solarized_dircolors(force=False, scheme='dark'):
+    # dircolors:
     _apt_get_install('coreutils')
     git_repo = 'https://github.com/seebi/dircolors-solarized'
     git_repo_dir = 'solarized/dircolors-solarized'
@@ -131,8 +129,7 @@ def install_solarized_dircolors(force=False, scheme='dark'):
             local('rm -f ~/.dir_colors')
             local('ln -s $PWD/dircolors.ansi-{} ~/.dir_colors'.format(scheme))
 
-
-def install_solarized_gedit(force=False, scheme='dark'):
+    # gedit:
     _apt_get_install('gedit')
     git_repo = 'https://github.com/mattcan/solarized-gedit'
     git_repo_dir = 'solarized/solarized-gedit'
