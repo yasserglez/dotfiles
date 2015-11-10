@@ -1,4 +1,5 @@
-# Yasser Gonzalez's dotfiles
+Yasser Gonzalez's dotfiles
+--------------------------
 
 My Ubuntu configuration files and a Fabric script to manage them.
 
