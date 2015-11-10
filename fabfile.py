@@ -14,6 +14,13 @@ def all(force=False):
     python(force)
     R(force)
     bin(force)
+    apt(force)
+
+
+def apt(force=False):
+    with lcd('apt'):
+        if force or _can_overwrite('/etc/apt/sources.list'):
+            local('sudo ln -sf $PWD/sources.list /etc/apt/sources.list')
 
 
 def bin(force=False):
