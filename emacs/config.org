@@ -62,6 +62,7 @@ installed with =my-install-base-packages=.
       org-plus-contrib
       org-pomodoro
       relative-line-numbers
+      scala-mode2
       scss-mode
       solarized-theme
       web-mode
