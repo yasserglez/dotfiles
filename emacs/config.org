@@ -198,10 +198,11 @@ Emacs Speaks Statistics (ESS) is used for R programming.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'ess)
+    (require 'ess-site)
     ;; Don't prompt for a directory when starting a new process
     (setq ess-ask-for-ess-directory nil)
     ;; Don't turn '_' into '<-'
-    (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
+    (ess-toggle-underscore nil)
     ;; Autoload ESS for .R and .Rd files
     (autoload 'R-mode "ess-site.el" "ESS" t)
     (autoload 'Rd-mode "ess-site.el" "ESS" t)
