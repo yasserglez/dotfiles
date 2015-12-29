@@ -15,8 +15,6 @@ function prompt_yasserglez_precmd {
 }
 
 function prompt_yasserglez_setup {
-  setopt LOCAL_OPTIONS
-  unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
   # Load required functions.
@@ -26,16 +24,18 @@ function prompt_yasserglez_setup {
   add-zsh-hook precmd prompt_yasserglez_precmd
 
   # Set git-info parameters.
-  zstyle ':prezto:module:git:info:branch' format '%Ugit%u:%b'
   zstyle ':prezto:module:git:info:keys' format 'branch' ' %b'
+  zstyle ':prezto:module:git:info:branch' format '%Ugit%u:%b'
 
   # Set python-info parameters.
   zstyle ':prezto:module:python:info:virtualenv' format ' %Uvirtualenv%u:%v'
 
   # Define prompts.
-  PROMPT=$'%U%m%u:%~$git_info[branch]$python_info[virtualenv]\n%# '
+  PROMPT='%Uzsh%u:%~> '
   PROMPT2='> '
-  SPROMPT=" -- correct '%R' to '%r' [nyae]? "
+  RPROMPT='$python_info[virtualenv]$git_info[branch]'
+  RPROMPT2=''
+  SPROMPT='- correct %R to %r [nyae]? '
 
   # Completions.
   zstyle ':completion:*:corrections' format '- %d'
