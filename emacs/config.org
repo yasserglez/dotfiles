@@ -80,8 +80,9 @@ installed with =my-install-base-packages=.
 * Make Emacs recognize =$PATH=
 
 #+BEGIN_SRC emacs-lisp
-  (setq exec-path-from-shell-variables '("PATH"))
-  (exec-path-from-shell-initialize)
+  (when (package-installed-p 'exec-path-from-shell)
+    (setq exec-path-from-shell-variables '("PATH"))
+    (exec-path-from-shell-initialize))
 #+END_SRC
 
 * Appearance
