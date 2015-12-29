@@ -57,6 +57,7 @@ installed with =my-install-base-packages=.
       bind-key
       elpy
       ess
+      exec-path-from-shell
       magit
       markdown-mode
       org-plus-contrib
@@ -74,6 +75,13 @@ installed with =my-install-base-packages=.
     (dolist (package my-base-packages)
       (unless (package-installed-p package)
         (package-install package))))
+#+END_SRC
+
+* Make Emacs recognize =$PATH=
+
+#+BEGIN_SRC emacs-lisp
+  (setq exec-path-from-shell-variables '("PATH"))
+  (exec-path-from-shell-initialize)
 #+END_SRC
 
 * Appearance
