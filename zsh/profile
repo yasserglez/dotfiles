@@ -20,7 +20,7 @@ export PATH="$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:$PATH"
 #
 
 export TMPDIR="/tmp/$USER"
-if [[ ! -d "$TMPDIR" ]; then
+if [[ ! -d "$TMPDIR" ]]; then
   mkdir -p -m 700 "$TMPDIR"
 fi
 
