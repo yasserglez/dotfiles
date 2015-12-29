@@ -5,7 +5,7 @@
 # Language
 #
 
-if [ -z "$LANG" ]; then
+if [[ -z "$LANG" ]]; then
   export LANG='en_CA.UTF-8'
 fi
 
@@ -13,14 +13,14 @@ fi
 # Executable files
 #
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:$PATH"
 
 #
 # Temporary files
 #
 
 export TMPDIR="/tmp/$USER"
-if [ ! -d "$TMPDIR" ]; then
+if [[ ! -d "$TMPDIR" ]; then
   mkdir -p -m 700 "$TMPDIR"
 fi
 
@@ -37,9 +37,9 @@ export EDITOR="emacsclient -a '' -c"
 export PYTHONUSERBASE="$HOME/.local"
 
 if [[ `uname` == "Linux" ]]; then
-    # Install tuxjdk from https://github.com/tuxjdk/tuxjdk
-    # for better font rendering in Ubuntu.
-    export PYCHARM_JDK="/usr/lib/jvm/tuxjdk-8.66.03"
+  # Install tuxjdk from https://github.com/tuxjdk/tuxjdk
+  # for better font rendering in Ubuntu.
+  export PYCHARM_JDK="/usr/lib/jvm/tuxjdk-8.66.03"
 fi
 
 #
