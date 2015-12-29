@@ -36,19 +36,17 @@ export EDITOR="emacsclient -a '' -c"
 
 export PYTHONUSERBASE="$HOME/.local"
 
-#
-# PyCharm
-#
-
-# Install tuxjdk from https://github.com/tuxjdk/tuxjdk
-# for better font rendering.
-export PYCHARM_JDK="/usr/lib/jvm/tuxjdk-8.66.03"
+if [[ `uname` == "Linux" ]]; then
+    # Install tuxjdk from https://github.com/tuxjdk/tuxjdk
+    # for better font rendering in Ubuntu.
+    export PYCHARM_JDK="/usr/lib/jvm/tuxjdk-8.66.03"
+fi
 
 #
 # R
 #
 
-export R_LIBS_USER="~/.local/lib/R/library"
+export R_LIBS_USER="$HOME/.local/lib/R/library"
 
 #
 # Spark
