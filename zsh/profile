@@ -28,7 +28,13 @@ fi
 # Editors
 #
 
-export EDITOR='emacsclient -a "" -c'
+export EDITOR="emacsclient -a '' -c"
+
+#
+# Python
+#
+
+export PYTHONUSERBASE="$HOME/.local"
 
 #
 # PyCharm
