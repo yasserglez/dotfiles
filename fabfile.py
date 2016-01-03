@@ -123,8 +123,18 @@ def solarized(force=False, scheme='dark'):
     _git_pull_or_clone(git_repo, git_repo_dir)
     with lcd(git_repo_dir):
         local('mkdir -p ~/.local/share/gedit/styles')
-        local('ln -sf $PWD/solarized-light.xml ~/.local/share/gedit/styles/')
-        local('ln -sf $PWD/solarized-dark.xml ~/.local/share/gedit/styles/')
+        local('ln -sf $PWD/solarized-{}.xml ~/.local/share/gedit/styles/'.format(scheme))
+
+    # IntelliJ:
+    git_repo = 'https://github.com/jkaving/intellij-colors-solarized'
+    git_repo_dir = 'solarized/intellij-colors-solarized'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    with lcd(git_repo_dir):
+        for d in os.listdir(os.path.expanduser('~')):
+            if d.startswith('.PyCharm') or d.startswith('.IdeaIC'):
+                colors_dir = '~/{}/config/colors'.format(d)
+                local('mkdir -p {}'.format(colors_dir))
+                local('ln -sf "$PWD/Solarized {}.icls" {}/'.format(scheme.title(), colors_dir))
 
 
 def vim(force=False):
