@@ -5,16 +5,17 @@ from fabric.contrib.console import confirm
 
 
 def all(force=False):
-    ack(force)
     apt(force)
-    bin(force)
-    emacs(force)
-    git(force)
-    R(force)
-    python(force)
-    solarized(force)
-    vim(force)
     zsh(force)
+    bin(force)
+    solarized(force)
+    ack(force)
+    git(force)
+    emacs(force)
+    vim(force)
+    python(force)
+    R(force)
+    scala(force)
 
 
 def ack(force=False):
@@ -34,6 +35,7 @@ def apt(force=False):
     _apt_get_update()
     _apt_get_install('launchpad-getkeys')
     local('sudo launchpad-getkeys')
+    local('sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823')
 
 
 def bin(force=False):
@@ -71,7 +73,7 @@ def git(force=False):
         with lcd(git_repo_dir):
             templates = ('Global/Linux', 'Global/Vim', 'Global/Emacs',
                          'Global/Eclipse', 'Global/Matlab', 'R',
-                         'Python', 'C', 'C++', 'Java', 'TeX')
+                         'Python', 'C', 'C++', 'Java', 'Scala', 'TeX')
             for template in templates:
                 local('cat {}.gitignore >> ~/.gitignore'.format(template))
 
@@ -87,6 +89,13 @@ def R(force=False):
 def python(force=False):
     _apt_get_install('python', 'python-pip', 'python3', 'python3-pip')
     local('pip install --user --upgrade virtualenv virtualenvwrapper')
+
+
+def scala(force=False):
+    _apt_get_install('scala', 'sbt')
+    if force or _can_overwrite('~/.sbt'):
+        local('rm -fr ~/.sbt')
+        local('ln -s $PWD/sbt ~/.sbt')
 
 
 def solarized(force=False, scheme='dark'):
