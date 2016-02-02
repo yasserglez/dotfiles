@@ -53,7 +53,8 @@ installed with =my-install-base-packages=.
 
 #+BEGIN_SRC emacs-lisp
   (defvar my-base-packages
-    '(auctex
+    '(alert
+      auctex
       bind-key
       elpy
       ensime
@@ -134,6 +135,18 @@ Settings related with Emacs' appearance.
 #+BEGIN_SRC emacs-lisp
   (line-number-mode)
   (column-number-mode)
+#+END_SRC
+
+* Alerts
+
+#+BEGIN_SRC emacs-lisp
+  (when (package-installed-p 'alert)
+    (require 'alert)
+    ;; Configure the default style in OS X and Ubuntu
+    (when (eq system-type 'darwin)
+      (setq alert-default-style 'notifier))
+    (when (eq system-type 'gnu/linux)
+      (setq alert-default-style 'libnotify)))
 #+END_SRC
 
 * Key bindings
@@ -491,12 +504,8 @@ seconds to be quite distracting), and use desktop notifications.
     (format-seconds org-pomodoro-time-format
                     (* 60 (ceiling org-pomodoro-countdown 60))))
 
-  (require 'notifications)
   (defun org-pomodoro-notify (title message)
-    (notifications-notify
-     :title title
-     :body message
-     :app-name "Emacs: Org-Pomodoro"))
+    (alert message :title title))
 #+END_SRC
 
 =F5= can be used to start/stop a pomodoro.
