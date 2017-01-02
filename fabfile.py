@@ -49,7 +49,7 @@ def bin(force=False):
 
 
 def emacs(force=False):
-    _apt_get_install('emacs-snapshot')
+    _apt_get_install('emacs')
     if force or _can_overwrite('~/.emacs.d'):
         local('rm -fr ~/.emacs.d')
         local('mkdir -p ~/.emacs.d')
