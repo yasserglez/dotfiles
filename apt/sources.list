@@ -1,6 +1,6 @@
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ wily main universe restricted multiverse
-deb http://security.ubuntu.com/ubuntu/ wily-security universe restricted multiverse main
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ wily-updates universe restricted multiverse main
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ wily-backports universe restricted multiverse main
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ wily-proposed universe restricted multiverse main
-deb http://archive.canonical.com/ wily partner
+deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial main universe restricted multiverse
+deb http://security.ubuntu.com/ubuntu/ xenial-security universe restricted multiverse main
+deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial-updates universe restricted multiverse main
+deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial-backports universe restricted multiverse main
+deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial-proposed universe restricted multiverse main
+deb http://archive.canonical.com/ xenial partner
