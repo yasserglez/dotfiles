@@ -67,8 +67,7 @@ installed with =my-install-base-packages=.
       relative-line-numbers
       scss-mode
       solarized-theme
-      web-mode
-      yasnippet))
+      web-mode))
 
   (defun my-install-base-packages ()
     (interactive)
@@ -199,6 +198,13 @@ The following command installs those packages using =pip=.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'elpy)
+    ;; Which Elpy modules to use
+    (setq elpy-modules '(elpy-module-sane-defaults
+                         elpy-module-company
+                         elpy-module-eldoc
+                         elpy-module-flymake
+                         elpy-module-pyvenv))
+    ;; Enable Elpy
     (elpy-enable)
     ;; Use Jedi for introspection and completion
     (setq elpy-rpc-backend "jedi")
@@ -206,10 +212,6 @@ The following command installs those packages using =pip=.
     (elpy-use-ipython)
     ;; Run tests using pytest
     (elpy-set-test-runner 'elpy-test-pytest-runner)
-    ;; Disable highlight-indentation
-    (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
-    ;; Load and configure YASnippet separately
-    (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules))
     ;; Alias for pyvenv-workon
     (defalias 'workon 'pyvenv-workon))
 #+END_SRC
@@ -625,16 +627,6 @@ Git integration using Magit.
     (setq magit-auto-revert-mode-lighter "")
     ;; Bind a global key to magit-status.
     (bind-key* "C-c g" 'magit-status))
-#+END_SRC
-
-* YASnippet
-
-Enable the YASnippet minor mode in all buffers.
-
-#+BEGIN_SRC emacs-lisp
-  (when (package-installed-p 'yasnippet)
-    (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-    (yas-global-mode 1))
 #+END_SRC
 
 * Miscellaneous
