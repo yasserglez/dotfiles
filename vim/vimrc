@@ -47,7 +47,7 @@ call vundle#begin('~/.vim/vundle/')
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'gagoar/StripWhiteSpaces'
+Plugin 'ntpeters/vim-better-whitespace'
 
 call vundle#end()
 filetype plugin indent on
@@ -58,5 +58,5 @@ set t_Co=16
 set background=dark
 colorscheme solarized
 
-" StripWhiteSpaces
-let g:strip_trailing_lines = 1
+" vim-better-whitespace
+autocmd BufEnter * EnableStripWhitespaceOnSave

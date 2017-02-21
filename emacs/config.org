@@ -2,9 +2,8 @@
 
 * About
 
-A recent version of Emacs can installed from the [[https://launchpad.net/~ubuntu-elisp/+archive/ubuntu/ppa][Ubuntu Emacs Lisp PPA]].
-The is configuration maintained in an Org-mode file. =~/.emacs.d/init.el=
-simply loads all the Emacs Lisp code in this file using Org-babel:
+Emacs configuration file in Org-mode format. =~/.emacs.d/init.el=
+simply loads the Emacs Lisp code in this file using Org-babel:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (require 'package)
@@ -21,7 +20,7 @@ simply loads all the Emacs Lisp code in this file using Org-babel:
 an ELPA archive. =package-enable-at-startup= is set to =nil= to avoid
 loading the packages again after processing the init file.
 
-The following interactive functions allow to edit and reload this
+These interactive functions allow to edit and reload this
 configuration file within Emacs.
 
 #+BEGIN_SRC emacs-lisp

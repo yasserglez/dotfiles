@@ -25,16 +25,6 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 #
-# Install tuxjdk from https://github.com/tuxjdk/tuxjdk
-# for better font rendering in Ubuntu.
-#
-
-if [[ `uname` == "Linux" ]]; then
-  export PYCHARM_JDK="/usr/lib/jvm/tuxjdk-8.66.03"
-  export IDEA_JDK="/usr/lib/jvm/tuxjdk-8.66.03"
-fi
-
-#
 # Editors
 #
 

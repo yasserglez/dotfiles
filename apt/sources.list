@@ -1,6 +1,6 @@
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial main universe restricted multiverse
+deb http://ca.archive.ubuntu.com/ubuntu/ xenial main universe restricted multiverse
 deb http://security.ubuntu.com/ubuntu/ xenial-security universe restricted multiverse main
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial-updates universe restricted multiverse main
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial-backports universe restricted multiverse main
-deb http://mirror.csclub.uwaterloo.ca/ubuntu/ xenial-proposed universe restricted multiverse main
+deb http://ca.archive.ubuntu.com/ubuntu/ xenial-updates universe restricted multiverse main
+deb http://ca.archive.ubuntu.com/ubuntu/ xenial-backports universe restricted multiverse main
+deb http://ca.archive.ubuntu.com/ubuntu/ xenial-proposed universe restricted multiverse main
 deb http://archive.canonical.com/ xenial partner

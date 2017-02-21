@@ -9,20 +9,12 @@ def all(force=False):
     zsh(force)
     bin(force)
     solarized(force)
-    ack(force)
     git(force)
     emacs(force)
     vim(force)
     python(force)
     R(force)
     scala(force)
-
-
-def ack(force=False):
-    _apt_get_install('ack-grep')
-    if force or _can_overwrite('~/.ackrc'):
-        with lcd('ack'):
-            local('ln -sf $PWD/ackrc ~/.ackrc')
 
 
 def apt(force=False):
@@ -155,7 +147,7 @@ def vim(force=False):
 def zsh(force=False):
     _apt_get_install('zsh')
     local('chsh -s /usr/bin/zsh')
-    git_repo = 'https://github.com/sorin-ionescu/prezto'
+    git_repo = 'https://github.com/zsh-users/prezto'
     git_repo_dir = 'zsh/prezto'
     _git_pull_or_clone(git_repo, git_repo_dir)
     with lcd('zsh'):
