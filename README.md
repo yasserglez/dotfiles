@@ -1,13 +1,11 @@
 Yasser Gonzalez's dotfiles
 --------------------------
 
-My Ubuntu configuration files and a Fabric script to manage them.
-
-On a new installation, run:
+My Ubuntu configuration files and a [Fabric](http://www.fabfile.org/)
+script to manage them. On a newly installed Ubuntu, run:
 
 ```
-sudo apt-get install python-pip
-pip install --user Fabric
+sudo apt-get install fabric
 ```
 
-and then use the tasks in `fabfile.py` to install the files.
+and use the tasks in `fabfile.py` to install the configuration files.

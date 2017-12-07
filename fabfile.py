@@ -6,18 +6,31 @@ from fabric.contrib.console import confirm
 
 def all(force=False):
     apt(force)
-    zsh(force)
-    bin(force)
-    solarized(force)
+    terminal(force)
     git(force)
-    emacs(force)
-    vim(force)
     python(force)
     R(force)
-    scala(force)
+    java(force)
+    gedit(force)
+    vim(force)
+    emacs(force)
+    others(force)
 
 
 def apt(force=False):
+    keys = [
+        '251104D968854915', # pypy
+        '51716619E084DAB9', # cran
+        '6A0344470F68ADCA', # gnome-encfs-manager
+        '99E82A75642AC823', # sbt
+        'A6A19B38D3D831EF', # mono
+        'C2518248EEA14886', # oracle-java
+        'EFDC8610341D9410', # spotify
+        'FC918B335044912E', # dropbox
+    ]
+    for key in keys:
+        local('sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv {}'.format(key))
+
     with lcd('apt'):
         if force or _can_overwrite('/etc/apt/sources.list'):
             local('sudo ln -sf $PWD/sources.list /etc/apt/sources.list')
@@ -25,19 +38,6 @@ def apt(force=False):
             local('sudo rm -fr /etc/apt/sources.list.d')
             local('sudo ln -s $PWD/sources.list.d /etc/apt/sources.list.d')
     _apt_get_update()
-    _apt_get_install('launchpad-getkeys')
-    local('sudo launchpad-getkeys')
-    local('sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823')
-
-
-def bin(force=False):
-    local_bin = '~/.local/bin'
-    local('mkdir -p {}'.format(local_bin))
-    for bin_file in os.listdir('bin'):
-        bin_path = os.path.join(local_bin, bin_file)
-        if force or _can_overwrite(bin_path):
-            with lcd('bin'):
-                local('ln -sf $PWD/{} {}'.format(bin_file, bin_path))
 
 
 def emacs(force=False):
@@ -48,8 +48,20 @@ def emacs(force=False):
         with lcd('emacs'):
             local('ln -s $PWD/init.el ~/.emacs.d/init.el')
             local('ln -s $PWD/config.org ~/.emacs.d/config.org')
-            local('ln -s $PWD/snippets ~/.emacs.d/snippets')
             local('ln -s $PWD/aspell.pws ~/.emacs.d/aspell.pws')
+
+
+def others(force=False):
+    packages = [
+        'dropbox',
+        'gnome-encfs-manager',
+        'gnucash',
+        'google-chrome-stable',
+        'google-talkplugin',
+        'keepass2',
+        'spotify-client',
+    ]
+    _apt_get_install(*packages)
 
 
 def git(force=False):
@@ -63,9 +75,19 @@ def git(force=False):
         git_repo_dir = 'git/gitignore'
         _git_pull_or_clone(git_repo, git_repo_dir)
         with lcd(git_repo_dir):
-            templates = ('Global/Linux', 'Global/Vim', 'Global/Emacs',
-                         'Global/Eclipse', 'Global/Matlab', 'R',
-                         'Python', 'C', 'C++', 'Java', 'Scala', 'TeX')
+            templates = [
+                'Global/Linux',
+                'Global/Vim',
+                'Global/Emacs',
+                'Global/JetBrains',
+                'Python',
+                'R',
+                'C',
+                'C++',
+                'Java',
+                'Scala',
+                'TeX',
+            ]
             for template in templates:
                 local('cat {}.gitignore >> ~/.gitignore'.format(template))
 
@@ -79,36 +101,19 @@ def R(force=False):
 
 
 def python(force=False):
-    _apt_get_install('python', 'python-pip', 'python3', 'python3-pip')
-    local('pip install --user --upgrade virtualenv virtualenvwrapper')
+    _apt_get_install(
+            'build-essential',
+            'curl',
+            'libffi-dev',
+            'libsqlite3-dev',
+            'libssl-dev',
+            'python',
+            'python-dev',
+            'python-pip')
+    local('curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash')
 
 
-def scala(force=False):
-    _apt_get_install('scala', 'sbt')
-    if force or _can_overwrite('~/.sbt'):
-        local('rm -fr ~/.sbt')
-        local('ln -s $PWD/sbt ~/.sbt')
-
-
-def solarized(force=False, scheme='dark'):
-    # gnome-terminal:
-    _apt_get_install('gnome-terminal', 'dconf-cli')
-    git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
-    git_repo_dir = 'solarized/gnome-terminal-colors-solarized'
-    _git_pull_or_clone(git_repo, git_repo_dir)
-    with lcd(git_repo_dir):
-        local('./install.sh -s {} -p Default'.format(scheme))
-
-    # dircolors:
-    _apt_get_install('coreutils')
-    git_repo = 'https://github.com/seebi/dircolors-solarized'
-    git_repo_dir = 'solarized/dircolors-solarized'
-    _git_pull_or_clone(git_repo, git_repo_dir)
-    if force or _can_overwrite('~/.dir_colors'):
-        with lcd(git_repo_dir):
-            local('ln -sf $PWD/dircolors.ansi-{} ~/.dir_colors'.format(scheme))
-
-    # gedit:
+def gedit(force=False, scheme='dark'):
     _apt_get_install('gedit')
     git_repo = 'https://github.com/mattcan/solarized-gedit'
     git_repo_dir = 'solarized/solarized-gedit'
@@ -116,17 +121,6 @@ def solarized(force=False, scheme='dark'):
     with lcd(git_repo_dir):
         local('mkdir -p ~/.local/share/gedit/styles')
         local('ln -sf $PWD/solarized-{}.xml ~/.local/share/gedit/styles/'.format(scheme))
-
-    # IntelliJ:
-    git_repo = 'https://github.com/jkaving/intellij-colors-solarized'
-    git_repo_dir = 'solarized/intellij-colors-solarized'
-    _git_pull_or_clone(git_repo, git_repo_dir)
-    with lcd(git_repo_dir):
-        for d in os.listdir(os.path.expanduser('~')):
-            if d.startswith('.PyCharm') or d.startswith('.IdeaIC'):
-                colors_dir = '~/{}/config/colors'.format(d)
-                local('mkdir -p {}'.format(colors_dir))
-                local('ln -sf "$PWD/Solarized {}.icls" {}/'.format(scheme.title(), colors_dir))
 
 
 def vim(force=False):
@@ -144,10 +138,15 @@ def vim(force=False):
             local('ln -sf $PWD/vundle ~/.vim/vundle')
 
 
-def zsh(force=False):
+def java(force=False):
+    _apt_get_install('oracle-java8-installer')
+    _apt_get_install('oracle-java8-set-default')
+
+
+def terminal(force=False):
     _apt_get_install('zsh')
     local('chsh -s /usr/bin/zsh')
-    git_repo = 'https://github.com/zsh-users/prezto'
+    git_repo = 'https://github.com/sorin-ionescu/prezto'
     git_repo_dir = 'zsh/prezto'
     _git_pull_or_clone(git_repo, git_repo_dir)
     with lcd('zsh'):
@@ -158,6 +157,39 @@ def zsh(force=False):
             if force or _can_overwrite('~/.{}'.format(dotfile)):
                 local('rm -f ~/.{}'.format(dotfile))
                 local('ln -sf $PWD/{0} ~/.{0}'.format(dotfile))
+
+    local_bin = '~/.local/bin'
+    local('mkdir -p {}'.format(local_bin))
+    for bin_file in os.listdir('bin'):
+        bin_path = os.path.join(local_bin, bin_file)
+        if force or _can_overwrite(bin_path):
+            with lcd('bin'):
+                local('ln -sf $PWD/{} {}'.format(bin_file, bin_path))
+
+    # gnome-terminal:
+    _apt_get_install('gnome-terminal', 'dconf-cli')
+    git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
+    git_repo_dir = 'solarized/gnome-terminal-colors-solarized'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    with lcd(git_repo_dir):
+        local('./install.sh -s dark -p Default')
+
+    # dircolors:
+    _apt_get_install('coreutils')
+    git_repo = 'https://github.com/seebi/dircolors-solarized'
+    git_repo_dir = 'solarized/dircolors-solarized'
+    _git_pull_or_clone(git_repo, git_repo_dir)
+    if force or _can_overwrite('~/.dir_colors'):
+        with lcd(git_repo_dir):
+            local('ln -sf $PWD/dircolors.ansi-dark ~/.dir_colors')
+
+    packages = [
+        'build-essential',
+        'curl',
+        'htop',
+        'wget',
+    ]
+    _apt_get_install(*packages)
 
 
 def _can_overwrite(file_or_dir):

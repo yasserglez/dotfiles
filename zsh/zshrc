@@ -10,10 +10,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 #
-# virtualenvwrapper
+# pyenv
 #
 
-export WORKON_HOME="$HOME/.virtualenvs"
-export PROJECT_HOME="$HOME/Workspace"
-VIRTUAL_ENV_DISABLE_PROMPT=1
-source "$HOME/.local/bin/virtualenvwrapper.sh"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+source "$HOME/.pyenv/completions/pyenv.zsh"

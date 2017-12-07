@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Based on https://stat.ethz.ch/pipermail/r-sig-debian/2012-August/001937.html
-
-export R_LIBS_SITE=${R_LIBS_SITE-'/usr/lib/R-devel/lib/R/library:/usr/local/lib/R/site-library:/usr/lib/R/site-library::/usr/lib/R/library'}
-export PATH="/usr/local/lib/R-devel/bin:$PATH"
-R "$@"
