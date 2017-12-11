@@ -19,6 +19,7 @@ def all(force=False):
 
 def apt(force=False):
     keys = [
+        '1397BC53640DB551', # google-chrome
         '251104D968854915', # pypy
         '51716619E084DAB9', # cran
         '6A0344470F68ADCA', # gnome-encfs-manager
