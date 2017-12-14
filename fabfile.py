@@ -62,6 +62,7 @@ def others(force=False):
         'google-talkplugin',
         'keepass2',
         'spotify-client',
+        'vlc',
     ]
     _apt_get_install(*packages)
 
