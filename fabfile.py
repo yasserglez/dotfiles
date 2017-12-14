@@ -23,6 +23,7 @@ def apt(force=False):
         '251104D968854915', # pypy
         '51716619E084DAB9', # cran
         '6A0344470F68ADCA', # gnome-encfs-manager
+        '7EA0A9C3F273FCD8', # docker
         '99E82A75642AC823', # sbt
         'A6A19B38D3D831EF', # mono
         'C2518248EEA14886', # oracle-java
