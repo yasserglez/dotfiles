@@ -190,6 +190,7 @@ def terminal(force=False):
         'build-essential',
         'curl',
         'htop',
+        'tree',
         'wget',
     ]
     _apt_get_install(*packages)
