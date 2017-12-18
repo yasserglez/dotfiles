@@ -7,6 +7,7 @@ from fabric.contrib.console import confirm
 def all(force=False):
     apt(force)
     terminal(force)
+    bin(force)
     git(force)
     python(force)
     R(force)
@@ -55,14 +56,21 @@ def emacs(force=False):
 
 def others(force=False):
     packages = [
+        'audacity',
+        'build-essential',
+        'curl',
         'dropbox',
+        'easytag',
         'gnome-encfs-manager',
         'gnucash',
         'google-chrome-stable',
         'google-talkplugin',
+        'htop',
         'keepass2',
         'spotify-client',
+        'tree',
         'vlc',
+        'wget',
     ]
     _apt_get_install(*packages)
 
@@ -146,6 +154,16 @@ def java(force=False):
     _apt_get_install('oracle-java8-set-default')
 
 
+def bin(force=False):
+    local_bin = '~/.local/bin'
+    local('mkdir -p {}'.format(local_bin))
+    for bin_file in os.listdir('bin'):
+        bin_path = os.path.join(local_bin, bin_file)
+        if force or _can_overwrite(bin_path):
+            with lcd('bin'):
+                local('ln -sf $PWD/{} {}'.format(bin_file, bin_path))
+
+
 def terminal(force=False):
     _apt_get_install('zsh')
     local('chsh -s /usr/bin/zsh')
@@ -160,14 +178,6 @@ def terminal(force=False):
             if force or _can_overwrite('~/.{}'.format(dotfile)):
                 local('rm -f ~/.{}'.format(dotfile))
                 local('ln -sf $PWD/{0} ~/.{0}'.format(dotfile))
-
-    local_bin = '~/.local/bin'
-    local('mkdir -p {}'.format(local_bin))
-    for bin_file in os.listdir('bin'):
-        bin_path = os.path.join(local_bin, bin_file)
-        if force or _can_overwrite(bin_path):
-            with lcd('bin'):
-                local('ln -sf $PWD/{} {}'.format(bin_file, bin_path))
 
     # gnome-terminal:
     _apt_get_install('gnome-terminal', 'dconf-cli')
@@ -185,15 +195,6 @@ def terminal(force=False):
     if force or _can_overwrite('~/.dir_colors'):
         with lcd(git_repo_dir):
             local('ln -sf $PWD/dircolors.ansi-dark ~/.dir_colors')
-
-    packages = [
-        'build-essential',
-        'curl',
-        'htop',
-        'tree',
-        'wget',
-    ]
-    _apt_get_install(*packages)
 
 
 def _can_overwrite(file_or_dir):
