@@ -3,12 +3,11 @@
 * About
 
 Emacs configuration file in Org-mode format. =~/.emacs.d/init.el=
-simply loads the Emacs Lisp code in this file using Org-babel:
+loads the Emacs Lisp code in this file using Org-babel:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (require 'package)
   (setq package-enable-at-startup nil)
-  (package-initialize)
 
   (require 'org)
   (setq vc-follow-symlinks nil)
@@ -20,7 +19,7 @@ simply loads the Emacs Lisp code in this file using Org-babel:
 an ELPA archive. =package-enable-at-startup= is set to =nil= to avoid
 loading the packages again after processing the init file.
 
-* Package management
+* Packages
 
 Emacs' built-in =package.el= is used for package management with the
 GNU and MELPA repositories (and also other package-specific repositories).
@@ -32,15 +31,16 @@ GNU and MELPA repositories (and also other package-specific repositories).
           ("org" . "http://orgmode.org/elpa/")))
 #+END_SRC
 
-Keep a list of packages that are frequently used so they can be easily
-installed with =my-install-base-packages=.
+Keep a list of base packages so they can be easily installed with
+=my-install-based-packages=. =org-plus-contrib= must be installed
+separately after starting Emacs with =emacs -q=, otherwise the
+Org-mode installation breaks.
 
 #+BEGIN_SRC emacs-lisp
   (defvar my-base-packages
     '(alert
       bind-key
       exec-path-from-shell
-      org-plus-contrib
       org-pomodoro
       solarized-theme))
 
@@ -52,7 +52,7 @@ installed with =my-install-base-packages=.
         (package-install package))))
 #+END_SRC
 
-* Set =exec-path= from =$PATH=
+Set =exec-path= from =$PATH=.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'exec-path-from-shell)
@@ -68,13 +68,15 @@ Settings related with Emacs' appearance.
 
 #+BEGIN_SRC emacs-lisp
   (require 'uniquify)
+
   (setq frame-title-format "%b"
         uniquify-buffer-name-style 'forward)
 #+END_SRC
 
-** Hide the the toolbar and the scrollbars
+** Hide the the menubar, toolbar and the scrollbars
 
 #+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
 #+END_SRC
@@ -147,7 +149,7 @@ text-mode buffers and =flyspell-prog-mode= in all programming-mode buffers.
 
 * Org-mode
 
-I use a task management system based on David Allen's [[http://gettingthingsdone.com/][GTD methodology]].
+Task management system based on David Allen's [[http://gettingthingsdone.com/][GTD methodology]].
 Configuration ideas were borrowed from [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] and [[http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/][John Wiegley]].
 
 ** Task states
@@ -182,8 +184,8 @@ every time a task transitions form one state to another (hence the
 
 ** Agenda
 
-=inbox.org= is used for capturing tasks (with capture templates and a
-few [[https://ifttt.com][IFTTT]] recipes that append content to the file). I keep separate
+=inbox.org= is used for capturing tasks (via capture templates and a
+few [[https://ifttt.com][IFTTT]] recipes that append content to that file). I keep separate
 files for the different projects I'm working on (basically containing
 headers for tasks and reference materials). Each file has a =#+FILETAGS=
 header so it is easier to filter tasks for a particular project using
@@ -319,7 +321,7 @@ Set the duration of the pomodoro.
 
 Configure the notifications: disable sounds, configure the modeline,
 show only the minutes remaining on the timer (I find the ticking
-seconds to be quite distracting), and use desktop notifications.
+seconds distracting), and use desktop notifications.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-pomodoro-play-sounds nil
@@ -396,13 +398,13 @@ Support encrypting individual entries using Org-crypt.
   (setq org-crypt-key "97DF6096")
 
   ;; Encrypted entries are marked with the private tag. Excluding the
-  ;; private tag from inheritance prevents already encrypted text being
-  ;; encrypted again.
+  ;; private tag from inheritance prevents text already encrypted from
+  ;; being encrypted again.
   (setq org-crypt-tag-matcher "private")
   (setq org-tags-exclude-from-inheritance '("private"))
 #+END_SRC
 
-** Miscellaneous
+** Misc
 
 *** Associate Org-mode with .org and.org_archive files
 
@@ -445,6 +447,32 @@ This is used in combination with the =bin/org-sync= shell script.
   (bind-key* "C-c l" 'org-store-link)
 #+END_SRC
 
+* Python
+
+Elpy is used for Python development. The following Python packages
+must be installed using =pip=:
+
+#+BEGIN_SRC sh :tangle no
+  pip install jedi flake8 autopep8
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (when (package-installed-p 'elpy)
+    (setq elpy-modules '(elpy-module-sane-defaults
+                         elpy-module-company
+                         elpy-module-eldoc
+                         elpy-module-flymake
+                         elpy-module-pyvenv))
+    (elpy-enable)
+    ;; Use Jupyter as the interactive interpreter
+    (setq python-shell-interpreter "jupyter"
+          python-shell-interpreter-args "console --simple-prompt")
+    ;; Integrate pyenv virtualenvs
+    (setenv "WORKON_HOME" "~/.pyenv/versions/")
+    (defalias 'pyenv-activate 'pyvenv-workon)
+    (defalias 'pyenv-deactivate 'pyvenv-deactivate))
+#+END_SRC
+
 * Git
 
 Git integration using Magit.
@@ -459,7 +487,7 @@ Git integration using Magit.
     (bind-key* "C-c g" 'magit-status))
 #+END_SRC
 
-* Miscellaneous
+* Misc
 
 Settings that don't fit in any previous category.
 

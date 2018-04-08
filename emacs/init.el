@@ -5,7 +5,6 @@
 
 (require 'package)
 (setq package-enable-at-startup nil)
-(package-initialize)
 
 (require 'org)
 (setq vc-follow-symlinks nil)

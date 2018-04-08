@@ -13,7 +13,7 @@ fi
 # Executable files
 #
 
-export PATH="$HOME/.local/bin:$HOME/.pyenv/bin:/usr/local/sbin:/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:$PATH"
 
 #
 # Temporary files

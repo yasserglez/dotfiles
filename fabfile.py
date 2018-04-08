@@ -30,6 +30,7 @@ def apt(force=False):
         'C2518248EEA14886', # oracle-java
         'EFDC8610341D9410', # spotify
         'FC918B335044912E', # dropbox
+        '062D648FD62FCE72', # emacs
     ]
     for key in keys:
         local('sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv {}'.format(key))
@@ -44,7 +45,7 @@ def apt(force=False):
 
 
 def emacs(force=False):
-    _apt_get_install('emacs')
+    _apt_get_install('emacs-snapshot')
     if force or _can_overwrite('~/.emacs.d'):
         local('rm -fr ~/.emacs.d')
         local('mkdir -p ~/.emacs.d')
