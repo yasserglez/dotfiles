@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+
+import os
+import pprint
+import argparse
+import collections
+import datetime
+import random
+
+import spotipy
+import spotipy.util
+
+
+CLIENT_ID = ''
+CLIENT_SECRET = ''
+REDIRECT_URI = 'http://localhost/'
+SCOPES = 'user-library-read playlist-read-private playlist-modify-private'
+
+
+def get_playlist_id(spotify, playlist_name):
+    results = spotify.current_user_playlists()
+    while results:
+        for playlist in results['items']:
+            if playlist['name'] == playlist_name:
+                return playlist['id']
+        results = spotify.next(results) if results['next'] else None
+
+
+def get_saved_tracks(spotify):
+    tracks = set()
+    results = spotify.current_user_saved_tracks()
+    while results:
+        for item in results['items']:
+            tracks.add(item['track']['id'])
+        results = spotify.next(results) if results['next'] else None
+    return tracks
+
+
+def main():
+    desc = "Populate a playlist with random sample of the user's saved tracks."
+    parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('--username', metavar='USERNAME', required=True, help='Spotify username')
+    parser.add_argument('--playlist', metavar='NAME', required=True, help='Spotify playlist name')
+    parser.add_argument('--songs', metavar='NUMBER', type=int, default=10, help='Number of randomly sampled songs')
+    args = parser.parse_args()
+
+    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'randomize-playlist.txt')
+    token = spotipy.util.prompt_for_user_token(args.username, SCOPES,
+        client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI, cache_path=cache_path)
+    spotify = spotipy.Spotify(auth=token)
+
+    playlist_id = get_playlist_id(spotify, args.playlist)
+    if not playlist_id:
+        raise ValueError('Invalid playlist name')
+
+    saved_tracks = get_saved_tracks(spotify)
+    selected_tracks = random.sample(saved_tracks, args.songs)
+
+    spotify.user_playlist_replace_tracks(args.username, playlist_id, selected_tracks)
+
+
+if __name__ == '__main__':
+    main()
