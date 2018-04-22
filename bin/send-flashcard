@@ -36,7 +36,7 @@ def main():
     msg['Subject'] = 'ML Flashcard: ' + name
     with open(os.path.join(args.dir, selected_image)) as f:
         msg.attach(MIMEImage(f.read(), name=selected_image))
-    server.sendmail(args.sender, args.recipient, msg.as_string())
+    server.sendmail(args.sender, args.recipient.split(','), msg.as_string())
 
 
 if __name__ == '__main__':
