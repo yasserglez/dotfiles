@@ -479,10 +479,8 @@ Git integration using Magit.
 
 #+BEGIN_SRC emacs-lisp
   (when (package-installed-p 'magit)
-    ;; vc-git no longer needed.
-    (delete 'Git vc-handled-backends)
-    ;; Don't show " MRev" in modeline.
-    (setq magit-auto-revert-mode-lighter "")
+    ;; VC no longer needed.
+    (setq vc-handled-backends nil)
     ;; Bind a global key to magit-status.
     (bind-key* "C-c g" 'magit-status))
 #+END_SRC
@@ -517,6 +515,12 @@ Based on [[http://www.masteringemacs.org/article/disabling-prompts-emacs][Disabl
 #+BEGIN_SRC emacs-lisp
   (setq auto-save-default nil)
   (setq make-backup-files nil)
+#+END_SRC
+
+** Move between windows using the arrow keys
+
+#+BEGIN_SRC emacs-lisp
+  (windmove-default-keybindings)
 #+END_SRC
 
 ** End sentences with one space
