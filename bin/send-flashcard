@@ -31,12 +31,13 @@ def main():
 
     msg = MIMEMultipart()
     msg['From'] = args.sender
-    msg['To'] = args.recipient
+    msg['To'] = args.sender
     name = ' '.join(selected_image.split('_')[:-1])
     msg['Subject'] = 'ML Flashcard: ' + name
+    recipients = [args.sender] + args.recipient.split(',')
     with open(os.path.join(args.dir, selected_image)) as f:
         msg.attach(MIMEImage(f.read(), name=selected_image))
-    server.sendmail(args.sender, args.recipient.split(','), msg.as_string())
+    server.sendmail(args.sender, recipients, msg.as_string())
 
 
 if __name__ == '__main__':
