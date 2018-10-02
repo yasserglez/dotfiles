@@ -1,6 +1,10 @@
-deb http://ca.archive.ubuntu.com/ubuntu/ xenial main universe restricted multiverse
-deb http://security.ubuntu.com/ubuntu/ xenial-security universe restricted multiverse main
-deb http://ca.archive.ubuntu.com/ubuntu/ xenial-updates universe restricted multiverse main
-deb http://ca.archive.ubuntu.com/ubuntu/ xenial-backports universe restricted multiverse main
-deb http://ca.archive.ubuntu.com/ubuntu/ xenial-proposed universe restricted multiverse main
-deb http://archive.canonical.com/ xenial partner
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic main restricted
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic-updates main restricted
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic universe
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic-updates universe
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic multiverse
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic-updates multiverse
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic-backports main restricted universe multiverse
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic-security main restricted
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic-security universe
+deb http://ubuntu.mirror.rafal.ca/ubuntu/ bionic-security multiverse

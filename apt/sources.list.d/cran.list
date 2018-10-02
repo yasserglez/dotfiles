@@ -1,1 +1,2 @@
-deb http://cloud.r-project.org/bin/linux/ubuntu xenial/
+deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/
+

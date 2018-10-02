@@ -11,7 +11,6 @@ def all(force=False):
     git(force)
     python(force)
     R(force)
-    java(force)
     gedit(force)
     vim(force)
     emacs(force)
@@ -19,22 +18,6 @@ def all(force=False):
 
 
 def apt(force=False):
-    keys = [
-        '1397BC53640DB551', # google-chrome
-        '251104D968854915', # pypy
-        '51716619E084DAB9', # cran
-        '6A0344470F68ADCA', # gnome-encfs-manager
-        '7EA0A9C3F273FCD8', # docker
-        '99E82A75642AC823', # sbt
-        'A6A19B38D3D831EF', # mono
-        'C2518248EEA14886', # oracle-java
-        'EFDC8610341D9410', # spotify
-        'FC918B335044912E', # dropbox
-        '062D648FD62FCE72', # emacs
-    ]
-    for key in keys:
-        local('sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv {}'.format(key))
-
     with lcd('apt'):
         if force or _can_overwrite('/etc/apt/sources.list'):
             local('sudo ln -sf $PWD/sources.list /etc/apt/sources.list')
@@ -60,15 +43,12 @@ def others(force=False):
         'audacity',
         'build-essential',
         'curl',
-        'dropbox',
         'easytag',
         'gnome-encfs-manager',
         'gnucash',
         'google-chrome-stable',
         'google-talkplugin',
         'htop',
-        'keepass2',
-        'spotify-client',
         'tree',
         'vlc',
         'wget',
@@ -148,11 +128,6 @@ def vim(force=False):
         _git_pull_or_clone(git_repo, git_repo_dir)
         with lcd('vim'):
             local('ln -sf $PWD/vundle ~/.vim/vundle')
-
-
-def java(force=False):
-    _apt_get_install('oracle-java8-installer')
-    _apt_get_install('oracle-java8-set-default')
 
 
 def bin(force=False):
