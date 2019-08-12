@@ -3,7 +3,7 @@
 * About
 
 Emacs configuration file in Org-mode format. =~/.emacs.d/init.el=
-loads the Emacs Lisp code in this file using Org-babel:
+loads this file using Org-babel:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (require 'package)
@@ -15,14 +15,13 @@ loads the Emacs Lisp code in this file using Org-babel:
   (org-babel-load-file my-config-file)
 #+END_SRC
 
-=package.el= is loaded first to support using Org-mode installed from
-an ELPA archive. =package-enable-at-startup= is set to =nil= to avoid
-loading the packages again after processing the init file.
+=package.el= is loaded first to support Org-mode installed from an
+ELPA archive. =package-enable-at-startup= is set to =nil= to avoid
+loading the packages again after the init file is processed.
 
 * Packages
 
-Emacs' built-in =package.el= is used for package management with the
-GNU and MELPA repositories (and also other package-specific repositories).
+Emacs' built-in =package.el= is used for package management.
 
 #+BEGIN_SRC emacs-lisp
   (setq package-archives
@@ -31,10 +30,10 @@ GNU and MELPA repositories (and also other package-specific repositories).
           ("org" . "http://orgmode.org/elpa/")))
 #+END_SRC
 
-Keep a list of base packages so they can be easily installed with
-=my-install-based-packages=. =org-plus-contrib= must be installed
-separately after starting Emacs with =emacs -q=, otherwise the
-Org-mode installation breaks.
+Keep a list of packages that can be installed by calling
+=my-install-base-packages=. =org-plus-contrib= must be installed
+separately after starting Emacs with =emacs -q=; otherwise,
+Org-mode will break.
 
 #+BEGIN_SRC emacs-lisp
   (defvar my-base-packages
@@ -184,12 +183,12 @@ every time a task transitions form one state to another (hence the
 
 ** Agenda
 
-=inbox.org= is used for capturing tasks (via capture templates and a
-few [[https://ifttt.com][IFTTT]] recipes that append content to that file). I keep separate
-files for the different projects I'm working on (basically containing
-headers for tasks and reference materials). Each file has a =#+FILETAGS=
-header so it is easier to filter tasks for a particular project using
-tags in the agenda.
+=inbox.org= is used for capturing tasks (via capture templates and
+[[https://ifttt.com][IFTTT]] recipes that append content to that file). I keep separate files
+for the different projects I'm working on (containing tasks and
+reference materials). Each file has a =#+FILETAGS= header so that it
+is easy to filter tasks belonging to a particular project using tags
+in the agenda.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-files '("~/Dropbox/org/"))
