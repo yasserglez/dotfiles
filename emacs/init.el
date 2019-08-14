@@ -87,6 +87,12 @@
   (yas-global-mode))
 
 
+;; YAML
+(use-package yaml-mode
+  :mode (("\\.yml\\'" . yaml-mode)
+         ("\\.yaml\\'" . yaml-mode)))
+
+
 ;;; Syntax Checking
 
 (use-package flycheck
