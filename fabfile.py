@@ -13,7 +13,6 @@ def all(force=False):
     R(force)
     gedit(force)
     vim(force)
-    emacs(force)
     others(force)
 
 
@@ -25,17 +24,6 @@ def apt(force=False):
             local('sudo rm -fr /etc/apt/sources.list.d')
             local('sudo ln -s $PWD/sources.list.d /etc/apt/sources.list.d')
     _apt_get_update()
-
-
-def emacs(force=False):
-    _apt_get_install('emacs-snapshot')
-    if force or _can_overwrite('~/.emacs.d'):
-        local('rm -fr ~/.emacs.d')
-        local('mkdir -p ~/.emacs.d')
-        with lcd('emacs'):
-            local('ln -s $PWD/init.el ~/.emacs.d/init.el')
-            local('ln -s $PWD/config.org ~/.emacs.d/config.org')
-            local('ln -s $PWD/aspell.pws ~/.emacs.d/aspell.pws')
 
 
 def others(force=False):
