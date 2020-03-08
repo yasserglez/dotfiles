@@ -142,6 +142,9 @@
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 
+;; Enable global auto-revert mode
+(global-auto-revert-mode t)
+
 ;; Move between windows using the arrow keys
 (windmove-default-keybindings)
 
