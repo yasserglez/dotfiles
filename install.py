@@ -149,7 +149,7 @@ def install_terminal():
         os.system('./install.sh -s dark -p Default')
 
 
-def install_dircolos():
+def install_dircolors():
     _apt_get_install('coreutils')
     git_repo = 'https://github.com/seebi/dircolors-solarized'
     git_repo_dir = f'{DOTFILES_DIR}/solarized/dircolors-solarized'
