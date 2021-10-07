@@ -1,4 +1,4 @@
-;;; Task Management based on David Allen's GTD Methodology
+;;; Task Management based on GTD
 
 (use-package org
   :ensure org-plus-contrib
@@ -12,6 +12,8 @@
   (defun my-org-agenda-tasks (&optional arg)
     (interactive "P")
     (org-agenda arg "ct"))
+  :init
+  (setq org-modules '(org-checklist org-habit))
   :mode (("\\.org\\'" . org-mode)
          ("\\.org_archive\\'" . org-mode))
   :bind* (("C-c a" . org-agenda)
@@ -22,15 +24,14 @@
           ("<f11>" . my-org-agenda-today)
           ("<f12>" . my-org-agenda-next-week)))
 
-;; Tasks marked as TODO are things I've committed to work on -- i.e.
-;; next actions in GTD. TODO tasks may have an associated date or time
-;; (for appointments, etc), or sometimes I schedule them to be done on
-;; a particular day during the weekly review. Tasks marked as MAYBE
-;; are things I might want to do in the future – i.e. someday/maybes
-;; in GTD. MAYBE tasks generally turn into TODO tasks when I decide to
-;; work on them. TODO tasks can be resolved by marking them as DONE or
-;; REF. Tasks marked as DONE can be archived, while REF tasks may be
-;; relevant for future reference.
+;; Tasks marked as TODO are next actions in GTD. TODO tasks may have
+;; an associated date or time (for appointments, etc), or I schedule
+;; them to be done on a particular day during the weekly review. Tasks
+;; marked as MAYBE are things I may want to do in the future – i.e.
+;; someday/maybe in GTD. MAYBE tasks turn into TODO tasks when I
+;; decide to work on them. TODO tasks can be resolved by marking them
+;; as DONE or REF. Tasks marked as DONE can be archived, while REF
+;; tasks may be relevant for future reference.
 
 (setq org-use-fast-todo-selection t)
 (setq org-todo-keywords
@@ -47,10 +48,10 @@
 
 ;; inbox.org is used for capturing tasks (via capture templates and a
 ;; few IFTTT recipes that append content to that file). I keep
-;; separate files for the different projects I'm working on
-;; (containing headers for tasks and reference materials). Each file
-;; has a #+FILETAGS header so it is easier to filter tasks for a
-;; particular project using tags in the agenda.
+;; separate files for the different projects (containing headers for
+;; tasks and reference materials). Each file has a #+FILETAGS header
+;; so it is easier to filter tasks for a particular project using tags
+;; in the agenda.
 
 (setq org-agenda-files '("~/Dropbox/org/"))
 
@@ -89,36 +90,16 @@
          ((org-agenda-overriding-header "Unscheduled tasks: ")
           (org-agenda-skip-function '(org-agenda-skip-subtree-if 'timestamp))))))
 
-;; Pomodoro technique
+;; Habits
 
-(use-package org-pomodoro
-  :bind* ("<f5>" . org-pomodoro)
-  :config
-  ;; Set the duration of the pomodoro.
-  (setq org-pomodoro-length 25
-	org-pomodoro-long-break-frequency 4
-	org-pomodoro-short-break-length 3
-	org-pomodoro-long-break-length 15)
-
-  ;; Configure the notifications: disable sounds, configure the
-  ;; modeline, show only the minutes remaining on the timer (I find
-  ;; the ticking seconds distracting), and use desktop notifications.
-  (setq org-pomodoro-play-sounds nil
-	org-pomodoro-format "Pomodoro %s"
-	org-pomodoro-short-break-format "Short Break %s"
-	org-pomodoro-long-break-format "Long Break %s")
-
-  (set-face-foreground 'org-pomodoro-mode-line
-                       (face-attribute 'mode-line :foreground))
-  (set-face-foreground 'org-pomodoro-mode-line-break
-                       (face-attribute 'mode-line :foreground))
-
-  :preface
-  (defun org-pomodoro-format-seconds ()
-    (format-seconds org-pomodoro-time-format
-                    (* 60 (ceiling org-pomodoro-countdown 60))))
-  (defun org-pomodoro-notify (title message)
-    (alert message :title title)))
+(setq org-habit-graph-column 40)
+(setq org-habit-preceding-days 14)
+(setq org-habit-following-days 7)
+(setq org-habit-show-done-always-green t)
+;; Show habits for future days
+(setq org-habit-show-habits-only-for-today nil)
+;; Only show scheduled habits
+(setq org-habit-show-all-today nil)
 
 ;; Holidays
 
