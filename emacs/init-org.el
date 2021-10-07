@@ -96,8 +96,7 @@
 (setq org-habit-preceding-days 14)
 (setq org-habit-following-days 7)
 (setq org-habit-show-done-always-green t)
-;; Show habits for future days
-(setq org-habit-show-habits-only-for-today nil)
+(setq org-habit-show-habits-only-for-today t)
 ;; Only show scheduled habits
 (setq org-habit-show-all-today nil)
 
