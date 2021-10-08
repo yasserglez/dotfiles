@@ -92,12 +92,13 @@
 
 ;; Habits
 
-(setq org-habit-graph-column 40)
 (setq org-habit-preceding-days 14)
-(setq org-habit-following-days 7)
+(setq org-habit-following-days 1)
+(setq org-habit-graph-column 40)
+(setq org-habit-completed-glyph ?x)
+(setq org-habit-today-glyph ? )
 (setq org-habit-show-done-always-green t)
 (setq org-habit-show-habits-only-for-today t)
-;; Only show scheduled habits
 (setq org-habit-show-all-today nil)
 
 ;; Holidays
