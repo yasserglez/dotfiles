@@ -92,14 +92,20 @@
 
 ;; Habits
 
+(require 'org-habit)
+
 (setq org-habit-preceding-days 14)
 (setq org-habit-following-days 1)
+(setq org-habit-show-habits-only-for-today t)
+(setq org-habit-show-all-today nil)
+
 (setq org-habit-graph-column 40)
 (setq org-habit-completed-glyph ?x)
 (setq org-habit-today-glyph ? )
 (setq org-habit-show-done-always-green t)
-(setq org-habit-show-habits-only-for-today t)
-(setq org-habit-show-all-today nil)
+(set-face-attribute 'org-habit-clear-face nil
+                    :foreground "#859900"
+                    :background "#5b7300")
 
 ;; Holidays
 
