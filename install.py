@@ -19,9 +19,13 @@ def _chdir(dir_path):
     os.chdir(dir_path)
 
 
-def _apt_get_install(*packages):
+def _brew_install(*packages):
     for pkg in packages:
-        os.system(f'sudo apt-get install --yes {pkg}')
+        os.system(f'brew install {pkg}')
+
+def _brew_install_cask(*packages):
+    for pkg in packages:
+        os.system(f'brew install --cask {pkg}')
 
 
 def _rm_confirm(path):
@@ -40,6 +44,7 @@ def _git_pull_or_clone(git_repo, git_repo_dir):
 
 
 def install_emacs():
+    _brew_install_cask('emacs')
     src_dir = f'{DOTFILES_DIR}/emacs'
     dest_dir = f'{HOME_DIR}/.emacs.d'
     _rm_confirm(dest_dir)
@@ -49,7 +54,7 @@ def install_emacs():
 
 
 def install_vim():
-    _apt_get_install('git', 'vim-nox')
+    _brew_install('git', 'vimx')
 
     src_file = f'{DOTFILES_DIR}/vim/vimrc'
     dest_file = f'{HOME_DIR}/.vimrc'
@@ -66,31 +71,11 @@ def install_vim():
 
 
 def install_python():
-    _apt_get_install(
-        'build-essential',
-        'curl',
-        'libffi-dev',
-        'libsqlite3-dev',
-        'libssl-dev',
-        'python',
-        'python-dev',
-        'python-pip')
-    os.system('curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash')
-
-
-def install_R():
-    _apt_get_install('r-base', 'r-base-dev')
-
-    os.system('mkdir -p ~/.local/lib/R/library')
-
-    src_file = f'{DOTFILES_DIR}/R/Rprofile'
-    dest_file = f'{HOME_DIR}/.Rprofile'
-    _rm_confirm(dest_file)
-    os.symlink(src_file, dest_file)
+    _brew_install('pyenv')
 
 
 def install_git():
-    _apt_get_install('git')
+    _brew_install('git')
 
     src_file = f'{DOTFILES_DIR}/git/gitconfig'
     dest_file = f'{HOME_DIR}/.gitconfig'
@@ -104,15 +89,10 @@ def install_git():
     _git_pull_or_clone(git_repo, git_repo_dir)
     with _chdir(git_repo_dir):
         templates = [
-            'Global/Linux',
+            'Global/macOS',
             'Global/Vim',
             'Global/Emacs',
             'Python',
-            'R',
-            'C',
-            'C++',
-            'Java',
-            'Scala',
             'TeX',
         ]
         for template in templates:
@@ -120,7 +100,7 @@ def install_git():
 
 
 def install_zsh():
-    _apt_get_install('zsh')
+    _brew_install('zsh')
     os.system('chsh -s /usr/bin/zsh')
 
     git_repo = 'https://github.com/sorin-ionescu/prezto'
@@ -140,31 +120,14 @@ def install_zsh():
         _rm_confirm(dest_file)
         os.symlink(src_file, dest_file)
 
-def install_terminal():
-    _apt_get_install('gnome-terminal', 'dconf-cli')
-    git_repo = 'https://github.com/anthony25/gnome-terminal-colors-solarized'
-    git_repo_dir = f'{DOTFILES_DIR}/solarized/gnome-terminal-colors-solarized'
-    _git_pull_or_clone(git_repo, git_repo_dir)
-    with _chdir(git_repo_dir):
-        os.system('./install.sh -s dark -p Default')
-
-
 def install_dircolors():
-    _apt_get_install('coreutils')
+    _brew_install('coreutils')
     git_repo = 'https://github.com/seebi/dircolors-solarized'
     git_repo_dir = f'{DOTFILES_DIR}/solarized/dircolors-solarized'
     _git_pull_or_clone(git_repo, git_repo_dir)
-    _rm_confirm(f'{HOME_DIR}/.dir_colors')
+    _rm_confirm(f'{HOME_DIR}/.dircolors')
     os.symlink(f'{git_repo_dir}/dircolors.ansi-dark',
-               f'{HOME_DIR}/.dir_colors')
-
-def install_bin():
-    local_bin = f'{HOME_DIR}/.local/bin'
-    os.system('mkdir -p {}'.format(local_bin))
-    for bin_file in os.listdir('bin'):
-        bin_path = os.path.join(local_bin, bin_file)
-        _rm_confirm(bin_path)
-        os.symlink(f'{DOTFILES_DIR}/bin/{bin_file}', bin_path)
+               f'{HOME_DIR}/.dircolors')
 
 
 if __name__ == '__main__':

@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-PDF=$1
-cp "${PDF}" input.pdf
-qpdf --linearize input.pdf tmp.pdf
-exiftool -all:all= tmp.pdf
-qpdf --linearize tmp.pdf output.pdf
-cp output.pdf "${PDF}"
-rm -f input.pdf tmp.pdf tmp.pdf_original output.pdf
