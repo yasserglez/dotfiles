@@ -46,17 +46,16 @@
 (setq org-log-reschedule 'time)
 (setq org-log-repeat 'time)
 
-;; inbox.org is used for capturing tasks (via capture templates and a
-;; few IFTTT recipes that append content to that file). I keep
-;; separate files for the different projects (containing headers for
-;; tasks and reference materials). Each file has a #+FILETAGS header
-;; so it is easier to filter tasks for a particular project using tags
-;; in the agenda.
+;; inbox.org is used for capturing tasks. I keep separate files 
+;; for the different projects (containing headers for tasks 
+;; and reference materials). Each file has a #+FILETAGS header
+;; so it is easier to filter tasks for a particular project using
+;; tags in the agenda.
 
-(setq org-agenda-files '("~/Dropbox/org/"))
+(setq org-agenda-files '("~/org/"))
 
-(setq org-directory "~/Dropbox/org/")
-(setq org-default-notes-file "~/Dropbox/org/inbox.org")
+(setq org-directory "~/org/")
+(setq org-default-notes-file "~/org/inbox.org")
 
 (setq org-capture-templates
       '(("t" "Task" entry (file "")

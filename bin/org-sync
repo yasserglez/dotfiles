@@ -3,10 +3,7 @@
 # Add a cron task to be run at every hour
 # 0 * * * * ~/.local/bin/org-sync >/dev/null
 
-cd ~/Dropbox/org/
-
-# Pull tasks from IFTTT
-cat inbox.txt >> inbox.org && cat /dev/null > inbox.txt
+cd ~/org/
 
 # Based on http://doc.norang.ca/org-mode.html#GitSync
 git ls-files --deleted -z | xargs -0 git rm >/dev/null 2>&1
