@@ -28,14 +28,13 @@
 ;; an associated date or time (for appointments, etc), or I schedule
 ;; them to be done on a particular day during the weekly review. Tasks
 ;; marked as MAYBE are things I may want to do in the future – i.e.
-;; someday/maybe in GTD. MAYBE tasks turn into TODO tasks when I
-;; decide to work on them. TODO tasks can be resolved by marking them
-;; as DONE or REF. Tasks marked as DONE can be archived, while REF
-;; tasks may be relevant for future reference.
+;; someday/maybe in GTD. MAYBE tasks turn into one or more TODO tasks
+;; when I decide to work on them. TODO tasks can be resolved by marking
+;; them as DONE. DONE tasks are archived every couple of months.
 
 (setq org-use-fast-todo-selection t)
 (setq org-todo-keywords
-      '((sequence "TODO(t!)" "MAYBE(m!)" "|" "DONE(d!)" "REF(r!)")))
+      '((sequence "TODO(t!)" "MAYBE(m!)" "|" "DONE(d!)")))
 
 ;; Task state changes are logged into a drawer. A timestamp is added
 ;; every time a task transitions form one state to another.
@@ -46,11 +45,9 @@
 (setq org-log-reschedule 'time)
 (setq org-log-repeat 'time)
 
-;; inbox.org is used for capturing tasks. I keep separate files
-;; for the different projects (containing headers for tasks
-;; and reference materials). Each file has a #+FILETAGS header
-;; so it is easier to filter tasks for a particular project using
-;; tags in the agenda.
+;; inbox.org is used for capturing tasks. I keep separate files for
+;; each project. Each file has a #+FILETAGS header so it is easier to
+;; filter tasks for a particular project using tags in the agenda.
 
 (setq org-agenda-files '("~/org/"))
 
@@ -59,10 +56,9 @@
 
 (setq org-capture-templates
       '(("t" "Task" entry (file "")
-         "* TODO %?\n  :LOGBOOK:\n  - State \"TODO\"                         %U\n  :END:")
-        ("r" "Reference" entry (file "")
-         "* REF %?\n  :LOGBOOK:\n  - State \"REF\"                    %U\n  :END:")))
+         "* TODO %?\n  :LOGBOOK:\n  - State \"TODO\"                         %U\n  :END:")))
 
+(setq org-refile-use-outline-path 'file)
 (setq org-refile-targets '((org-agenda-files :level . 1)))
 
 ;; Configure a group of agenda views and key bindings for quick access.
