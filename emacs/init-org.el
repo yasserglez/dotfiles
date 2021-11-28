@@ -13,7 +13,7 @@
     (interactive "P")
     (org-agenda arg "ct"))
   :init
-  (setq org-modules '(org-checklist org-habit))
+  (setq org-modules '(org-checklist))
   :mode (("\\.org\\'" . org-mode)
          ("\\.org_archive\\'" . org-mode))
   :bind* (("C-c a" . org-agenda)
@@ -46,8 +46,8 @@
 (setq org-log-reschedule 'time)
 (setq org-log-repeat 'time)
 
-;; inbox.org is used for capturing tasks. I keep separate files 
-;; for the different projects (containing headers for tasks 
+;; inbox.org is used for capturing tasks. I keep separate files
+;; for the different projects (containing headers for tasks
 ;; and reference materials). Each file has a #+FILETAGS header
 ;; so it is easier to filter tasks for a particular project using
 ;; tags in the agenda.
@@ -88,23 +88,6 @@
         ("ct" "Unscheduled tasks" todo "TODO"
          ((org-agenda-overriding-header "Unscheduled tasks: ")
           (org-agenda-skip-function '(org-agenda-skip-subtree-if 'timestamp))))))
-
-;; Habits
-
-(require 'org-habit)
-
-(setq org-habit-preceding-days 14)
-(setq org-habit-following-days 1)
-(setq org-habit-show-habits-only-for-today t)
-(setq org-habit-show-all-today nil)
-
-(setq org-habit-graph-column 40)
-(setq org-habit-completed-glyph ?x)
-(setq org-habit-today-glyph ? )
-(setq org-habit-show-done-always-green t)
-(set-face-attribute 'org-habit-clear-face nil
-                    :foreground "#859900"
-                    :background "#5b7300")
 
 ;; Holidays
 
