@@ -114,22 +114,6 @@
       (append holiday-local-holidays
               holiday-other-holidays))
 
-;; Encryption
-
-(require 'org-crypt)
-
-;; Use a hook to automatically encrypt entries before a file is saved
-(org-crypt-use-before-save-magic)
-
-;; GPG key used for encryption
-(setq org-crypt-key "97DF6096")
-
-;; Encrypted entries are marked with the private tag. Excluding the
-;; private tag from inheritance prevents text already encrypted from
-;; being encrypted again.
-(setq org-crypt-tag-matcher "private")
-(setq org-tags-exclude-from-inheritance '("private"))
-
 ;; Misc
 
 ;; Save all Org-mode buffers at one minute before the hour
