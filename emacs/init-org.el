@@ -49,13 +49,11 @@
 ;; each project. Each file has a #+FILETAGS header so it is easier to
 ;; filter tasks for a particular project using tags in the agenda.
 
-(setq org-agenda-files '("~/org/"))
-
-(setq org-directory "~/org/")
-(setq org-default-notes-file "~/org/inbox.org")
+(setq org-directory "/Volumes/org/")
+(setq org-agenda-files '("/Volumes/org/agenda/"))
 
 (setq org-capture-templates
-      '(("t" "Task" entry (file "")
+      '(("t" "Task" entry (file "agenda/inbox.org")
          "* TODO %?\n  :LOGBOOK:\n  - State \"TODO\"                         %U\n  :END:")))
 
 (setq org-refile-use-outline-path 'file)
@@ -115,10 +113,6 @@
               holiday-other-holidays))
 
 ;; Misc
-
-;; Save all Org-mode buffers at one minute before the hour
-;; This is used in combination with the bin/org-sync shell script.
-(run-at-time "00:59" (* 60 60) 'org-save-all-org-buffers)
 
 ;; Don’t split lines with M-RET
 (setq org-M-RET-may-split-line nil)
