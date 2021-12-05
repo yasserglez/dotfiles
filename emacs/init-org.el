@@ -1,7 +1,8 @@
-;;; Task Management based on GTD
+(setq org-directory "/Volumes/org/")
+(setq org-agenda-files '("/Volumes/org/agenda/"))
+(setq org-roam-directory "/Volumes/org/notes/")
 
 (use-package org
-  :ensure org-plus-contrib
   :preface
   (defun my-org-agenda-next-week (&optional arg)
     (interactive "P")
@@ -17,20 +18,32 @@
   :mode (("\\.org\\'" . org-mode)
          ("\\.org_archive\\'" . org-mode))
   :bind* (("C-c a" . org-agenda)
-          ("C-c b" . org-iswitchb)
-          ("C-c l" . org-store-link)
-          ("<f9>"  . org-capture)
-          ("<f10>" . my-org-agenda-tasks)
-          ("<f11>" . my-org-agenda-today)
-          ("<f12>" . my-org-agenda-next-week)))
+          ("<f5>"  . (lambda () (interactive) (org-capture nil "t")))
+          ("<f6>"  . my-org-agenda-tasks)
+          ("<f7>"  . my-org-agenda-today)
+          ("<f8>"  . my-org-agenda-next-week)))
+
+(use-package org-roam
+  :init
+  (setq org-roam-v2-ack t)
+  :bind (("<f9>" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n l" . org-roam-buffer-toggle))
+  :config
+  (org-roam-setup))
+
+(setq org-roam-capture-templates
+      '(("d" "default" plain "%?"
+         :target (file+head "${slug}.org" "#+TITLE: ${title}\n")
+         :unnarrowed t)))
 
 ;; Tasks marked as TODO are next actions in GTD. TODO tasks may have
-;; an associated date or time (for appointments, etc), or I schedule
-;; them to be done on a particular day during the weekly review. Tasks
-;; marked as MAYBE are things I may want to do in the future – i.e.
-;; someday/maybe in GTD. MAYBE tasks turn into one or more TODO tasks
-;; when I decide to work on them. TODO tasks can be resolved by marking
-;; them as DONE. DONE tasks are archived every couple of months.
+;; an associated date and time, or I schedule them to be done on a
+;; specific day during the weekly review. Tasks marked as MAYBE are
+;; someday/maybe tasks in GTD. MAYBE tasks can turn into one or more
+;; TODO tasks when I decide to work on them. TODO tasks can be
+;; resolved by marking them as DONE. DONE tasks are archived every
+;; couple of months to keep the agenda files small.
 
 (setq org-use-fast-todo-selection t)
 (setq org-todo-keywords
@@ -48,9 +61,6 @@
 ;; inbox.org is used for capturing tasks. I keep separate files for
 ;; each project. Each file has a #+FILETAGS header so it is easier to
 ;; filter tasks for a particular project using tags in the agenda.
-
-(setq org-directory "/Volumes/org/")
-(setq org-agenda-files '("/Volumes/org/agenda/"))
 
 (setq org-capture-templates
       '(("t" "Task" entry (file "agenda/inbox.org")
@@ -79,8 +89,8 @@
          ((org-agenda-compact-blocks t)
           (org-agenda-span 7)
           (org-deadline-warning-days 14)))
-        ("ct" "Unscheduled tasks" todo "TODO"
-         ((org-agenda-overriding-header "Unscheduled tasks: ")
+        ("ct" "Next actions" todo "TODO"
+         ((org-agenda-overriding-header "Next actions: ")
           (org-agenda-skip-function '(org-agenda-skip-subtree-if 'timestamp))))))
 
 ;; Holidays
@@ -111,8 +121,6 @@
 (setq calendar-holidays
       (append holiday-local-holidays
               holiday-other-holidays))
-
-;; Misc
 
 ;; Don’t split lines with M-RET
 (setq org-M-RET-may-split-line nil)
