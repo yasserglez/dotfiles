@@ -1,12 +1,14 @@
 ;;; Yasser Gonzalez's Emacs Configuration
 
+
+;;; Package management
+
 ;; Initialize Emacs built-in package manager
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
+        ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 ;; Bootstrap use-package
@@ -61,49 +63,35 @@
     (setq alert-default-style 'libnotify)))
 
 
-;;; Git
+;;; Completion, spell checking, syntax checking, etc
 
-(use-package magit
-  :bind* ("C-c g" . magit-status)
+;; Ivy
+(use-package ivy
   :config
-  (setq vc-handled-backends nil
-        vc-follow-symlinks nil))
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-use-selectable-prompt t)
+  (setq ivy-count-format "(%d/%d) ")
+  :init
+  (ivy-mode))
 
-
-;;; Org-mode
-
-(load "~/.emacs.d/init-org.el")
-
-;;; Python
-
-(load "~/.emacs.d/init-python.el")
-
+(use-package swiper
+  :config
+  (global-set-key "\C-s" 'swiper))
 
 ;; YASnippet
-
 (use-package yasnippet
   :init
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   (yas-global-mode))
 
-
-;; YAML
-(use-package yaml-mode
-  :mode (("\\.yml\\'" . yaml-mode)
-         ("\\.yaml\\'" . yaml-mode)))
-
-
-;;; Syntax Checking
-
+;; Syntax checking
 (use-package flycheck
   :init (global-flycheck-mode)
   :config
   ;; https://emacs.stackexchange.com/q/21664
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
-
-;;; Spell Checking
-
+;; Spell checking
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra")
       ispell-dictionary "en"
@@ -114,6 +102,30 @@
 ;; Unset the C-M-i key binding, used for completion in Elpy
 (eval-after-load "flyspell"
   '(define-key flyspell-mode-map (kbd "C-M-i") nil))
+
+
+;;; Git
+
+(use-package magit
+  :bind* ("C-c g" . magit-status)
+  :config
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (setq vc-handled-backends nil
+        vc-follow-symlinks nil))
+
+
+;;; Specific file formats
+
+;; Org-mode
+(load "~/.emacs.d/init-org.el")
+
+;; Python
+(load "~/.emacs.d/init-python.el")
+
+;; YAML
+(use-package yaml-mode
+  :mode (("\\.yml\\'" . yaml-mode)
+         ("\\.yaml\\'" . yaml-mode)))
 
 
 ;;; Misc
