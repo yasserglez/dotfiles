@@ -18,15 +18,15 @@
   :mode (("\\.org\\'" . org-mode)
          ("\\.org_archive\\'" . org-mode))
   :bind* (("C-c a" . org-agenda)
-          ("<f5>"  . (lambda () (interactive) (org-capture nil "t")))
-          ("<f6>"  . my-org-agenda-tasks)
-          ("<f7>"  . my-org-agenda-today)
-          ("<f8>"  . my-org-agenda-next-week)))
+          ("<f9>"  . (lambda () (interactive) (org-capture nil "t")))
+          ("<f10>" . my-org-agenda-tasks)
+          ("<f11>" . my-org-agenda-today)
+          ("<f12>" . my-org-agenda-next-week)))
 
 (use-package org-roam
   :init
   (setq org-roam-v2-ack t)
-  :bind (("<f9>" . org-roam-node-find)
+  :bind (("<f5>" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n l" . org-roam-buffer-toggle))
   :config
@@ -67,7 +67,10 @@
          "* TODO %?\n  :LOGBOOK:\n  - State \"TODO\"                         %U\n  :END:")))
 
 (setq org-refile-use-outline-path 'file)
-(setq org-refile-targets '((org-agenda-files :level . 1)))
+(setq org-refile-targets '((org-agenda-files :todo . "DOES_NOT_EXIST")))
+;; These two options improve Ivy compatibility.
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-allow-creating-parent-nodes 'confirm)
 
 ;; Configure a group of agenda views and key bindings for quick access.
 
