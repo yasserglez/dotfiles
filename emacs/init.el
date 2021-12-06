@@ -143,7 +143,7 @@
 
 ;; Disable the splash screen and the echo area message
 (setq inhibit-startup-message t
-      inhibit-startup-echo-area-message "yasserglez")
+      inhibit-startup-echo-area-message t)
 
 ;; Kill a buffer even if it has a process attached to it
 (setq kill-buffer-query-functions
@@ -159,6 +159,10 @@
 
 ;; Move between windows using the arrow keys
 (windmove-default-keybindings)
+
+;; Use the keys next to the space bar as meta
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'meta)
 
 ;; End sentences with one space
 (setq sentence-end-double-space nil)
