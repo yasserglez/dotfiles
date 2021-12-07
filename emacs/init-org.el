@@ -1,6 +1,6 @@
-(setq org-directory "/Volumes/org/")
-(setq org-agenda-files '("/Volumes/org/agenda/"))
-(setq org-roam-directory "/Volumes/org/notes/")
+(setq org-directory "/Volumes/Dropbox/org/")
+(setq org-agenda-files '("/Volumes/Dropbox/org/"))
+(setq org-roam-directory "/Volumes/Dropbox/org/notes/")
 
 (use-package org
   :preface
@@ -63,7 +63,7 @@
 ;; filter tasks for a particular project using tags in the agenda.
 
 (setq org-capture-templates
-      '(("t" "Task" entry (file "agenda/inbox.org")
+      '(("t" "Task" entry (file "inbox.org")
          "* TODO %?\n  :LOGBOOK:\n  - State \"TODO\"                         %U\n  :END:")))
 
 (setq org-refile-use-outline-path 'file)
