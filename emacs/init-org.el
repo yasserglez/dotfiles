@@ -134,3 +134,7 @@
 
 ;; Only record the time when a task is archived
 (setq org-archive-save-context-info '(time))
+
+;; Show inline images by default
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width nil)
