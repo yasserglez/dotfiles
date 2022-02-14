@@ -9,6 +9,8 @@
   :config
   ;; Use flycheck instead of flymake.
   (add-hook 'elpy-mode-hook 'flycheck-mode)
+  ;; Use black for code formatting.
+  (setq elpy-formatter 'black)
   ;; Integrate pyenv virtualenvs.
   (setenv "WORKON_HOME" "~/.pyenv/versions/")
   (defalias 'pyenv-activate 'pyvenv-workon)
