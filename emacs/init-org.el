@@ -3,7 +3,7 @@
 (setq org-roam-directory "/Volumes/Dropbox/org/notes/")
 
 (use-package org
-  :preface
+  :init
   (defun my-org-agenda-next-week (&optional arg)
     (interactive "P")
     (org-agenda arg "cw"))
@@ -13,8 +13,6 @@
   (defun my-org-agenda-tasks (&optional arg)
     (interactive "P")
     (org-agenda arg "ct"))
-  :init
-  (setq org-modules '(org-checklist))
   :mode (("\\.org\\'" . org-mode)
          ("\\.org_archive\\'" . org-mode))
   :bind* (("C-c a" . org-agenda)
@@ -26,16 +24,34 @@
 (use-package org-roam
   :init
   (setq org-roam-v2-ack t)
+  :config
+  (cl-defmethod org-roam-node-type ((node org-roam-node))
+    "Return the type of note: main, article, book, etc."
+    (condition-case nil
+	(file-name-nondirectory
+	 (directory-file-name
+          (file-name-directory
+           (file-relative-name (org-roam-node-file node) org-roam-directory))))
+      (error "main")))
+
+  (org-roam-setup)
   :bind (("<f5>" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
-         ("C-c n l" . org-roam-buffer-toggle))
-  :config
-  (org-roam-setup))
+         ("C-c n l" . org-roam-buffer-toggle)))
 
+;; Based on https://jethrokuan.github.io/org-roam-guide/
 (setq org-roam-capture-templates
-      '(("d" "default" plain "%?"
+      '(("m" "main" plain "%?"
          :target (file+head "${slug}.org" "#+TITLE: ${title}\n")
+         :unnarrowed t)
+        ("a" "article" plain "%?"
+         :target (file+head "article/${slug}.org" "#+TITLE: ${title}\n")
+         :unnarrowed t)
+        ("b" "book" plain "%?"
+         :target (file+head "book/${slug}.org" "#+TITLE: ${title}\n")
          :unnarrowed t)))
+
+(setq org-roam-node-display-template "${type:10} ${title:*}")
 
 ;; Tasks marked as TODO are next actions in GTD. TODO tasks may have
 ;; an associated date and time, or I schedule them to be done on a
