@@ -30,7 +30,7 @@ def _brew_install_cask(*packages):
 
 def _rm_confirm(path):
     if os.path.exists(path):
-        os.system('rm -ri {}'.format(path))
+        os.system('rm -rI {}'.format(path))
 
 
 def _git_pull_or_clone(git_repo, git_repo_dir):
