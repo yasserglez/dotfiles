@@ -54,7 +54,7 @@ def install_emacs():
 
 
 def install_vim():
-    _brew_install('git', 'vimx')
+    _brew_install('git', 'vim')
 
     src_file = f'{DOTFILES_DIR}/vim/vimrc'
     dest_file = f'{HOME_DIR}/.vimrc'
