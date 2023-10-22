@@ -1,6 +1,3 @@
-;;; Yasser Gonzalez's Emacs Configuration
-
-
 ;;; Package management
 
 ;; Initialize Emacs built-in package manager
@@ -11,12 +8,11 @@
         ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
-;; Bootstrap use-package
+;; Install and initialize use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Initialize use-package
 (eval-when-compile
   (require 'use-package))
 (require 'use-package-ensure)
@@ -56,11 +52,8 @@
 ;; Alerts
 (use-package alert
   :init
-  ;; Configure the default style in OS X and Ubuntu
-  (when (eq system-type 'darwin)
-    (setq alert-default-style 'notifier))
-  (when (eq system-type 'gnu/linux)
-    (setq alert-default-style 'libnotify)))
+  ;; Configure the default style
+  (setq alert-default-style 'notifier))
 
 
 ;;; Completion, spell checking, syntax checking, etc

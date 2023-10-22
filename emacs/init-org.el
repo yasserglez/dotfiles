@@ -33,7 +33,6 @@
           (file-name-directory
            (file-relative-name (org-roam-node-file node) org-roam-directory))))
       (error "main")))
-
   (org-roam-setup)
   :bind (("<f5>" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -54,7 +53,7 @@
 (setq org-roam-node-display-template "${type:10} ${title:*}")
 
 ;; Tasks marked as TODO are next actions in GTD. TODO tasks may have
-;; an associated date and time, or I schedule them to be done on a
+;; an associated date and time or I schedule them to be done on a
 ;; specific day during the weekly review. Tasks marked as MAYBE are
 ;; someday/maybe tasks in GTD. MAYBE tasks can turn into one or more
 ;; TODO tasks when I decide to work on them. TODO tasks can be
