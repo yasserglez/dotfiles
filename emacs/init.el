@@ -71,12 +71,6 @@
   :config
   (global-set-key "\C-s" 'swiper))
 
-;; YASnippet
-(use-package yasnippet
-  :init
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-  (yas-global-mode))
-
 ;; Syntax checking
 (use-package flycheck
   :init (global-flycheck-mode)
