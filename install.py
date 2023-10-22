@@ -71,7 +71,7 @@ def install_vim():
 
 
 def install_python():
-    _brew_install('pyenv')
+    _brew_install('pyenv', 'pyenv-virtualenv')
 
 
 def install_git():
