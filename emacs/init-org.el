@@ -73,6 +73,9 @@
 (setq org-log-reschedule 'time)
 (setq org-log-repeat 'time)
 
+;; Fold subtrees when a file is loaded.
+(setq org-startup-folded t)
+
 ;; inbox.org is used for capturing tasks. I keep separate files for
 ;; each project. Each file has a #+FILETAGS header so it is easier to
 ;; filter tasks for a particular project using tags in the agenda.
