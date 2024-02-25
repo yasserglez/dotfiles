@@ -44,10 +44,13 @@
          :target (file+head "${slug}.org" "#+TITLE: ${title}\n")
          :unnarrowed t)
         ("a" "article" plain "%?"
-         :target (file+head "article/${slug}.org" "#+TITLE: ${title}\n")
+         :target (file+head "articles/${slug}.org" "#+TITLE: ${title}\n")
+         :unnarrowed t)
+        ("r" "recipe" plain "%?"
+         :target (file+head "recipes/${slug}.org" "#+TITLE: ${title}\n")
          :unnarrowed t)
         ("b" "book" plain "%?"
-         :target (file+head "book/${slug}.org" "#+TITLE: ${title}\n")
+         :target (file+head "books/${slug}.org" "#+TITLE: ${title}\n")
          :unnarrowed t)))
 
 (setq org-roam-node-display-template "${type:10} ${title:*}")
