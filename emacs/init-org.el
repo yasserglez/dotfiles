@@ -1,6 +1,6 @@
-(setq org-directory "/Volumes/Dropbox/org/")
-(setq org-agenda-files '("/Volumes/Dropbox/org/"))
-(setq org-roam-directory "/Volumes/Dropbox/org/notes/")
+(setq org-directory "/Volumes/Drive/org/")
+(setq org-agenda-files '("/Volumes/Drive/org/"))
+(setq org-roam-directory "/Volumes/Drive/org/notes/")
 
 (use-package org
   :init
