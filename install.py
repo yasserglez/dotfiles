@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import sys
-import shutil
 import argparse
 from contextlib import contextmanager
 
@@ -43,16 +41,6 @@ def _git_pull_or_clone(git_repo, git_repo_dir):
                   .format(git_repo, git_repo_dir))
 
 
-def install_emacs():
-    _brew_install_cask('emacs')
-    src_dir = f'{DOTFILES_DIR}/emacs'
-    dest_dir = f'{HOME_DIR}/.emacs.d'
-    _rm_confirm(dest_dir)
-    os.mkdir(dest_dir)
-    for name in os.listdir(src_dir):
-        os.symlink(f'{src_dir}/{name}', f'{dest_dir}/{name}')
-
-
 def install_vim():
     _brew_install('git', 'vim')
 
@@ -88,13 +76,7 @@ def install_git():
     git_repo_dir = f'{DOTFILES_DIR}/git/gitignore'
     _git_pull_or_clone(git_repo, git_repo_dir)
     with _chdir(git_repo_dir):
-        templates = [
-            'Global/macOS',
-            'Global/Vim',
-            'Global/Emacs',
-            'Python',
-            'TeX',
-        ]
+        templates = ['Global/macOS', 'Global/Vim', 'Python']
         for template in templates:
             os.system(f'cat {template}.gitignore >> ~/.gitignore')
 
