@@ -4,8 +4,7 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_CA.UTF-8'
 fi
 
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/Users/yasserglez/.local/bin:/opt/homebrew/bin:/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
