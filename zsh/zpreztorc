@@ -1,9 +1,5 @@
 # ~/.zpreztorc: This file configures Prezto.
 
-#
-# General
-#
-
 # Case-sensitivity completion, history lookup, etc?
 zstyle ':prezto:*:*' case-sensitive 'no'
 
@@ -33,30 +29,14 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'prompt'
 
-#
-# Editor
-#
-
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' key-bindings 'emacs'
-
-#
-# Git
-#
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
 zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
-#
-# Prompt
-#
-
 # Set the prompt theme to load.
 zstyle ':prezto:module:prompt' theme 'yasserglez'
-
-#
-# Terminal
-#
 
 # Auto set the tab and window titles.
 zstyle ':prezto:module:terminal' auto-title 'yes'
