@@ -1,39 +1,13 @@
-#
-# My custom prompt.
-#
-
-function prompt_yasserglez_precmd {
-  # Get Git repository information.
-  if (( $+functions[git-info] )); then
-    git-info
-  fi
-
-  # Get Python information.
-  if (( $+functions[python-info] )); then
-    python-info
-  fi
-}
-
 function prompt_yasserglez_setup {
   prompt_opts=(cr percent subst)
 
   # Load required functions.
   autoload -Uz add-zsh-hook
 
-  # Add hook for calling {git,python}-info before each command.
-  add-zsh-hook precmd prompt_yasserglez_precmd
-
-  # Set git-info parameters.
-  zstyle ':prezto:module:git:info:keys' format 'branch' ' %b'
-  zstyle ':prezto:module:git:info:branch' format '%Ugit%u:%b'
-
-  # Set python-info parameters.
-  zstyle ':prezto:module:python:info:virtualenv' format ' %Uvirtualenv%u:%v'
-
   # Define prompts.
   PROMPT='%Uzsh%u:%~> '
   PROMPT2='> '
-  RPROMPT='$python_info[virtualenv]$git_info[branch]'
+  RPROMPT=''
   RPROMPT2=''
   SPROMPT='- correct %R to %r [nyae]? '
 
