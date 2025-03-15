@@ -1,7 +1,3 @@
-[user]
-	name = Yasser Gonzalez
-	email = yasserglez@gmail.com
-
 [core]
 	excludesfile = ~/.gitignore
 
