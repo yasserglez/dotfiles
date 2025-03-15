@@ -1,7 +1,3 @@
-"
-" General Settings
-"
-
 set encoding=utf-8
 
 set tabstop=4  " how many columns a tab counts for
@@ -35,10 +31,6 @@ nnoremap k gk
 
 " <Ctrl-l> redraws the screen and removes any search highlighting
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
-
-"
-" Vundle Plugins
-"
 
 set nocompatible
 filetype off
