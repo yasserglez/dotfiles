@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import subprocess
 import argparse
 from contextlib import contextmanager
 
@@ -19,26 +20,25 @@ def _chdir(dir_path):
 
 def _brew_install(*packages):
     for pkg in packages:
-        os.system(f'brew install {pkg}')
+        subprocess.run(['brew', 'install', pkg], check=True)
 
 def _brew_install_cask(*packages):
     for pkg in packages:
-        os.system(f'brew install --cask {pkg}')
+        subprocess.run(['brew', 'install', '--cask', pkg], check=True)
 
 
 def _rm_confirm(path):
     if os.path.exists(path):
-        os.system('rm -rI {}'.format(path))
+        subprocess.run(['rm', '-rI', path])
 
 
 def _git_pull_or_clone(git_repo, git_repo_dir):
     if os.path.isdir(git_repo_dir):
         with _chdir(git_repo_dir):
-            os.system('git pull')
-            os.system('git submodule update --init --recursive')
+            subprocess.run(['git', 'pull'], check=True)
+            subprocess.run(['git', 'submodule', 'update', '--init', '--recursive'], check=True)
     else:
-        os.system('git clone --recursive {} {}'
-                  .format(git_repo, git_repo_dir))
+        subprocess.run(['git', 'clone', '--recursive', git_repo, git_repo_dir], check=True)
 
 
 def install_vim():
@@ -51,7 +51,7 @@ def install_vim():
 
     dest_dir = f'{HOME_DIR}/.vim'
     _rm_confirm(dest_dir)
-    os.system(f'mkdir {dest_dir}')
+    os.makedirs(dest_dir, exist_ok=True)
     git_repo = 'https://github.com/gmarik/Vundle.vim'
     git_repo_dir = f'{DOTFILES_DIR}/vim/vundle/Vundle.vim'
     _git_pull_or_clone(git_repo, git_repo_dir)
@@ -77,13 +77,16 @@ def install_git():
     _git_pull_or_clone(git_repo, git_repo_dir)
     with _chdir(git_repo_dir):
         templates = ['Global/macOS', 'Global/Vim', 'Python']
+        abs_gitignore = os.path.expanduser('~/.gitignore')
         for template in templates:
-            os.system(f'cat {template}.gitignore >> ~/.gitignore')
+            with open(f'{template}.gitignore', 'r') as src:
+                with open(abs_gitignore, 'a') as dest:
+                    dest.write(src.read())
 
 
 def install_zsh():
     _brew_install('zsh')
-    os.system('chsh -s /usr/bin/zsh')
+    subprocess.run(['chsh', '-s', '/usr/bin/zsh'], check=True)
 
     git_repo = 'https://github.com/sorin-ionescu/prezto'
     git_repo_dir = f'{DOTFILES_DIR}/zsh/prezto'
@@ -110,6 +113,13 @@ def install_dircolors():
     _rm_confirm(f'{HOME_DIR}/.dircolors')
     os.symlink(f'{git_repo_dir}/dircolors.ansi-dark',
                f'{HOME_DIR}/.dircolors')
+
+
+def install_aider():
+    src_file = f'{DOTFILES_DIR}/aider.conf.yml'
+    dest_file = f'{HOME_DIR}/.aider.conf.yml'
+    _rm_confirm(dest_file)
+    os.symlink(src_file, dest_file)
 
 
 if __name__ == '__main__':
